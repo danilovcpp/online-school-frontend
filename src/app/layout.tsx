@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
-import "./globals.css";
+import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
   title: "Online school",
