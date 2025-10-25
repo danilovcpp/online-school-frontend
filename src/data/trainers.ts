@@ -6,7 +6,7 @@ export const trainers: Trainer[] = [
     title: 'Базовый режим',
     description: 'Практика работы с абакусом и ввод чисел вручную',
     icon: '🎯',
-    path: '/trainers/basic',
+    path: '/trainers/abacus',
   },
   {
     id: 'flash-anzan',

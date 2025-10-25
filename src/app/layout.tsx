@@ -4,8 +4,8 @@ import { PropsWithChildren } from "react";
 import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
-  title: "Online school",
-  description: "Online school",
+  title: "Абакус - Интерактивное обучение счету",
+  description: "Древнее искусство быстрого счета с помощью абакуса (соробана)",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
