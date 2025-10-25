@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { FlashAnzanSettings, FlashAnzanStats } from '@/types';
 import { delay, generateRandomNumber } from '@/utils';
 
@@ -8,12 +8,13 @@ export function useFlashAnzan() {
   const [numbers, setNumbers] = useState<number[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [correctAnswer, setCorrectAnswer] = useState<number>(0);
-  const [isRunning, setIsRunning] = useState<boolean>(false);
   const [stats, setStats] = useState<FlashAnzanStats>({
     correct: 0,
     wrong: 0,
     accuracy: 0,
   });
+
+  const isRunning = useRef<boolean>(false);
 
   const generateNumbers = useCallback((count: number, digits: number) => {
     const newNumbers: number[] = [];
@@ -33,11 +34,18 @@ export function useFlashAnzan() {
   const start = useCallback(
     async (settings: FlashAnzanSettings, onNumberShow: (num: number, index: number) => void, onFinish: () => void) => {
       const nums = generateNumbers(settings.count, settings.digits);
-      setIsRunning(true);
+      isRunning.current = true;
       setCurrentIndex(0);
 
-      for (let i = 0; i < nums.length; i++) {
-        if (!isRunning) break;
+      for await (const i of nums.keys()) {
+        console.log('is run', isRunning);
+        
+        if (!isRunning.current) break;
+
+        console.log('set', settings);
+        console.log('i', i);
+        console.log('num', nums[i]);
+        
 
         setCurrentIndex(i);
         onNumberShow(nums[i], i);
@@ -46,14 +54,14 @@ export function useFlashAnzan() {
         await delay(200);
       }
 
-      setIsRunning(false);
+      isRunning.current = false;
       onFinish();
     },
     [generateNumbers, isRunning]
   );
 
   const stop = useCallback(() => {
-    setIsRunning(false);
+    isRunning.current = false;
   }, []);
 
   const checkAnswer = useCallback(
@@ -90,7 +98,7 @@ export function useFlashAnzan() {
     numbers,
     currentIndex,
     correctAnswer,
-    isRunning,
+    isRunning: isRunning.current,
     stats,
     start,
     stop,
