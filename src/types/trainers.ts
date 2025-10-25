@@ -1,5 +1,5 @@
 // Trainer types
-export type TrainerType = 'basic' | 'flash-anzan' | 'guess-result' | 'mental-visualization' | 'soroban';
+export type TrainerType = 'abacus' | 'flash-anzan' | 'guess-result' | 'mental-visualization' | 'soroban';
 
 export interface Trainer {
   id: TrainerType;

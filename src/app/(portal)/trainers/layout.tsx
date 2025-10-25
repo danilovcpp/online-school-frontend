@@ -1,8 +1,6 @@
 import { PropsWithChildren } from "react";
 
-import { trainers } from "@/data/trainers";
-import { Card } from "@/components/Card/Card";
-import { TrainerCard } from "@/components/TrainerCard/TrainerCard";
+import { TrainerList } from "@/features/trainers/components/trainers-list/trainer-list";
 
 import styles from "./layout.module.scss";
 
@@ -19,22 +17,9 @@ const Layout = ({ children }: PropsWithChildren) => {
       </header>
 
       <main>
-        <section
-          className="animate-fadeInUp"
-          style={{ animationDelay: "0.1s" }}
-        >
-          <Card title="Выберите тренажер">
-            <div className={styles.grid}>
-              {trainers.map((trainer) => (
-                <TrainerCard key={trainer.id} trainer={trainer} />
-              ))}
-            </div>
-          </Card>
-        </section>
+        <TrainerList />
 
         {children}
-
-        
       </main>
 
       <footer className={styles.footer}>
@@ -42,6 +27,6 @@ const Layout = ({ children }: PropsWithChildren) => {
       </footer>
     </div>
   );
-}
+};
 
 export default Layout;

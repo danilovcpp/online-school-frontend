@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.card{
+.card {
   background: var(--color-overlay-heavy);
   border: 2px solid var(--color-border-light);
   border-radius: var(--radius-lg);
@@ -12,40 +12,40 @@
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-}
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--gradient-primary);
-  opacity: 0;
-  transition: opacity var(--transition-base);
-  z-index: var(--z-base);
-}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: var(--z-base);
+  }
 
-.card:hover {
-  transform: translateY(-10px) scale(1.02);
-  border-color: var(--color-primary);
-  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
-}
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+  }
 
-.card:hover::before {
-  opacity: 0.1;
-}
+  &:hover::before {
+    opacity: 0.1;
+  }
 
-.card.active {
-  border-color: var(--color-success);
-  background: rgba(67, 233, 123, 0.1);
-  box-shadow: 0 15px 35px rgba(67, 233, 123, 0.3);
-}
+  &.active {
+    border-color: var(--color-success);
+    background: rgba(67, 233, 123, 0.1);
+    box-shadow: 0 15px 35px rgba(67, 233, 123, 0.3);
+  }
 
-.card.active::before {
-  background: var(--gradient-success);
-  opacity: 0.2;
+  &.active::before {
+    background: var(--gradient-success);
+    opacity: 0.2;
+  }
 }
 
 .icon {
