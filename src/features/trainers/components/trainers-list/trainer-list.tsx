@@ -1,11 +1,12 @@
-"use client";
-import { Card } from "@/components/Card/Card";
+'use client';
+import { usePathname } from 'next/navigation';
 
-import { trainerList } from "../../constants/trainer-list";
-import { TrainerCard } from "../trainer-card/trainer-card";
+import { Card } from '@/components/Card/Card';
 
-import styles from "./trainer-list.module.scss";
-import { usePathname } from "next/navigation";
+import { trainerList } from '../../constants/trainer-list';
+import { TrainerCard } from '../trainer-card/trainer-card';
+
+import styles from './trainer-list.module.scss';
 
 const TrainerList = () => {
   const pathname = usePathname();
@@ -14,11 +15,7 @@ const TrainerList = () => {
     <Card title="Выберите тренажер">
       <div className={styles.grid}>
         {trainerList.map((trainer) => (
-          <TrainerCard
-            key={trainer.id}
-            trainer={trainer}
-            isActive={pathname === trainer.path}
-          />
+          <TrainerCard key={trainer.id} trainer={trainer} isActive={pathname === trainer.path} />
         ))}
       </div>
     </Card>

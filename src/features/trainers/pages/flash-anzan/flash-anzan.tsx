@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import clsx from 'clsx';
 
-import { Card } from "@/components/Card/Card";
-import { Button } from "@/components/Button/Button";
-import { Input } from "@/components/Input/Input";
-import { Select } from "@/components/Select/Select";
-import { FlashAnzanSettings } from "@/types";
+import { Button } from '@/components/Button/Button';
+import { Card } from '@/components/Card/Card';
+import { Input } from '@/components/Input/Input';
+import { Select } from '@/components/Select/Select';
 
-import { useFlashAnzan } from "../../hooks/use-flash-anzan";
+import { FlashAnzanSettings } from '@/types';
 
-import styles from "./flash-anzan.module.scss";
-import clsx from "clsx";
+import { useFlashAnzan } from '../../hooks/use-flash-anzan';
+
+import styles from './flash-anzan.module.scss';
 
 const FlashAnzanPage = () => {
   const [settings, setSettings] = useState<FlashAnzanSettings>({
@@ -20,19 +21,18 @@ const FlashAnzanPage = () => {
     digits: 2,
   });
   const [currentNumber, setCurrentNumber] = useState<number | null>(null);
-  const [currentProgress, setCurrentProgress] = useState<string>("");
-  const [userAnswer, setUserAnswer] = useState<string>("");
+  const [currentProgress, setCurrentProgress] = useState<string>('');
+  const [userAnswer, setUserAnswer] = useState<string>('');
   const [showAnswerSection, setShowAnswerSection] = useState<boolean>(false);
-  const [resultMessage, setResultMessage] = useState<string>("");
-  const [resultType, setResultType] = useState<"success" | "error" | "">("");
+  const [resultMessage, setResultMessage] = useState<string>('');
+  const [resultType, setResultType] = useState<'success' | 'error' | ''>('');
 
-  const { numbers, correctAnswer, isRunning, stats, start, stop, checkAnswer } =
-    useFlashAnzan();
+  const { numbers, correctAnswer, isRunning, stats, start, stop, checkAnswer } = useFlashAnzan();
 
   const handleStart = () => {
-    setUserAnswer("");
-    setResultMessage("");
-    setResultType("");
+    setUserAnswer('');
+    setResultMessage('');
+    setResultType('');
     setShowAnswerSection(false);
 
     start(
@@ -43,53 +43,46 @@ const FlashAnzanPage = () => {
       },
       () => {
         setCurrentNumber(null);
-        setCurrentProgress("Введите ответ");
+        setCurrentProgress('Введите ответ');
         setShowAnswerSection(true);
-      }
+      },
     );
   };
 
   console.log('numbers', numbers);
-  
 
   const handleStop = () => {
     stop();
     setCurrentNumber(null);
-    setCurrentProgress("");
+    setCurrentProgress('');
   };
 
   const handleCheckAnswer = () => {
     const answer = parseInt(userAnswer);
 
     if (isNaN(answer)) {
-      setResultMessage("Пожалуйста, введите число");
-      setResultType("error");
+      setResultMessage('Пожалуйста, введите число');
+      setResultType('error');
       return;
     }
 
     const isCorrect = checkAnswer(answer);
 
     if (isCorrect) {
-      setResultMessage(
-        `🎉 Правильно!\nЧисла: ${numbers.join(" + ")} = ${correctAnswer}`
-      );
-      setResultType("success");
+      setResultMessage(`🎉 Правильно!\nЧисла: ${numbers.join(' + ')} = ${correctAnswer}`);
+      setResultType('success');
     } else {
-      setResultMessage(
-        `❌ Неправильно\nВаш ответ: ${answer}\nПравильный ответ: ${correctAnswer}\nЧисла: ${numbers.join(
-          " + "
-        )}`
-      );
-      setResultType("error");
+      setResultMessage(`❌ Неправильно\nВаш ответ: ${answer}\nПравильный ответ: ${correctAnswer}\nЧисла: ${numbers.join(' + ')}`);
+      setResultType('error');
     }
 
     setTimeout(() => {
       setShowAnswerSection(false);
       setCurrentNumber(null);
-      setCurrentProgress("");
-      setResultMessage("");
-      setResultType("");
-      setUserAnswer("");
+      setCurrentProgress('');
+      setResultMessage('');
+      setResultType('');
+      setUserAnswer('');
     }, 4000);
   };
 
@@ -97,24 +90,18 @@ const FlashAnzanPage = () => {
     <div className="max-w-7xl mx-auto px-5 py-5">
       <header className="text-center py-10">
         <h1 className="text-5xl font-extrabold mb-3">Flash Anzan</h1>
-        <h2 className="block text-lg font-light text-white/70 mt-3">
-          Тренажер быстрых вычислений
-        </h2>
+        <h2 className="block text-lg font-light text-white/70 mt-3">Тренажер быстрых вычислений</h2>
       </header>
 
       <main>
         <section>
           <Card>
-            <h2 className="text-3xl mb-5 bg-gradient-accent bg-clip-text text-transparent font-bold">
-              Настройки
-            </h2>
+            <h2 className="text-3xl mb-5 bg-gradient-accent bg-clip-text text-transparent font-bold">Настройки</h2>
             <div className={styles.settings}>
               <Select
                 label="Количество чисел:"
                 value={settings.count}
-                onChange={(e) =>
-                  setSettings({ ...settings, count: Number(e.target.value) })
-                }
+                onChange={(e) => setSettings({ ...settings, count: Number(e.target.value) })}
               >
                 <option value={3}>3 числа</option>
                 <option value={5}>5 чисел</option>
@@ -126,9 +113,7 @@ const FlashAnzanPage = () => {
               <Select
                 label="Скорость (мс):"
                 value={settings.speed}
-                onChange={(e) =>
-                  setSettings({ ...settings, speed: Number(e.target.value) })
-                }
+                onChange={(e) => setSettings({ ...settings, speed: Number(e.target.value) })}
               >
                 <option value={1500}>1500 мс (легко)</option>
                 <option value={1000}>1000 мс (средне)</option>
@@ -140,9 +125,7 @@ const FlashAnzanPage = () => {
               <Select
                 label="Количество цифр:"
                 value={settings.digits}
-                onChange={(e) =>
-                  setSettings({ ...settings, digits: Number(e.target.value) })
-                }
+                onChange={(e) => setSettings({ ...settings, digits: Number(e.target.value) })}
               >
                 <option value={1}>1 цифра</option>
                 <option value={2}>2 цифры</option>
@@ -175,15 +158,13 @@ const FlashAnzanPage = () => {
 
             {showAnswerSection && (
               <div className={styles.answer}>
-                <h3>
-                  Введите сумму всех чисел:
-                </h3>
+                <h3>Введите сумму всех чисел:</h3>
                 <Input
                   type="number"
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
                   onKeyPress={(e) => {
-                    if (e.key === "Enter") {
+                    if (e.key === 'Enter') {
                       handleCheckAnswer();
                     }
                   }}
@@ -198,14 +179,7 @@ const FlashAnzanPage = () => {
             )}
 
             {resultMessage && (
-              <div
-                className={clsx(
-                  styles.result,
-                  resultType === "success" ? styles.success : styles.error
-                )}
-              >
-                {resultMessage}
-              </div>
+              <div className={clsx(styles.result, resultType === 'success' ? styles.success : styles.error)}>{resultMessage}</div>
             )}
 
             {(stats.correct > 0 || stats.wrong > 0) && (

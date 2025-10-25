@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint:js": "eslint --ext .js --ext .ts --ext .tsx ./src",
+    "lint:fix": "npm run lint:js -- --fix && prettier --write 'src/**/*.{js,ts,tsx}'"
   },
   "dependencies": {
     "clsx": "2.1.1",
@@ -23,6 +24,9 @@
     "@types/react-dom": "19.2.2",
     "eslint": "9.38.0",
     "eslint-config-next": "16.0.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-simple-import-sort": "12.1.1",
+    "prettier": "3.6.2",
     "sass": "1.93.2",
     "typescript": "5.9.3"
   }

@@ -1,8 +1,9 @@
 'use client';
+import { useCallback, useRef, useState } from 'react';
 
-import { useState, useCallback, useRef } from 'react';
-import { FlashAnzanSettings, FlashAnzanStats } from '@/types';
 import { delay, generateRandomNumber } from '@/utils';
+
+import { FlashAnzanSettings, FlashAnzanStats } from '@/types';
 
 export function useFlashAnzan() {
   const [numbers, setNumbers] = useState<number[]>([]);
@@ -39,13 +40,12 @@ export function useFlashAnzan() {
 
       for await (const i of nums.keys()) {
         console.log('is run', isRunning);
-        
+
         if (!isRunning.current) break;
 
         console.log('set', settings);
         console.log('i', i);
         console.log('num', nums[i]);
-        
 
         setCurrentIndex(i);
         onNumberShow(nums[i], i);
@@ -57,7 +57,7 @@ export function useFlashAnzan() {
       isRunning.current = false;
       onFinish();
     },
-    [generateNumbers, isRunning]
+    [generateNumbers, isRunning],
   );
 
   const stop = useCallback(() => {
@@ -68,7 +68,7 @@ export function useFlashAnzan() {
     (userAnswer: number): boolean => {
       const isCorrect = userAnswer === correctAnswer;
 
-      setStats(prev => {
+      setStats((prev) => {
         const newCorrect = prev.correct + (isCorrect ? 1 : 0);
         const newWrong = prev.wrong + (isCorrect ? 0 : 1);
         const total = newCorrect + newWrong;
@@ -83,7 +83,7 @@ export function useFlashAnzan() {
 
       return isCorrect;
     },
-    [correctAnswer]
+    [correctAnswer],
   );
 
   const resetStats = useCallback(() => {

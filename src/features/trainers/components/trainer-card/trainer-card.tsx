@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
+
 import { Trainer } from '@/types';
 
 import styles from './trainer-card.module.scss';

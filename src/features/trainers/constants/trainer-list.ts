@@ -1,4 +1,5 @@
 import { routes } from '@/shared/constants/routes';
+
 import { Trainer } from '@/types';
 
 export const trainerList: Array<Trainer> = [

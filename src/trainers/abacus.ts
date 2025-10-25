@@ -17,10 +17,7 @@ export class AbacusCalculator {
   }
 
   setValue(number: number, callback?: (column: number, value: number) => void): void {
-    const digits = String(number)
-      .padStart(this.columns, '0')
-      .split('')
-      .map(Number);
+    const digits = String(number).padStart(this.columns, '0').split('').map(Number);
 
     digits.forEach((digit, index) => {
       this.values[index] = digit;

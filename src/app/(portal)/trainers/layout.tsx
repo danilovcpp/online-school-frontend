@@ -1,8 +1,8 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import { TrainerList } from "@/features/trainers/components/trainers-list/trainer-list";
+import { TrainerList } from '@/features/trainers/components/trainers-list/trainer-list';
 
-import styles from "./layout.module.scss";
+import styles from './layout.module.scss';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
@@ -10,9 +10,7 @@ const Layout = ({ children }: PropsWithChildren) => {
       <header className={styles.header}>
         <h1 className={styles.title}>
           <span className={styles.gradientText}>Абакус</span>
-          <span className={styles.subtitle}>
-            Древнее искусство быстрого счета
-          </span>
+          <span className={styles.subtitle}>Древнее искусство быстрого счета</span>
         </h1>
       </header>
 
