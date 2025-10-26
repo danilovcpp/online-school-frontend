@@ -1,3 +1,5 @@
+@use '@/styles/mixins/media';
+
 .container {
   max-width: var(--max-width-container);
   margin: 0 auto;
@@ -6,7 +8,7 @@
 
 .header {
   text-align: center;
-  padding: var(--spacing-2xl) var(--spacing-xl);
+  padding: var(--spacing-xl) var(--spacing-md);
   animation: fadeInDown 0.8s ease-out;
 }
 
@@ -14,7 +16,7 @@
   font-family: var(--font-family-heading);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-extrabold);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   line-height: var(--line-height-tight);
 }
 
@@ -42,4 +44,18 @@
   color: var(--color-text-secondary);
   margin-top: var(--spacing-2xl);
   font-size: var(--font-size-base);
+}
+
+@include media.max-mobile {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
 }

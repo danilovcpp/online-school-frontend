@@ -1,6 +1,14 @@
+@use '@/styles/mixins';
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--spacing-xl);
   margin-top: var(--spacing-xl);
+}
+
+@include mixins.max-tablet {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
