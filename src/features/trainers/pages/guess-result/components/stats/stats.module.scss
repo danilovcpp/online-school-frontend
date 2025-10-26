@@ -1,0 +1,43 @@
+.root {
+  background: var(--color-overlay-heavy);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+
+.title {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.item {
+  background: var(--color-overlay-heavy);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.value {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  background: var(--gradient-success);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

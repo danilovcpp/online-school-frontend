@@ -36,6 +36,22 @@ export interface FlashAnzanStats {
   accuracy: number;
 }
 
+// Guess Result types
+export interface GuessResultSettings {
+  count: number; // Number of numbers to show (3-6)
+  speed: number; // Display speed in ms
+  digits: number; // Number of digits
+  allowNegative?: boolean;
+}
+
+export interface GuessResultStats {
+  correct: number;
+  wrong: number;
+  accuracy: number;
+  averageTime: number; // Average time to answer in seconds
+  totalRounds: number;
+}
+
 // Practice mode types
 export interface PracticeChallenge {
   number: number;

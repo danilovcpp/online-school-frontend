@@ -1,0 +1,92 @@
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.container {
+  animation: slideIn 0.3s ease-out;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.abacus {
+  display: inline-block;
+  padding: 15px;
+  background: var(--color-overlay-heavy);
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.frame {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 30px;
+  background: var(--color-overlay-medium);
+  border-radius: 4px;
+  padding: 4px;
+  position: relative;
+}
+
+.topSection {
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 0;
+}
+
+.divider {
+  height: 2px;
+  background: var(--gradient-primary);
+  margin: 2px 0;
+  border-radius: 1px;
+}
+
+.bottomSection {
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 0;
+}
+
+.bead {
+  width: 20px;
+  height: 12px;
+  background: var(--color-overlay-light);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-overlay-heavy);
+
+  &.active {
+    background: var(--gradient-accent);
+    box-shadow: 0 0 10px var(--color-accent);
+    transform: scale(1.1);
+  }
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-top: 10px;
+}
