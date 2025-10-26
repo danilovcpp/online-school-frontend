@@ -27,6 +27,7 @@ export interface FlashAnzanSettings {
   count: number;
   speed: number;
   digits: number;
+  allowNegative?: boolean;
 }
 
 export interface FlashAnzanStats {

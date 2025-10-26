@@ -17,24 +17,39 @@ export function useFlashAnzan() {
 
   const isRunning = useRef<boolean>(false);
 
-  const generateNumbers = useCallback((count: number, digits: number) => {
+  const generateNumbers = useCallback((count: number, digits: number, allowNegative = false) => {
     const newNumbers: number[] = [];
     const min = Math.pow(10, digits - 1);
     const max = Math.pow(10, digits) - 1;
 
+    let currentSum = 0;
+
     for (let i = 0; i < count; i++) {
-      newNumbers.push(generateRandomNumber(min, max));
+      const number = generateRandomNumber(min, max);
+      let finalNumber = number;
+
+      // If negative numbers are allowed, randomly make some numbers negative
+      // but ensure the intermediate sum never goes below 0 (abacus constraint)
+      if (allowNegative && Math.random() > 0.5) {
+        const potentialNegative = -number;
+        // Only make it negative if the intermediate sum would remain >= 0
+        if (currentSum + potentialNegative >= 0) {
+          finalNumber = potentialNegative;
+        }
+      }
+
+      newNumbers.push(finalNumber);
+      currentSum += finalNumber;
     }
 
-    const sum = newNumbers.reduce((acc, num) => acc + num, 0);
     setNumbers(newNumbers);
-    setCorrectAnswer(sum);
+    setCorrectAnswer(currentSum);
     return newNumbers;
   }, []);
 
   const start = useCallback(
     async (settings: FlashAnzanSettings, onNumberShow: (num: number, index: number) => void, onFinish: () => void) => {
-      const nums = generateNumbers(settings.count, settings.digits);
+      const nums = generateNumbers(settings.count, settings.digits, settings.allowNegative);
       isRunning.current = true;
       setCurrentIndex(0);
 

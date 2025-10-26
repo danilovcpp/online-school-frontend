@@ -66,11 +66,17 @@ const FlashAnzanPage = () => {
 
     const isCorrect = checkAnswer(answer);
 
+    // Format numbers with proper signs for display
+    const numbersFormatted = numbers.map((num, idx) => {
+      if (idx === 0) return num.toString();
+      return num >= 0 ? `+ ${num}` : `- ${Math.abs(num)}`;
+    }).join(' ');
+
     if (isCorrect) {
-      setResultMessage(`🎉 Правильно!\nЧисла: ${numbers.join(' + ')} = ${correctAnswer}`);
+      setResultMessage(`🎉 Правильно!\nЧисла: ${numbersFormatted} = ${correctAnswer}`);
       setResultType('success');
     } else {
-      setResultMessage(`❌ Неправильно\nВаш ответ: ${answer}\nПравильный ответ: ${correctAnswer}\nЧисла: ${numbers.join(' + ')}`);
+      setResultMessage(`❌ Неправильно\nВаш ответ: ${answer}\nПравильный ответ: ${correctAnswer}\nЧисла: ${numbersFormatted}`);
       setResultType('error');
     }
 
@@ -88,6 +94,13 @@ const FlashAnzanPage = () => {
     setSettings((prev) => ({
       ...prev,
       [event.target.name]: +event.target.value,
+    }));
+  };
+
+  const handleToggleNegative: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSettings((prev) => ({
+      ...prev,
+      allowNegative: event.target.checked,
     }));
   };
 
@@ -117,6 +130,19 @@ const FlashAnzanPage = () => {
             </option>
           ))}
         </Select>
+
+        <div className={styles.checkboxWrapper}>
+          <Input
+            type="checkbox"
+            id="allowNegative"
+            checked={settings.allowNegative}
+            onChange={handleToggleNegative}
+            className={styles.checkbox}
+          />
+          <label htmlFor="allowNegative" className={styles.checkboxLabel}>
+            Разрешить отрицательные числа
+          </label>
+        </div>
       </div>
 
       <div className={styles.display}>

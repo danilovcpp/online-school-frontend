@@ -4,6 +4,7 @@ export const defaultSettings: FlashAnzanSettings = {
   count: 5,
   speed: 1000,
   digits: 2,
+  allowNegative: false,
 };
 
 export const countSetting = [
