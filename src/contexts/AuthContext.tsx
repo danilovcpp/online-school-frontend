@@ -40,6 +40,27 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  const register = useCallback(async (name: string, email: string, password: string) => {
+    setIsLoading(true);
+
+    // Simulate API call delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    // In a real app, validate with backend
+    // For now, create a mock user with provided data
+    const newUser: User = {
+      id: Date.now().toString(),
+      email,
+      name,
+      avatar: name.charAt(0).toUpperCase(),
+    };
+
+    setUser(newUser);
+    localStorage.setItem('user', JSON.stringify(newUser));
+
+    setIsLoading(false);
+  }, []);
+
   const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem('user');
@@ -62,6 +83,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     user,
     isAuthenticated: !!user,
     login,
+    register,
     logout,
     isLoading,
   };

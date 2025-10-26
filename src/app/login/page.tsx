@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/Button/Button';
@@ -81,6 +82,13 @@ export default function LoginPage() {
             {isLoading ? 'Вход...' : 'Войти'}
           </Button>
         </form>
+
+        <div className={styles.footer}>
+          Нет аккаунта?{' '}
+          <Link href={routes.auth.register} className={styles.link}>
+            Зарегистрироваться
+          </Link>
+        </div>
       </Card>
     </div>
   );
