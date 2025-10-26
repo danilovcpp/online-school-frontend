@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithRef } from 'react';
 
-import styles from './TutorialCard.module.scss';
+import styles from './tutorial-card.module.scss';
 
 interface TutorialCardProps extends ComponentPropsWithRef<'div'> {
   step: string | number;

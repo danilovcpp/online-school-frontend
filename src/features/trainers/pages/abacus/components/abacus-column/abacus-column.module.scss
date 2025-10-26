@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 2.25rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.rod {
+  position: relative;
+  width: 6px;
+  height: 300px;
+  background: linear-gradient(180deg, #4a5568, #2d3748);
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.topBeads,
+.bottomBeads {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.topBeads {
+  top: 10px;
+}
+
+.bottomBeads {
+  bottom: 10px;
+}
+
+.divider {
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: var(--gradient-primary);
+  left: 50%;
+  transform: translateX(-50%);
+  top: 80px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}

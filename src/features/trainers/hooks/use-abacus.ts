@@ -1,155 +1,147 @@
 'use client';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
-import { BeadPosition } from '@/types';
+import { getSuperscript } from '@/utils';
 
-export function useAbacus(columns: number = 6) {
-  const [beadStates, setBeadStates] = useState<BeadPosition[]>([]);
-  const [currentValue, setCurrentValue] = useState<number>(0);
+/**
+ * Hook для управления абакусом (соробан)
+ * @param {number} columns - количество колонок (по умолчанию 6)
+ * @returns {object} методы и состояние абакуса
+ */
+export const useAbacus = (columns = 6) => {
+  // Состояние значений каждой колонки (0-9)
+  const [values, setValues] = useState(new Array(columns).fill(0));
 
-  const calculateColumnValue = useCallback((column: number, states: BeadPosition[]) => {
-    const columnBeads = states.filter((b) => b.column === column);
-
-    let value = 0;
-    const topBead = columnBeads.find((b) => b.type === 'top');
-    if (topBead?.active) {
-      value += 5;
+  const currentValue = useMemo(() => {
+    let total = 0;
+    for (let i = 0; i < columns; i++) {
+      const power = columns - 1 - i;
+      total += values[i] * Math.pow(10, power);
     }
+    return total;
+  }, [values, columns]);
 
-    const bottomBeads = columnBeads.filter((b) => b.type === 'bottom' && b.active);
-    value += bottomBeads.length;
-
-    return value;
+  /**
+   * Переключить верхнюю бусину (стоимость 5)
+   * @param {number} column - индекс колонки
+   * @param {boolean} isActive - текущее состояние бусины
+   */
+  const toggleTopBead = useCallback((column: number, isActive: boolean) => {
+    setValues((prev) => {
+      const newValues = [...prev];
+      if (isActive) {
+        newValues[column] -= 5;
+      } else {
+        newValues[column] += 5;
+      }
+      return newValues;
+    });
   }, []);
 
-  const calculateTotalValue = useCallback(
-    (states: BeadPosition[]) => {
-      let total = 0;
-      for (let i = 0; i < columns; i++) {
-        const columnValue = calculateColumnValue(i, states);
-        const power = columns - 1 - i;
-        total += columnValue * Math.pow(10, power);
-      }
-      return total;
-    },
-    [columns, calculateColumnValue],
-  );
+  /**
+   * Переключить нижнюю бусину (стоимость 1)
+   * @param {number} column - индекс колонки
+   * @param {number} beadIndex - индекс бусины (0-3)
+   * @param {boolean} isActive - текущее состояние бусины
+   * @param {Array} activeBeads - массив активных нижних бусин
+   */
+  const toggleBottomBead = useCallback((column: number, beadIndex: number, isActive: boolean, activeBeads: boolean[]) => {
+    setValues((prev) => {
+      const newValues = [...prev];
 
-  const toggleBead = useCallback(
-    (bead: BeadPosition) => {
-      setBeadStates((prevStates) => {
-        const newStates = [...prevStates];
-        const beadIndex = newStates.findIndex(
-          (state) => state.column === bead.column && state.type === bead.type && state.index === bead.index,
-        );
-
-        if (bead.type === 'top') {
-          if (beadIndex !== -1) {
-            newStates[beadIndex].active = !newStates[beadIndex].active;
-          }
-        } else {
-          // Bottom beads logic
-          const columnBottomBeads = newStates
-            .filter((b) => b.column === bead.column && b.type === 'bottom')
-            .sort((a, b) => a.index - b.index);
-
-          if (beadIndex !== -1 && newStates[beadIndex].active) {
-            // Deactivate this bead and all above it
-            for (let i = 0; i <= bead.index; i++) {
-              const idx = newStates.findIndex((b) => b.column === bead.column && b.type === 'bottom' && b.index === i);
-              if (idx !== -1) {
-                newStates[idx].active = false;
-              }
-            }
-          } else {
-            // Activate this bead and all below it
-            for (let i = bead.index; i < 4; i++) {
-              const idx = newStates.findIndex((b) => b.column === bead.column && b.type === 'bottom' && b.index === i);
-              if (idx !== -1) {
-                newStates[idx].active = true;
-              }
-            }
-          }
+      if (isActive) {
+        // Деактивировать эту бусину и все выше неё
+        let deactivateCount = 0;
+        for (let i = 0; i <= beadIndex; i++) {
+          if (activeBeads[i]) deactivateCount++;
         }
+        newValues[column] -= deactivateCount;
+      } else {
+        // Активировать эту бусину и все ниже неё
+        let activateCount = 0;
+        for (let i = beadIndex; i < 4; i++) {
+          if (!activeBeads[i]) activateCount++;
+        }
+        newValues[column] += activateCount;
+      }
 
-        const newValue = calculateTotalValue(newStates);
-        setCurrentValue(newValue);
-        return newStates;
-      });
-    },
-    [calculateTotalValue],
-  );
+      return newValues;
+    });
+  }, []);
 
+  /**
+   * Установить значение на абакусе
+   * @param {number} number - число для установки
+   */
   const setValue = useCallback(
     (number: number) => {
-      const digits = String(number).padStart(columns, '0').split('').map(Number);
+      const maxValue = Math.pow(10, columns) - 1;
+      const clampedNumber = Math.max(0, Math.min(maxValue, number));
+      const digits = String(clampedNumber).padStart(columns, '0').split('').map(Number);
 
-      const newStates: BeadPosition[] = [];
-
-      for (let col = 0; col < columns; col++) {
-        const digit = digits[col];
-
-        // Add top bead
-        newStates.push({
-          column: col,
-          type: 'top',
-          index: 0,
-          active: digit >= 5,
-        });
-
-        // Add bottom beads
-        const bottomBeadsCount = digit >= 5 ? digit - 5 : digit;
-        for (let i = 0; i < 4; i++) {
-          newStates.push({
-            column: col,
-            type: 'bottom',
-            index: i,
-            active: i >= 4 - bottomBeadsCount,
-          });
-        }
-      }
-
-      setBeadStates(newStates);
-      setCurrentValue(number);
+      setValues(digits);
     },
     [columns],
   );
 
+  /**
+   * Сбросить абакус (все значения в 0)
+   */
   const reset = useCallback(() => {
-    const newStates: BeadPosition[] = [];
-
-    for (let col = 0; col < columns; col++) {
-      newStates.push({
-        column: col,
-        type: 'top',
-        index: 0,
-        active: false,
-      });
-
-      for (let i = 0; i < 4; i++) {
-        newStates.push({
-          column: col,
-          type: 'bottom',
-          index: i,
-          active: false,
-        });
-      }
-    }
-
-    setBeadStates(newStates);
-    setCurrentValue(0);
+    setValues(new Array(columns).fill(0));
   }, [columns]);
 
-  const initialize = useCallback(() => {
-    reset();
-  }, [reset]);
+  /**
+   * Получить цифру для конкретной колонки
+   * @param {number} column - индекс колонки
+   */
+  const getColumnValue = useCallback(
+    (column: number): number => {
+      return values[column];
+    },
+    [values],
+  );
+
+  /**
+   * Получить степень десятки для колонки
+   * @param {number} column - индекс колонки
+   */
+  const getColumnPower = useCallback(
+    (column: number) => {
+      return columns - 1 - column;
+    },
+    [columns],
+  );
+
+  /**
+   * Получить метку для колонки (например "10²")
+   * @param {number} column - индекс колонки
+   */
+  const getColumnLabel = useCallback(
+    (column: number) => {
+      const power = getColumnPower(column);
+      return power === 0 ? '1' : `10${getSuperscript(power)}`;
+    },
+    [getColumnPower],
+  );
 
   return {
-    beadStates,
+    // Состояние
+    values,
+    columns,
+
+    // Основные методы
     currentValue,
-    toggleBead,
     setValue,
     reset,
-    initialize,
+
+    // Методы для работы с бусинами
+    toggleTopBead,
+    toggleBottomBead,
+
+    // Вспомогательные методы
+    getColumnValue,
+    getColumnPower,
+    getColumnLabel,
   };
-}
+};
