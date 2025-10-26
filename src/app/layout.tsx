@@ -1,6 +1,8 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 
+import { Header } from '@/components/Header/Header';
+
 import '@/styles/globals.scss';
 
 export const metadata: Metadata = {
@@ -11,7 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
