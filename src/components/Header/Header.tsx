@@ -18,6 +18,10 @@ export const Header: React.FC = () => {
     router.push(routes.auth.login);
   };
 
+  const handleRegister = () => {
+    router.push(routes.auth.register);
+  };
+
   const handleLogout = () => {
     logout();
     router.push('/');
@@ -47,7 +51,7 @@ export const Header: React.FC = () => {
               <Button variant="secondary" onClick={handleLogin} className={styles.authButton}>
                 Вход
               </Button>
-              <Button variant="primary" className={styles.authButton}>
+              <Button variant="primary" onClick={handleRegister} className={styles.authButton}>
                 Регистрация
               </Button>
             </>
