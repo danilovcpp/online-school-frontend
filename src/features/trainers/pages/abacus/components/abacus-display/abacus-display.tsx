@@ -17,8 +17,7 @@ interface AbacusProps {
 }
 
 export const AbacusDisplay: React.FC<AbacusProps> = ({ columns: initialColums = 6, value, onChange, showValue = true }) => {
-  const { columns, currentValue, toggleTopBead, toggleBottomBead, getColumnValue, getColumnLabel, setValue } =
-    useAbacus(initialColums);
+  const { columns, currentValue, toggleTopBead, toggleBottomBead, getColumnValue, getColumnLabel, setValue } = useAbacus(initialColums);
 
   useEffect(() => {
     if (value !== undefined) {

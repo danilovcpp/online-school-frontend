@@ -121,7 +121,9 @@ const FlashAnzanPage = () => {
 
       <div className={styles.display}>
         {currentNumber !== null ? (
-          <div key={`${currentNumber}-${currentProgress}`} className={styles.flashNumber}>{currentNumber}</div>
+          <div key={`${currentNumber}-${currentProgress}`} className={styles.flashNumber}>
+            {currentNumber}
+          </div>
         ) : (
           currentProgress && <div className={styles.flashNumber}>?</div>
         )}

@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 
 import { Header } from '@/components/Header/Header';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 import '@/styles/globals.scss';
 
@@ -14,8 +15,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <AuthProvider>
+          <Header />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

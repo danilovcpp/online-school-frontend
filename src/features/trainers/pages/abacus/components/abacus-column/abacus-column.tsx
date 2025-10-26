@@ -13,13 +13,7 @@ interface AbacusColumnProps {
   onToggleBottom: (column: number, index: number, isActive: boolean, beats: boolean[]) => void;
 }
 
-export const AbacusColumn: React.FC<AbacusColumnProps> = ({
-  columnIndex,
-  label,
-  value,
-  onToggleTop,
-  onToggleBottom,
-}) => {
+export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, value, onToggleTop, onToggleBottom }) => {
   const hasTopBead = value >= 5;
   const bottomCount = value % 5;
   const bottomBeads = [false, false, false, false];

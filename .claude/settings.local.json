@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(timeout /t 10 /nobreak)",
+      "Bash(npm run lint:js:*)",
+      "Bash(npm run lint:fix:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

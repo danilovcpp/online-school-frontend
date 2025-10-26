@@ -1,11 +1,28 @@
-import Link from 'next/link';
+'use client';
+
 import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/Button/Button';
+import { useAuth } from '@/contexts/AuthContext';
+import { routes } from '@/shared/constants/routes';
 
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
+  const router = useRouter();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const handleLogin = () => {
+    router.push(routes.auth.login);
+  };
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -15,12 +32,26 @@ export const Header: React.FC = () => {
         </Link>
 
         <nav className={styles.nav}>
-          <Button variant="secondary" className={styles.authButton}>
-            Вход
-          </Button>
-          <Button variant="primary" className={styles.authButton}>
-            Регистрация
-          </Button>
+          {isAuthenticated && user ? (
+            <>
+              <div className={styles.userInfo}>
+                <span className={styles.avatar}>{user.avatar || '👤'}</span>
+                <span className={styles.userName}>{user.name}</span>
+              </div>
+              <Button variant="secondary" onClick={handleLogout} className={styles.authButton}>
+                Выход
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" onClick={handleLogin} className={styles.authButton}>
+                Вход
+              </Button>
+              <Button variant="primary" className={styles.authButton}>
+                Регистрация
+              </Button>
+            </>
+          )}
         </nav>
       </div>
     </header>
