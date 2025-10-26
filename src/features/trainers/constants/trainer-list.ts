@@ -31,11 +31,4 @@ export const trainerList: Array<Trainer> = [
     icon: '🧠',
     path: routes.trainers.mentalVisualization,
   },
-  {
-    id: 'soroban',
-    title: 'Соробан (Японский абакус)',
-    description: 'Традиционный японский счётный инструмент для развития навыков быстрого счёта',
-    icon: '🎴',
-    path: routes.trainers.soroban,
-  },
 ];
