@@ -25,7 +25,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--primary-gradient);
+    background: var(--gradient-primary);
     opacity: 0.05;
     z-index: 0;
   }
@@ -40,6 +40,7 @@
   -webkit-text-fill-color: transparent;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 1;
+  animation: flashScale 0.2s ease;
 }
 
 .progress {
@@ -55,50 +56,6 @@
   justify-content: center;
   flex-wrap: wrap;
   margin: 20px 0;
-}
-
-.stats {
-  background: var(--color-overlay-heavy);
-  padding: 25px;
-  border-radius: 15px;
-  margin-top: 30px;
-
-  h3 {
-    color: var(--text-primary);
-    margin-bottom: 20px;
-    text-align: center;
-  }
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-}
-
-.statItem {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.statLabel {
-  display: block;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-}
-
-.statValue {
-  display: block;
-  font-size: 2rem;
-  font-weight: bold;
-  background: var(--gradient-success);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .answer {
@@ -175,6 +132,7 @@
 }
 
 @keyframes shake {
+
   0%,
   100% {
     transform: translateX(0);
@@ -186,5 +144,16 @@
 
   75% {
     transform: translateX(10px);
+  }
+}
+
+@keyframes flashScale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
