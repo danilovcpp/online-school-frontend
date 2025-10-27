@@ -45,4 +45,11 @@ export const trainerList: Array<Trainer> = [
     icon: '🌈',
     path: routes.trainers.stroopTest,
   },
+  {
+    id: 'lipman-test',
+    title: 'Тест Лимпана',
+    description: 'Тренировка концентрации внимания и избирательного восприятия',
+    icon: '🔍',
+    path: routes.trainers.lipmanTest,
+  },
 ];

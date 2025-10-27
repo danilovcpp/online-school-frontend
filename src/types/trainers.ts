@@ -3,6 +3,7 @@ export type TrainerType =
   | 'abacus'
   | 'flash-anzan'
   | 'guess-result'
+  | 'lipman-test'
   | 'mental-visualization'
   | 'schulte-table'
   | 'soroban'
@@ -96,4 +97,27 @@ export interface StroopTestStats {
   accuracy: number; // Accuracy percentage
   totalCorrect: number;
   totalWrong: number;
+}
+
+// Lipman Test types
+export interface LipmanTestSettings {
+  rows: number; // Number of rows (10, 15, 20)
+  cols: number; // Number of columns (15, 20, 25)
+  targetLetters: string[]; // Letters to find (e.g., ['К', 'А'])
+}
+
+export interface LipmanTestStats {
+  completedTests: number;
+  bestTime: number | null; // Best time in seconds
+  averageTime: number; // Average time in seconds
+  accuracy: number; // Accuracy percentage
+  totalCorrect: number; // Total correct marks
+  totalWrong: number; // Total wrong marks
+}
+
+export interface LipmanCell {
+  letter: string;
+  isTarget: boolean;
+  isMarked: boolean;
+  isCorrect?: boolean; // Only set after test completion
 }

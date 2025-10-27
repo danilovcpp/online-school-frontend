@@ -1,0 +1,186 @@
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 8px;
+
+  p {
+    margin: 0 0 0.5rem 0;
+    line-height: 1.6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.targetInfo {
+  font-weight: 500;
+}
+
+.targetLetters {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.hint {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.gameInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.progress {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.result {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.resultValue {
+  font-weight: 700;
+  color: var(--color-primary);
+
+  &.correct {
+    color: var(--color-success);
+  }
+
+  &.wrong {
+    color: var(--color-error);
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--color-dark-elevated);
+  border: 2px solid var(--color-border-light);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--color-text-primary);
+  min-width: 30px;
+  min-height: 30px;
+
+  &:hover:not(.disabled) {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: var(--color-primary);
+    transform: scale(1.1);
+  }
+
+  &:active:not(.disabled) {
+    transform: scale(0.95);
+  }
+
+  &.marked {
+    background: rgba(102, 126, 234, 0.3);
+    border-color: var(--color-primary);
+  }
+
+  &.correctMark {
+    background: rgba(67, 233, 123, 0.3);
+    border-color: var(--color-success);
+    color: var(--color-success);
+  }
+
+  &.wrongMark {
+    background: rgba(240, 101, 149, 0.3);
+    border-color: var(--color-error);
+    color: var(--color-error);
+  }
+
+  &.missed {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    color: #ffc107;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 768px) {
+  .settings {
+    flex-direction: column;
+  }
+
+  .cell {
+    font-size: 0.875rem;
+    min-width: 25px;
+    min-height: 25px;
+  }
+
+  .timer {
+    font-size: 1.25rem;
+  }
+
+  .results {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cell {
+    font-size: 0.75rem;
+    min-width: 20px;
+    min-height: 20px;
+  }
+}
