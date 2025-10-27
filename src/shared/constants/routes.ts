@@ -8,5 +8,6 @@ export const routes = {
     flashAzan: '/trainers/flash-anzan',
     guessResult: '/trainers/guess-result',
     mentalVisualization: '/trainers/mental-visualization',
+    schulteTable: '/trainers/schulte-table',
   },
 };

@@ -31,4 +31,11 @@ export const trainerList: Array<Trainer> = [
     icon: '🧠',
     path: routes.trainers.mentalVisualization,
   },
+  {
+    id: 'schulte-table',
+    title: 'Таблица Шульте',
+    description: 'Тренажер концентрации внимания и периферического зрения',
+    icon: '🎯',
+    path: routes.trainers.schulteTable,
+  },
 ];

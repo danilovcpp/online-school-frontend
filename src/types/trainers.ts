@@ -1,5 +1,5 @@
 // Trainer types
-export type TrainerType = 'abacus' | 'flash-anzan' | 'guess-result' | 'mental-visualization' | 'soroban';
+export type TrainerType = 'abacus' | 'flash-anzan' | 'guess-result' | 'mental-visualization' | 'schulte-table' | 'soroban';
 
 export interface Trainer {
   id: TrainerType;
@@ -56,4 +56,17 @@ export interface GuessResultStats {
 export interface PracticeChallenge {
   number: number;
   completed: boolean;
+}
+
+// Schulte Table types
+export interface SchulteTableSettings {
+  gridSize: number; // Size of the grid (3x3, 4x4, 5x5)
+  shuffle: boolean; // Whether to shuffle numbers
+}
+
+export interface SchulteTableStats {
+  completedGames: number;
+  bestTime: number | null; // Best time in seconds
+  averageTime: number; // Average time in seconds
+  lastTime: number | null; // Last completed time in seconds
 }
