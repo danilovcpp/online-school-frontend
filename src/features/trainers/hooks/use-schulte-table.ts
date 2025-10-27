@@ -8,6 +8,7 @@ export function useSchulteTable() {
   const [currentNumber, setCurrentNumber] = useState<number>(1);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [settings, setSettings] = useState<SchulteTableSettings | null>(null);
   const [stats, setStats] = useState<SchulteTableStats>({
     completedGames: 0,
     bestTime: null,
@@ -17,26 +18,32 @@ export function useSchulteTable() {
 
   const timerInterval = useRef<NodeJS.Timeout | null>(null);
 
-  const generateGrid = useCallback((gridSize: number, shuffle: boolean) => {
+  const shuffleArray = useCallback((array: number[]) => {
+    const shuffled = [...array];
+    // Fisher-Yates shuffle algorithm
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }, []);
+
+  const generateGrid = useCallback((gridSize: number, shouldShuffle: boolean) => {
     const totalNumbers = gridSize * gridSize;
     const nums = Array.from({ length: totalNumbers }, (_, i) => i + 1);
 
-    if (shuffle) {
-      // Fisher-Yates shuffle algorithm
-      for (let i = nums.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [nums[i], nums[j]] = [nums[j], nums[i]];
-      }
-    }
+    // Если shuffle=false, перемешиваем один раз в начале
+    const initialNumbers = shouldShuffle ? nums : shuffleArray(nums);
 
-    setNumbers(nums);
+    setNumbers(initialNumbers);
     setCurrentNumber(1);
-    return nums;
-  }, []);
+    return initialNumbers;
+  }, [shuffleArray]);
 
   const startGame = useCallback(
-    (settings: SchulteTableSettings) => {
-      generateGrid(settings.gridSize, settings.shuffle);
+    (gameSettings: SchulteTableSettings) => {
+      setSettings(gameSettings);
+      generateGrid(gameSettings.gridSize, gameSettings.shuffle);
       setCurrentNumber(1);
       setIsActive(true);
       const now = Date.now();
@@ -63,7 +70,7 @@ export function useSchulteTable() {
 
   const handleNumberClick = useCallback(
     (clickedNumber: number) => {
-      if (!isActive) return;
+      if (!isActive || !settings) return;
 
       if (clickedNumber === currentNumber) {
         const totalNumbers = numbers.length;
@@ -89,10 +96,45 @@ export function useSchulteTable() {
           });
         } else {
           setCurrentNumber(currentNumber + 1);
+
+          // Если включено постоянное перемешивание, перемешиваем оставшиеся числа
+          if (settings.shuffle) {
+            setNumbers((prevNumbers) => {
+              // Разделяем найденные и оставшиеся числа
+              const found: number[] = [];
+              const remaining: number[] = [];
+
+              prevNumbers.forEach((num) => {
+                if (num <= currentNumber) {
+                  found.push(num);
+                } else {
+                  remaining.push(num);
+                }
+              });
+
+              // Перемешиваем только оставшиеся числа
+              const shuffledRemaining = shuffleArray(remaining);
+
+              // Объединяем: найденные остаются на своих позициях, оставшиеся перемешаны
+              const result: number[] = [];
+              let foundIndex = 0;
+              let remainingIndex = 0;
+
+              prevNumbers.forEach((num) => {
+                if (num <= currentNumber) {
+                  result.push(found[foundIndex++]);
+                } else {
+                  result.push(shuffledRemaining[remainingIndex++]);
+                }
+              });
+
+              return result;
+            });
+          }
         }
       }
     },
-    [isActive, currentNumber, numbers.length, elapsedTime, stopGame],
+    [isActive, settings, currentNumber, numbers.length, elapsedTime, stopGame, shuffleArray],
   );
 
   const resetStats = useCallback(() => {
@@ -109,6 +151,7 @@ export function useSchulteTable() {
     setCurrentNumber(1);
     setIsActive(false);
     setElapsedTime(0);
+    setSettings(null);
     if (timerInterval.current) {
       clearInterval(timerInterval.current);
       timerInterval.current = null;
