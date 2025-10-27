@@ -101,18 +101,6 @@ const AbacusPage: React.FC = () => {
       </section>
 
       <section>
-        <AbacusDisplay columns={6} value={abacusValue} onChange={setAbacusValue} />
-      </section>
-
-      <Card title="Как использовать абакус">
-        <div className={styles.grid}>
-          {tutorials.map((item) => (
-            <TutorialCard key={item.step} {...item} />
-          ))}
-        </div>
-      </Card>
-
-      <section>
         <Card title="Практика">
           <div className={styles.challengeWrapper}>
             <div className={styles.challenge}>
@@ -131,6 +119,18 @@ const AbacusPage: React.FC = () => {
           </div>
         </Card>
       </section>
+
+      <section>
+        <AbacusDisplay columns={6} value={abacusValue} onChange={setAbacusValue} />
+      </section>
+
+      <Card title="Как использовать абакус">
+        <div className={styles.grid}>
+          {tutorials.map((item) => (
+            <TutorialCard key={item.step} {...item} />
+          ))}
+        </div>
+      </Card>
     </main>
   );
 };
