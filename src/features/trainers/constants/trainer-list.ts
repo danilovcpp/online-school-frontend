@@ -25,13 +25,6 @@ export const trainerList: Array<Trainer> = [
     path: routes.trainers.guessResult,
   },
   {
-    id: 'mental-visualization',
-    title: 'Mental Visualization',
-    description: 'Абакус из головы - визуализация без физического инструмента',
-    icon: '🧠',
-    path: routes.trainers.mentalVisualization,
-  },
-  {
     id: 'schulte-table',
     title: 'Таблица Шульте',
     description: 'Тренажер концентрации внимания и периферического зрения',
