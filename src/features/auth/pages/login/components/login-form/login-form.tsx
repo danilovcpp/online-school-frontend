@@ -33,7 +33,7 @@ const LoginForm: FC = () => {
 
     try {
       await login(email, password);
-      router.push(routes.trainers.abacus);
+      router.push(routes.home);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Ошибка входа');
     }
