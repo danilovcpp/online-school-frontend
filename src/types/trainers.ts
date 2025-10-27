@@ -1,5 +1,12 @@
 // Trainer types
-export type TrainerType = 'abacus' | 'flash-anzan' | 'guess-result' | 'mental-visualization' | 'schulte-table' | 'soroban';
+export type TrainerType =
+  | 'abacus'
+  | 'flash-anzan'
+  | 'guess-result'
+  | 'mental-visualization'
+  | 'schulte-table'
+  | 'soroban'
+  | 'stroop-test';
 
 export interface Trainer {
   id: TrainerType;
@@ -69,4 +76,24 @@ export interface SchulteTableStats {
   bestTime: number | null; // Best time in seconds
   averageTime: number; // Average time in seconds
   lastTime: number | null; // Last completed time in seconds
+}
+
+// Stroop Test types
+export interface SroopColor {
+  name: string; // Color name in Russian (e.g., "красный")
+  hex: string; // Color hex code
+}
+
+export interface StroopTestSettings {
+  rounds: number; // Number of rounds (10, 20, 30)
+  mode: 'congruent' | 'incongruent' | 'mixed'; // Test mode
+}
+
+export interface StroopTestStats {
+  completedTests: number;
+  bestTime: number | null; // Best average time per answer in ms
+  averageTime: number; // Average time per answer in ms
+  accuracy: number; // Accuracy percentage
+  totalCorrect: number;
+  totalWrong: number;
 }

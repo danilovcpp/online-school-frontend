@@ -38,4 +38,11 @@ export const trainerList: Array<Trainer> = [
     icon: '🎯',
     path: routes.trainers.schulteTable,
   },
+  {
+    id: 'stroop-test',
+    title: 'Тест Струпа',
+    description: 'Тренировка когнитивного контроля и избирательного внимания',
+    icon: '🌈',
+    path: routes.trainers.stroopTest,
+  },
 ];

@@ -10,5 +10,6 @@ export const routes = {
     guessResult: '/trainers/guess-result',
     mentalVisualization: '/trainers/mental-visualization',
     schulteTable: '/trainers/schulte-table',
+    stroopTest: '/trainers/stroop-test',
   },
 };
