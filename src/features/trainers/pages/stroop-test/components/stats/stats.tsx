@@ -17,28 +17,28 @@ export const Stats = ({ stats }: StatsProps) => {
       <h3 className={styles.title}>Статистика</h3>
       <div className={styles.grid}>
         <div className={styles.item}>
-          <span className={styles.label}>Завершено тестов:</span>
-          <span className={styles.value}>{stats.completedTests}</span>
+          <div className={styles.label}>Завершено тестов:</div>
+          <div className={styles.value}>{stats.completedTests}</div>
         </div>
         <div className={styles.item}>
-          <span className={styles.label}>Лучшее среднее время:</span>
-          <span className={styles.value}>{formatTime(stats.bestTime)}</span>
+          <div className={styles.label}>Лучшее среднее время:</div>
+          <div className={styles.value}>{formatTime(stats.bestTime)}</div>
         </div>
         <div className={styles.item}>
-          <span className={styles.label}>Среднее время:</span>
-          <span className={styles.value}>{formatTime(stats.averageTime)}</span>
+          <div className={styles.label}>Среднее время:</div>
+          <div className={styles.value}>{formatTime(stats.averageTime)}</div>
         </div>
         <div className={styles.item}>
-          <span className={styles.label}>Точность:</span>
-          <span className={styles.value}>{stats.accuracy}%</span>
+          <div className={styles.label}>Точность:</div>
+          <div className={styles.value}>{stats.accuracy}%</div>
         </div>
         <div className={styles.item}>
-          <span className={styles.label}>Правильных:</span>
-          <span className={styles.value}>{stats.totalCorrect}</span>
+          <div className={styles.label}>Правильных:</div>
+          <div className={styles.value}>{stats.totalCorrect}</div>
         </div>
         <div className={styles.item}>
-          <span className={styles.label}>Неправильных:</span>
-          <span className={styles.value}>{stats.totalWrong}</span>
+          <div className={styles.label}>Неправильных:</div>
+          <div className={styles.value}>{stats.totalWrong}</div>
         </div>
       </div>
     </div>
