@@ -38,10 +38,10 @@ export const Header: React.FC = () => {
         <nav className={styles.nav}>
           {isAuthenticated && user ? (
             <>
-              <div className={styles.userInfo}>
+              <Link href={routes.profile} className={styles.userInfo}>
                 <span className={styles.avatar}>{user.avatar || '👤'}</span>
                 <span className={styles.userName}>{user.name}</span>
-              </div>
+              </Link>
               <Button variant="secondary" onClick={handleLogout} className={styles.authButton}>
                 Выход
               </Button>

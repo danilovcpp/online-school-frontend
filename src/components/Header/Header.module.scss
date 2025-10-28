@@ -56,6 +56,16 @@
   background: var(--color-overlay-light);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-overlay-medium);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-primary);
+  }
 }
 
 .avatar {

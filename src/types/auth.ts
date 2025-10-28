@@ -3,6 +3,10 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
+  bio?: string;
+  registeredAt?: string;
+  level?: number;
+  experiencePoints?: number;
 }
 
 export interface AuthContextType {

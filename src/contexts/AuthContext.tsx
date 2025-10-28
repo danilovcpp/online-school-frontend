@@ -12,6 +12,10 @@ const MOCK_USER: User = {
   email: 'user@example.com',
   name: 'Иван Иванов',
   avatar: '👤',
+  bio: 'Увлекаюсь ментальной арифметикой и развитием когнитивных способностей. Постоянно совершенствую свои навыки счета на абакусе.',
+  registeredAt: new Date('2024-01-15').toISOString(),
+  level: 5,
+  experiencePoints: 3750,
 };
 
 // Mock credentials
@@ -53,6 +57,10 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       email,
       name,
       avatar: name.charAt(0).toUpperCase(),
+      bio: '',
+      registeredAt: new Date().toISOString(),
+      level: 1,
+      experiencePoints: 0,
     };
 
     setUser(newUser);
