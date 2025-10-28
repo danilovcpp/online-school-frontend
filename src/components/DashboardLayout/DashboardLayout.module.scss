@@ -18,13 +18,14 @@
 .main {
   flex: 1;
   overflow-y: auto;
-  padding: var(--spacing-xl);
+  padding: 0;
   animation: fadeInUp 0.5s ease-out;
+  width: 100%;
 }
 
 @include media.max-tablet {
   .main {
-    padding: var(--spacing-lg);
+    padding: 0;
   }
 }
 
@@ -34,6 +35,6 @@
   }
 
   .main {
-    padding: var(--spacing-md);
+    padding: 0;
   }
 }
