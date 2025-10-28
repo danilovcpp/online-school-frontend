@@ -1,0 +1,273 @@
+@import '@/styles/mixins';
+
+.container {
+  min-height: 100vh;
+  background: transparent;
+}
+
+// Hero Section
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, var(--color-primary-opacity-10) 0%, rgb(33 12 50 / 36%) 50%, var(--color-primary-opacity-10) 100%);
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1.5rem;
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+.titleAccent {
+  display: block;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 0.5rem;
+}
+
+.subtitle {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  color: var(--color-text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: var(--line-height-relaxed);
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+    min-width: 180px;
+  }
+}
+
+// Features Section
+.features {
+  padding: 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-text-primary);
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @include hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.featureTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.featureDescription {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+// Trainers Section
+.trainers {
+  padding: 5rem 2rem;
+  background: var(--color-primary-opacity-5);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.trainersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.trainerCard {
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @include hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.trainerIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.trainerTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 0.75rem;
+  color: var(--color-text-primary);
+}
+
+.trainerDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.trainersAction {
+  display: flex;
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+  }
+}
+
+// CTA Section
+.cta {
+  padding: 6rem 2rem;
+  background: var(--gradient-primary);
+  text-align: center;
+}
+
+.ctaContent {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.ctaDescription {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  color: white;
+  opacity: 0.95;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.cta a {
+  text-decoration: none;
+}
+
+.cta button {
+  padding: 1rem 2.5rem;
+  font-size: 1.125rem;
+  background: white;
+  color: var(--color-primary);
+  border: none;
+
+  @include hover {
+    background: rgba(white, 0.95);
+    transform: translateY(-2px);
+  }
+}
+
+// Responsive adjustments
+@include media-tablet {
+  .hero {
+    min-height: 70vh;
+    padding: 3rem 1.5rem;
+  }
+
+  .features,
+  .trainers {
+    padding: 4rem 1.5rem;
+  }
+
+  .cta {
+    padding: 5rem 1.5rem;
+  }
+
+  .featuresGrid,
+  .trainersGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@include media-mobile {
+  .hero {
+    min-height: 60vh;
+    padding: 2rem 1rem;
+  }
+
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      width: 100%;
+      min-width: auto;
+    }
+  }
+
+  .features,
+  .trainers {
+    padding: 3rem 1rem;
+  }
+
+  .cta {
+    padding: 4rem 1rem;
+  }
+
+  .featuresGrid,
+  .trainersGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .featureCard,
+  .trainerCard {
+    padding: 2rem 1.5rem;
+  }
+}

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useAuth } from '@/contexts/AuthContext';
+import { HomePage } from '@/features/landing/pages/home';
 import { routes } from '@/shared/constants/routes';
 
 export default function Home() {
@@ -13,10 +14,14 @@ export default function Home() {
   useEffect(() => {
     if (isAuthenticated) {
       router.replace(routes.dashboard);
-    } else {
-      router.replace(routes.auth.login);
     }
   }, [isAuthenticated, router]);
 
+  // Show landing page for unauthenticated users
+  if (!isAuthenticated) {
+    return <HomePage />;
+  }
+
+  // Return null while redirecting authenticated users
   return null;
 }
