@@ -23,6 +23,12 @@ const menuItems: MenuItem[] = [
     path: routes.dashboard,
   },
   {
+    id: 'courses',
+    title: 'Курсы',
+    icon: '📚',
+    path: routes.courses,
+  },
+  {
     id: 'abacus',
     title: 'Абакус',
     icon: '🧮',

@@ -1,6 +1,7 @@
 export const routes = {
   home: '/',
   dashboard: '/dashboard',
+  courses: '/courses',
   auth: {
     login: '/login',
     register: '/register',
