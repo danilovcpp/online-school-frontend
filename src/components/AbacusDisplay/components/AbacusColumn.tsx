@@ -19,8 +19,6 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
   const bottomCount = value % 5;
   const bottomBeads = [false, false, false, false];
 
-  console.log('bottomCount', bottomCount);
-
   // Активные бусины - это бусины у разделителя
   // bottomCount определяет количество активных бусин (подсвеченных)
   // Индекс 0 = ближайшая к разделителю, индекс 3 = самая дальняя
