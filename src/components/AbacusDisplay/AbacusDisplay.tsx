@@ -25,7 +25,7 @@ export const AbacusDisplay: React.FC<AbacusDisplayProps> = ({
   interactive = true,
   showValue = true,
 }) => {
-  const { columns, currentValue, toggleTopBead, toggleBottomBead, getColumnValue, getColumnLabel, setValue } = useAbacus(initialColumns);
+  const { columns, currentValue, toggleTopBead, toggleBottomBead, getColumnValue, setValue } = useAbacus(initialColumns);
 
   useEffect(() => {
     if (value !== undefined) {
@@ -43,12 +43,13 @@ export const AbacusDisplay: React.FC<AbacusDisplayProps> = ({
     <div className={styles.container}>
       <div className={styles.abacusFrame}>
         {Array.from({ length: columns }, (_, i) => i).reverse().map((columnIndex) => {
+          const columnValue = getColumnValue(columnIndex);
           return (
             <AbacusColumn
               key={columnIndex}
               columnIndex={columnIndex}
-              value={getColumnValue(columnIndex)}
-              label={showLabels ? getColumnLabel(columnIndex) : undefined}
+              value={columnValue}
+              label={showLabels ? columnValue.toString() : undefined}
               onToggleTop={interactive ? toggleTopBead : undefined}
               onToggleBottom={interactive ? toggleBottomBead : undefined}
             />
