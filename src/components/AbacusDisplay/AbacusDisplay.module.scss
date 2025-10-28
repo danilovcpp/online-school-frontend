@@ -61,6 +61,7 @@
 
 .abacusFrame {
   display: flex;
+  flex-direction: row-reverse;
   gap: clamp(0.5rem, 1.5vw, 1rem);
   background: linear-gradient(145deg, var(--color-dark-surface), var(--color-dark-elevated));
   padding: var(--spacing-2xl);

@@ -55,6 +55,14 @@
     var(--shadow-primary),
     inset 0 2px 4px var(--color-overlay-medium),
     var(--shadow-glow-primary);
+
+  &.top {
+    transform: translateY(50%);
+  }
+
+  &.bottom {
+    transform: translateY(-50%);
+  }
 }
 
 .inactive {
