@@ -33,7 +33,6 @@
     inset 0 2px 4px var(--color-overlay-darker),
     0 2px 4px var(--color-bg-transparent-10);
   width: clamp(1.5rem, 3vw, 2rem);
-  min-height: clamp(16rem, 30vh, 20rem);
 
   @include media-tablet {
     width: clamp(1.25rem, 2.5vw, 1.75rem);
