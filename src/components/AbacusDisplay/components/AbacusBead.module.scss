@@ -1,0 +1,62 @@
+@import '@/styles/mixins';
+
+.bead {
+  width: clamp(1.75rem, 3.5vw, 2.5rem);
+  height: clamp(1.75rem, 3.5vw, 2.5rem);
+  border-radius: 50%;
+  transition: all var(--transition-base);
+  box-shadow:
+    var(--shadow-bead),
+    inset 0 2px 4px var(--color-overlay-medium);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 40%;
+    height: 30%;
+    background: radial-gradient(ellipse at top left, var(--color-overlay-medium), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  @include media-tablet {
+    width: clamp(1.5rem, 3vw, 2rem);
+    height: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  @include media-mobile {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.interactive {
+  cursor: pointer;
+
+  @include hover {
+    transform: scale(1.08);
+    box-shadow:
+      var(--shadow-bead-hover),
+      inset 0 2px 4px var(--color-overlay-medium);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.active {
+  background: var(--gradient-success);
+  box-shadow: var(--shadow-success);
+  box-shadow:
+    var(--shadow-primary),
+    inset 0 2px 4px var(--color-overlay-medium),
+    var(--shadow-glow-primary);
+}
+
+.inactive {
+  background: var(--gradient-primary);
+}

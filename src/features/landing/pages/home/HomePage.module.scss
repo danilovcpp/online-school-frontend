@@ -61,6 +61,77 @@
   }
 }
 
+// Abacus Section
+.abacusSection {
+  padding: 5rem 2rem;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 69, 19, 0.05) 0%,
+    rgba(101, 67, 33, 0.08) 50%,
+    rgba(139, 69, 19, 0.05) 100%
+  );
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(var(--color-primary-rgb), 0.03) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+.abacusContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.abacusTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.abacusDescription {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.abacusHint {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: var(--border-radius-md);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  p {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
 // Features Section
 .features {
   padding: 5rem 2rem;
@@ -219,6 +290,14 @@
     padding: 3rem 1.5rem;
   }
 
+  .abacusSection {
+    padding: 4rem 1.5rem;
+  }
+
+  .abacusContent {
+    margin-bottom: 2rem;
+  }
+
   .features,
   .trainers {
     padding: 4rem 1.5rem;
@@ -248,6 +327,23 @@
     button {
       width: 100%;
       min-width: auto;
+    }
+  }
+
+  .abacusSection {
+    padding: 3rem 1rem;
+  }
+
+  .abacusContent {
+    margin-bottom: 1.5rem;
+  }
+
+  .abacusHint {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+
+    p {
+      font-size: var(--font-size-sm);
     }
   }
 
