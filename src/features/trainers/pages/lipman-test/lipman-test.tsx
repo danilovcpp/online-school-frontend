@@ -17,8 +17,7 @@ import styles from './lipman-test.module.scss';
 
 const LipmanTestPage = () => {
   const [settings, setSettings] = useState<LipmanTestSettings>(defaultSettings);
-  const { cells, isActive, isCompleted, elapsedTime, stats, startTest, completeTest, toggleCell, reset } =
-    useLipmanTest();
+  const { cells, isActive, isCompleted, elapsedTime, stats, startTest, completeTest, toggleCell, reset } = useLipmanTest();
 
   const handleStart = () => {
     reset();
@@ -95,13 +94,12 @@ const LipmanTestPage = () => {
 
       <div className={styles.info}>
         <p>
-          Тест Лимпана — это психологический тест для оценки концентрации внимания. В таблице случайных букв
-          нужно найти и отметить все вхождения указанных букв.
+          Тест Лимпана — это психологический тест для оценки концентрации внимания. В таблице случайных букв нужно найти и отметить все
+          вхождения указанных букв.
         </p>
         {settings.targetLetters.length > 0 && (
           <p className={styles.targetInfo}>
-            Целевые буквы:{' '}
-            <span className={styles.targetLetters}>{settings.targetLetters.join(', ')}</span>
+            Целевые буквы: <span className={styles.targetLetters}>{settings.targetLetters.join(', ')}</span>
           </p>
         )}
         <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать тест</p>

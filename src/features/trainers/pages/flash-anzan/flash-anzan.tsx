@@ -67,10 +67,12 @@ const FlashAnzanPage = () => {
     const isCorrect = checkAnswer(answer);
 
     // Format numbers with proper signs for display
-    const numbersFormatted = numbers.map((num, idx) => {
-      if (idx === 0) return num.toString();
-      return num >= 0 ? `+ ${num}` : `- ${Math.abs(num)}`;
-    }).join(' ');
+    const numbersFormatted = numbers
+      .map((num, idx) => {
+        if (idx === 0) return num.toString();
+        return num >= 0 ? `+ ${num}` : `- ${Math.abs(num)}`;
+      })
+      .join(' ');
 
     if (isCorrect) {
       setResultMessage(`🎉 Правильно!\nЧисла: ${numbersFormatted} = ${correctAnswer}`);

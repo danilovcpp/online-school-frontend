@@ -126,8 +126,7 @@ export function useStroopTest() {
         setStats((prev) => {
           const newBestTime = prev.bestTime === null ? avgResponseTime : Math.min(prev.bestTime, avgResponseTime);
           const newCompletedTests = prev.completedTests + 1;
-          const newAverageTime =
-            (prev.averageTime * prev.completedTests + avgResponseTime) / newCompletedTests;
+          const newAverageTime = (prev.averageTime * prev.completedTests + avgResponseTime) / newCompletedTests;
 
           return {
             ...prev,

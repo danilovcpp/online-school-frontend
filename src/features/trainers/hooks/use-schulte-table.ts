@@ -28,17 +28,20 @@ export function useSchulteTable() {
     return shuffled;
   }, []);
 
-  const generateGrid = useCallback((gridSize: number, shouldShuffle: boolean) => {
-    const totalNumbers = gridSize * gridSize;
-    const nums = Array.from({ length: totalNumbers }, (_, i) => i + 1);
+  const generateGrid = useCallback(
+    (gridSize: number, shouldShuffle: boolean) => {
+      const totalNumbers = gridSize * gridSize;
+      const nums = Array.from({ length: totalNumbers }, (_, i) => i + 1);
 
-    // Если shuffle=false, перемешиваем один раз в начале
-    const initialNumbers = shouldShuffle ? nums : shuffleArray(nums);
+      // Если shuffle=false, перемешиваем один раз в начале
+      const initialNumbers = shouldShuffle ? nums : shuffleArray(nums);
 
-    setNumbers(initialNumbers);
-    setCurrentNumber(1);
-    return initialNumbers;
-  }, [shuffleArray]);
+      setNumbers(initialNumbers);
+      setCurrentNumber(1);
+      return initialNumbers;
+    },
+    [shuffleArray],
+  );
 
   const startGame = useCallback(
     (gameSettings: SchulteTableSettings) => {
@@ -82,10 +85,8 @@ export function useSchulteTable() {
 
           setStats((prev) => {
             const newCompletedGames = prev.completedGames + 1;
-            const newBestTime =
-              prev.bestTime === null ? finalTime : Math.min(prev.bestTime, finalTime);
-            const newAverageTime =
-              (prev.averageTime * prev.completedGames + finalTime) / newCompletedGames;
+            const newBestTime = prev.bestTime === null ? finalTime : Math.min(prev.bestTime, finalTime);
+            const newAverageTime = (prev.averageTime * prev.completedGames + finalTime) / newCompletedGames;
 
             return {
               completedGames: newCompletedGames,

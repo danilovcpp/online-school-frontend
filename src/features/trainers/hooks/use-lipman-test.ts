@@ -122,13 +122,11 @@ export function useLipmanTest() {
     setStats((prev) => {
       const newCompletedTests = prev.completedTests + 1;
       const newBestTime = prev.bestTime === null ? finalTime : Math.min(prev.bestTime, finalTime);
-      const newAverageTime =
-        (prev.averageTime * prev.completedTests + finalTime) / newCompletedTests;
+      const newAverageTime = (prev.averageTime * prev.completedTests + finalTime) / newCompletedTests;
       const newTotalCorrect = prev.totalCorrect + correct;
       const newTotalWrong = prev.totalWrong + wrong;
       const totalAttempts = newTotalCorrect + newTotalWrong;
-      const newAccuracy =
-        totalAttempts > 0 ? Math.round((newTotalCorrect / totalAttempts) * 100) : 0;
+      const newAccuracy = totalAttempts > 0 ? Math.round((newTotalCorrect / totalAttempts) * 100) : 0;
 
       return {
         completedTests: newCompletedTests,

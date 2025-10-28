@@ -72,12 +72,12 @@ const StroopTestPage = () => {
 
       <div className={styles.info}>
         <p>
-          <strong>Тест Струпа</strong> — классическое психологическое упражнение для тренировки когнитивного контроля
-          и избирательного внимания.
+          <strong>Тест Струпа</strong> — классическое психологическое упражнение для тренировки когнитивного контроля и избирательного
+          внимания.
         </p>
         <p>
-          <strong>Задача:</strong> Вам будет показано слово-название цвета, написанное определённым цветом. Вы должны
-          выбрать <strong>цвет текста</strong>, а не прочитать слово.
+          <strong>Задача:</strong> Вам будет показано слово-название цвета, написанное определённым цветом. Вы должны выбрать{' '}
+          <strong>цвет текста</strong>, а не прочитать слово.
         </p>
         <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot;, чтобы начать упражнение</p>
       </div>
@@ -95,7 +95,10 @@ const StroopTestPage = () => {
             </Button>
             <div className={styles.gameInfo}>
               <div className={styles.roundInfo}>
-                Раунд: <span className={styles.number}>{currentRound}/{totalRounds}</span>
+                Раунд:{' '}
+                <span className={styles.number}>
+                  {currentRound}/{totalRounds}
+                </span>
               </div>
               <div className={styles.timer}>Время: {formatTime(elapsedTime)}</div>
             </div>
@@ -106,9 +109,7 @@ const StroopTestPage = () => {
             <Button onClick={handleStart} variant="primary">
               Начать заново
             </Button>
-            <div className={styles.completionMessage}>
-              Тест завершён за {formatTime(elapsedTime)}!
-            </div>
+            <div className={styles.completionMessage}>Тест завершён за {formatTime(elapsedTime)}!</div>
           </>
         )}
       </div>
@@ -116,17 +117,12 @@ const StroopTestPage = () => {
       {currentTask && isActive && (
         <div className={styles.taskArea}>
           <div className={styles.wordDisplay}>
-            <span
-              className={styles.colorWord}
-              style={{ color: currentTask.displayColor }}
-            >
+            <span className={styles.colorWord} style={{ color: currentTask.displayColor }}>
               {currentTask.colorName}
             </span>
           </div>
 
-          <div className={styles.instruction}>
-            Выберите цвет текста:
-          </div>
+          <div className={styles.instruction}>Выберите цвет текста:</div>
 
           <div className={styles.colorButtons}>
             {colors.map((color) => (

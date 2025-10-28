@@ -1,0 +1,65 @@
+.card {
+  background: var(--color-overlay-light);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  animation: fadeInUp 1s ease-out;
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card-hover);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-primary);
+}
+
+.icon {
+  font-size: var(--font-size-4xl);
+}
+
+.info {
+  flex: 1;
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: var(--line-height-tight);
+}
+
+.description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.button {
+  width: 100%;
+}

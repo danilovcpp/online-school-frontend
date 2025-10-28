@@ -1,9 +1,8 @@
 @use '@/styles/mixins/media';
 
 .container {
-  max-width: var(--max-width-container);
-  margin: 0 auto;
-  padding: var(--spacing-xl);
+  max-width: 100%;
+  width: 100%;
 }
 
 .header {
@@ -47,10 +46,6 @@
 }
 
 @include media.max-mobile {
-  .container {
-    padding: 10px;
-  }
-
   .title {
     font-size: 2rem;
   }

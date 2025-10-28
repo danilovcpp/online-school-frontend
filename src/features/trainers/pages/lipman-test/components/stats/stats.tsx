@@ -26,9 +26,7 @@ export const Stats = ({ stats }: StatsProps) => {
         </div>
         <div className={styles.stat}>
           <div className={styles.label}>Среднее время</div>
-          <div className={styles.value}>
-            {stats.completedTests > 0 ? formatTime(stats.averageTime) : '-'}
-          </div>
+          <div className={styles.value}>{stats.completedTests > 0 ? formatTime(stats.averageTime) : '-'}</div>
         </div>
         <div className={styles.stat}>
           <div className={styles.label}>Точность</div>

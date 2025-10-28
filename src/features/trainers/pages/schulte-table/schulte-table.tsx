@@ -17,8 +17,7 @@ import styles from './schulte-table.module.scss';
 
 const SchulteTablePage = () => {
   const [settings, setSettings] = useState<SchulteTableSettings>(defaultSettings);
-  const { numbers, currentNumber, isActive, elapsedTime, stats, startGame, stopGame, handleNumberClick, reset } =
-    useSchulteTable();
+  const { numbers, currentNumber, isActive, elapsedTime, stats, startGame, stopGame, handleNumberClick, reset } = useSchulteTable();
 
   const handleStart = () => {
     reset();
@@ -62,13 +61,7 @@ const SchulteTablePage = () => {
         </Select>
 
         <div className={styles.checkboxWrapper}>
-          <Input
-            type="checkbox"
-            id="shuffle"
-            checked={settings.shuffle}
-            onChange={handleToggleShuffle}
-            className={styles.checkbox}
-          />
+          <Input type="checkbox" id="shuffle" checked={settings.shuffle} onChange={handleToggleShuffle} className={styles.checkbox} />
           <label htmlFor="shuffle" className={styles.checkboxLabel}>
             Перемешивать числа
           </label>
@@ -77,8 +70,8 @@ const SchulteTablePage = () => {
 
       <div className={styles.info}>
         <p>
-          Таблица Шульте — это таблица со случайно расположенными числами. Задача — как можно быстрее найти все
-          числа по порядку от 1 до {totalNumbers}.
+          Таблица Шульте — это таблица со случайно расположенными числами. Задача — как можно быстрее найти все числа по порядку от 1 до{' '}
+          {totalNumbers}.
         </p>
         <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать упражнение</p>
       </div>
@@ -107,11 +100,7 @@ const SchulteTablePage = () => {
             <Button onClick={handleStart} variant="primary">
               Начать заново
             </Button>
-            {stats.lastTime && (
-              <div className={styles.completionMessage}>
-                Упражнение завершено за {formatTime(stats.lastTime)}!
-              </div>
-            )}
+            {stats.lastTime && <div className={styles.completionMessage}>Упражнение завершено за {formatTime(stats.lastTime)}!</div>}
           </>
         )}
       </div>
@@ -126,9 +115,7 @@ const SchulteTablePage = () => {
           {numbers.map((number, index) => (
             <button
               key={index}
-              className={`${styles.cell} ${number < currentNumber ? styles.found : ''} ${
-                !isActive ? styles.disabled : ''
-              }`}
+              className={`${styles.cell} ${number < currentNumber ? styles.found : ''} ${!isActive ? styles.disabled : ''}`}
               onClick={() => handleNumberClick(number)}
               disabled={!isActive}
             >

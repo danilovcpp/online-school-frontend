@@ -1,0 +1,71 @@
+@use '@/styles/mixins/media';
+
+.dashboard {
+  width: 100%;
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: var(--spacing-2xl);
+
+  @include media.max-mobile {
+    padding: var(--spacing-lg);
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-3xl);
+
+  @include media.max-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media.max-mobile {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+.trainersSection {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.trainersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-xl);
+
+  @include media.max-tablet {
+    grid-template-columns: 1fr;
+  }
+
+  @include media.max-mobile {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-4xl);
+}
+
+.footerButton {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-3xl);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.arrow {
+  font-size: var(--font-size-xl);
+  transition: transform var(--transition-base);
+
+  .footerButton:hover & {
+    transform: translateX(5px);
+  }
+}

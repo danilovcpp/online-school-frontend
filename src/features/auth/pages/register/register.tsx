@@ -8,8 +8,6 @@ import { RegisterForm } from './components/register-form/register-form';
 import styles from './register.module.scss';
 
 const RegisterPage = () => {
-
-
   return (
     <div className={styles.container}>
       <Card className={styles.card}>
