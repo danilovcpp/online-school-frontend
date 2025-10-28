@@ -43,30 +43,31 @@ export const useAbacus = (columns = 6) => {
 
   /**
    * Переключить нижнюю бусину (стоимость 1)
-   * При клике бусина перемещается вверх вместе со всеми ниже неё
+   * При клике бусина индивидуально перемещается к разделителю или от него
+   * Бусины перемещаются по одной в правильном порядке
    * @param {number} column - индекс колонки
-   * @param {number} beadIndex - индекс бусины (0 = верхняя, 3 = нижняя)
-   * @param {boolean} isActive - текущее состояние бусины (true = вверху у разделителя)
-   * @param {Array} activeBeads - массив активных нижних бусин
+   * @param {number} beadIndex - индекс бусины (0 = ближайшая к разделителю, 3 = самая дальняя)
+   * @param {boolean} isActive - текущее состояние бусины (true = у разделителя)
    */
-  const toggleBottomBead = useCallback((column: number, beadIndex: number, isActive: boolean, activeBeads: boolean[]) => {
+  const toggleBottomBead = useCallback((column: number, beadIndex: number, isActive: boolean) => {
     setValues((prev) => {
       const newValues = [...prev];
+      const currentValue = newValues[column] % 5;
 
       if (isActive) {
-        // Бусина активна (вверху у разделителя), опустить её и все ниже
-        let deactivateCount = 0;
-        for (let i = beadIndex; i < 4; i++) {
-          if (activeBeads[i]) deactivateCount++;
+        // Бусина активна (у разделителя)
+        // Можем отодвинуть только если это самая последняя активная бусина
+        // т.е. beadIndex === currentValue - 1
+        if (beadIndex === currentValue - 1) {
+          newValues[column] -= 1;
         }
-        newValues[column] -= deactivateCount;
       } else {
-        // Бусина неактивна (внизу), поднять её и все ниже неё
-        let activateCount = 0;
-        for (let i = beadIndex; i < 4; i++) {
-          if (!activeBeads[i]) activateCount++;
+        // Бусина неактивна (далеко от разделителя)
+        // Можем придвинуть только если это следующая по порядку бусина
+        // т.е. beadIndex === currentValue
+        if (beadIndex === currentValue) {
+          newValues[column] += 1;
         }
-        newValues[column] += activateCount;
       }
 
       return newValues;

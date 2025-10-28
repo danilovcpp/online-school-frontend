@@ -11,7 +11,7 @@ interface AbacusColumnProps {
   label?: string;
   value: number;
   onToggleTop?: (column: number, isActive: boolean) => void;
-  onToggleBottom?: (column: number, index: number, isActive: boolean, beads: boolean[]) => void;
+  onToggleBottom?: (column: number, index: number, isActive: boolean) => void;
 }
 
 export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, value, onToggleTop, onToggleBottom }) => {
@@ -19,9 +19,10 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
   const bottomCount = value % 5;
   const bottomBeads = [false, false, false, false];
 
-  // Активные бусины располагаются снизу вверх (индекс 3,2,1,0)
-  // bottomCount бусин будут активны начиная с нижней
-  for (let i = 3; i >= 4 - bottomCount; i--) {
+  // Активные бусины - это бусины у разделителя
+  // bottomCount определяет количество активных бусин (подсвеченных)
+  // Индекс 0 = ближайшая к разделителю, индекс 3 = самая дальняя
+  for (let i = 0; i < bottomCount; i++) {
     bottomBeads[i] = true;
   }
 
@@ -33,7 +34,7 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
 
   const handleBottomClick = (beadIndex: number) => {
     if (onToggleBottom) {
-      onToggleBottom(columnIndex, beadIndex, bottomBeads[beadIndex], bottomBeads);
+      onToggleBottom(columnIndex, beadIndex, bottomBeads[beadIndex]);
     }
   };
 
@@ -42,21 +43,21 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
       {label && <div className={styles.label}>{label}</div>}
       <div className={styles.rod}>
         <div className={styles.topSection}>
-          {!hasTopBead && <div className={styles.spacer} />}
-          <AbacusBead active={hasTopBead} onClick={handleTopClick} interactive={!!onToggleTop} />
           {hasTopBead && <div className={styles.spacer} />}
+          <AbacusBead active={hasTopBead} onClick={handleTopClick} interactive={!!onToggleTop} />
+          {!hasTopBead && <div className={styles.spacer} />}
         </div>
 
         <div className={styles.divider} />
 
         <div className={styles.bottomSection}>
-          {bottomCount > 0 && <div className={styles.spacer} />}
+          {bottomCount === 0 && <div className={styles.spacer} />}
           <div className={styles.beadGroup}>
             {bottomBeads.map((isActive, index) => (
               <AbacusBead key={index} active={isActive} onClick={() => handleBottomClick(index)} interactive={!!onToggleBottom} />
             ))}
           </div>
-          {bottomCount === 0 && <div className={styles.spacer} />}
+          {bottomCount > 0 && <div className={styles.spacer} />}
         </div>
       </div>
     </div>
