@@ -2,6 +2,9 @@ export const routes = {
   home: '/',
   dashboard: '/dashboard',
   courses: '/courses',
+  course: {
+    mentalArithmeticLevel1: '/courses/mental-arithmetic-level-1',
+  },
   auth: {
     login: '/login',
     register: '/register',

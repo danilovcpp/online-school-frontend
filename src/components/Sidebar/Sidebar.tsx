@@ -29,6 +29,12 @@ const menuItems: MenuItem[] = [
     path: routes.courses,
   },
   {
+    id: 'mental-arithmetic-level-1',
+    title: 'Курс: Уровень 1',
+    icon: '🎓',
+    path: routes.course.mentalArithmeticLevel1,
+  },
+  {
     id: 'abacus',
     title: 'Абакус',
     icon: '🧮',

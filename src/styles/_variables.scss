@@ -203,6 +203,7 @@
 
 /* === АНИМАЦИИ === */
 
+:global {
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -291,4 +292,5 @@
     transform: scale(1);
     opacity: 1;
   }
+}
 }

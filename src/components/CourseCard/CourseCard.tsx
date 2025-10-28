@@ -38,17 +38,9 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course, onEnroll }) => {
           </div>
         </div>
 
-        {course.price !== undefined && (
-          <div className={styles.price}>
-            {course.price === 0 ? 'Бесплатно' : `${course.price} ₽`}
-          </div>
-        )}
+        {course.price !== undefined && <div className={styles.price}>{course.price === 0 ? 'Бесплатно' : `${course.price} ₽`}</div>}
 
-        <button
-          className={styles.button}
-          onClick={handleEnroll}
-          disabled={!course.isAvailable}
-        >
+        <button className={styles.button} onClick={handleEnroll} disabled={!course.isAvailable}>
           {course.isAvailable ? 'Записаться на курс' : 'Скоро'}
         </button>
       </div>

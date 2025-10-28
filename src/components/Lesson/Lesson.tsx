@@ -3,12 +3,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
-import type { Lesson } from '@/types/courses';
+import type { Lesson as LessonType } from '@/types/courses';
 
 import styles from './Lesson.module.scss';
 
 interface LessonProps {
-  lesson: Lesson;
+  lesson: LessonType;
   onComplete?: (lessonId: string) => void;
 }
 
@@ -31,18 +31,12 @@ export const Lesson: React.FC<LessonProps> = ({ lesson, onComplete }) => {
     <div className={`${styles.lesson} ${lesson.isLocked ? styles.locked : ''} ${lesson.isCompleted ? styles.completed : ''}`}>
       <div className={styles.header} onClick={handleToggle}>
         <div className={styles.headerContent}>
-          <div className={styles.orderBadge}>
-            {lesson.isCompleted ? '✓' : lesson.order}
-          </div>
+          <div className={styles.orderBadge}>{lesson.isCompleted ? '✓' : lesson.order}</div>
           <h3 className={styles.title}>{lesson.title}</h3>
         </div>
         <div className={styles.controls}>
           {lesson.isLocked && <span className={styles.lockIcon}>🔒</span>}
-          {!lesson.isLocked && (
-            <span className={`${styles.expandIcon} ${isExpanded ? styles.expanded : ''}`}>
-              ▼
-            </span>
-          )}
+          {!lesson.isLocked && <span className={`${styles.expandIcon} ${isExpanded ? styles.expanded : ''}`}>▼</span>}
         </div>
       </div>
 
@@ -55,9 +49,7 @@ export const Lesson: React.FC<LessonProps> = ({ lesson, onComplete }) => {
 
           <div className={styles.practice}>
             <h4 className={styles.sectionTitle}>🎯 Практика</h4>
-            {lesson.practice.description && (
-              <p className={styles.practiceDescription}>{lesson.practice.description}</p>
-            )}
+            {lesson.practice.description && <p className={styles.practiceDescription}>{lesson.practice.description}</p>}
             {lesson.practice.requirements && (
               <div className={styles.requirements}>
                 <strong>Требования:</strong> {lesson.practice.requirements}

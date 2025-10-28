@@ -1,0 +1,85 @@
+@import '@/styles/mixins';
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+  transition: opacity var(--transition-default);
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.description {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.progressBlock {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.95rem;
+}
+
+.progressLabel {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.progressValue {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: var(--color-background-tertiary);
+  border-radius: var(--border-radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--border-radius-full);
+  transition: width 0.3s ease;
+}
+
+.lessons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
