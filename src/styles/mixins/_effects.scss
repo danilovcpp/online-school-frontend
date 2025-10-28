@@ -1,0 +1,125 @@
+// Импорт анимаций (должен быть в начале)
+@use './animations' as *;
+
+// Миксины для визуальных эффектов
+
+// Миксин для градиентного текста
+@mixin gradient-text($gradient: var(--gradient-accent)) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Миксин для стекломорфизма
+@mixin glass-effect($opacity: 0.05, $blur: 10px, $border-opacity: 0.1) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, $border-opacity);
+}
+
+// Миксин для темного стекломорфизма
+@mixin glass-effect-dark($opacity: 0.3, $blur: 10px, $border-opacity: 0.1) {
+  background: rgba(0, 0, 0, $opacity);
+  backdrop-filter: blur($blur);
+  border: 2px solid rgba(255, 255, 255, $border-opacity);
+}
+
+// Миксин для overlay эффекта
+@mixin overlay-effect($gradient: var(--gradient-primary), $opacity: 0.05, $z-index: 0) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $gradient;
+    opacity: $opacity;
+    z-index: $z-index;
+  }
+}
+
+// Миксин для интерактивного overlay при hover
+@mixin hover-overlay($base-opacity: 0, $hover-opacity: 0.1, $gradient: var(--gradient-primary)) {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $gradient;
+    opacity: $base-opacity;
+    transition: opacity var(--transition-base);
+    z-index: var(--z-base);
+  }
+
+  &:hover::before {
+    opacity: $hover-opacity;
+  }
+}
+
+// Миксин для focus эффекта инпутов
+@mixin input-focus($border-color: var(--color-primary), $shadow: var(--shadow-glow-primary)) {
+  &:focus {
+    outline: none;
+    border-color: $border-color;
+    box-shadow: $shadow;
+  }
+}
+
+// Миксин для состояния результата (успех/ошибка)
+@mixin result-state($type: 'success') {
+  @if $type == 'success' {
+    background: var(--color-overlay-success-medium);
+    border: 2px solid var(--color-success);
+    color: var(--color-success);
+    @include success-pulse;
+  } @else if $type == 'error' {
+    background: var(--color-overlay-error-light);
+    border: 2px solid var(--color-error);
+    color: var(--color-error);
+    @include shake-animation;
+  }
+}
+
+// Миксин для карточек с hover эффектом
+@mixin card-hover($translate: -5px, $shadow: var(--shadow-xl)) {
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY($translate);
+      box-shadow: $shadow;
+    }
+  }
+}
+
+// Миксин для кнопок с эффектом нажатия
+@mixin button-press($scale: 0.95) {
+  &:active:not(:disabled) {
+    transform: scale($scale);
+  }
+}
+
+// Миксин для placeholder текста
+@mixin placeholder-style($color: var(--color-text-tertiary), $opacity: 0.5) {
+  color: $color;
+  opacity: $opacity;
+}
+
+// Миксин для обводки текста
+@mixin text-stroke($shadow: var(--shadow-text-stroke)) {
+  text-shadow: $shadow;
+}
+
+// Миксин для свечения текста
+@mixin text-glow($shadow: var(--shadow-text-glow)) {
+  text-shadow: $shadow;
+}

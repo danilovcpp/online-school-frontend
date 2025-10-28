@@ -1,13 +1,13 @@
+@use '@/styles/mixins' as *;
+
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
+  @include flex-center(column, var(--spacing-lg));
 }
 
 .error {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  background: var(--color-overlay-error-light);
+  border: 1px solid var(--color-overlay-error-medium);
+  color: var(--color-error);
   padding: var(--spacing-md);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);

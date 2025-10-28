@@ -31,6 +31,28 @@
   --color-overlay-heavy: rgba(0, 0, 0, 0.3);
   --color-overlay-darker: rgba(0, 0, 0, 0.4);
 
+  /* Цветные прозрачные слои */
+  --color-overlay-primary: rgba(102, 126, 234, 0.05);
+  --color-overlay-primary-medium: rgba(102, 126, 234, 0.1);
+  --color-overlay-primary-strong: rgba(102, 126, 234, 0.3);
+  --color-overlay-primary-heavy: rgba(102, 126, 234, 0.4);
+  --color-overlay-secondary: rgba(240, 147, 251, 0.4);
+  --color-overlay-secondary-strong: rgba(240, 147, 251, 0.6);
+  --color-overlay-accent: rgba(79, 172, 254, 0.4);
+  --color-overlay-accent-strong: rgba(79, 172, 254, 0.6);
+  --color-overlay-success-light: rgba(67, 233, 123, 0.1);
+  --color-overlay-success-medium: rgba(67, 233, 123, 0.2);
+  --color-overlay-success-strong: rgba(67, 233, 123, 0.3);
+  --color-overlay-success-heavy: rgba(67, 233, 123, 0.6);
+  --color-overlay-error-light: rgba(245, 87, 108, 0.2);
+  --color-overlay-error-medium: rgba(245, 87, 108, 0.3);
+  --color-overlay-error-strong: rgba(245, 87, 108, 0.6);
+  --color-overlay-warning: rgba(255, 193, 7, 0.2);
+  --color-warning: #ffc107;
+  --color-info-light: rgba(59, 130, 246, 0.1);
+  --color-info-border: rgba(59, 130, 246, 0.3);
+  --color-info: #3b82f6;
+
   /* Цвета текста */
   --color-text-primary: #ffffff;
   --color-text-secondary: rgba(255, 255, 255, 0.7);
@@ -100,13 +122,24 @@
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.2);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.3);
   --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-card-active: 0 3px 10px rgba(0, 0, 0, 0.3);
+  --shadow-button-hover: 0 8px 20px rgba(0, 0, 0, 0.3);
   --shadow-primary: 0 10px 30px rgba(102, 126, 234, 0.4);
   --shadow-primary-hover: 0 15px 40px rgba(102, 126, 234, 0.6);
+  --shadow-secondary: 0 10px 30px rgba(240, 147, 251, 0.4);
+  --shadow-secondary-hover: 0 15px 40px rgba(240, 147, 251, 0.6);
+  --shadow-accent: 0 10px 30px rgba(79, 172, 254, 0.4);
+  --shadow-accent-hover: 0 15px 40px rgba(79, 172, 254, 0.6);
   --shadow-success: 0 5px 25px rgba(67, 233, 123, 0.6);
   --shadow-error: 0 5px 25px rgba(245, 87, 108, 0.6);
   --shadow-inset: inset 0 5px 20px rgba(0, 0, 0, 0.5);
   --shadow-glow-primary: 0 0 20px rgba(102, 126, 234, 0.3);
   --shadow-glow-success: 0 0 30px rgba(102, 126, 234, 0.4);
+  --shadow-text-stroke: -1px -1px 2px rgba(0, 0, 0, 0.8), 1px -1px 2px rgba(0, 0, 0, 0.8),
+    -1px 1px 2px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
+  --shadow-text-glow: 0 0 20px currentColor;
 
   /* === Z-INDEX === */
   --z-base: 0;

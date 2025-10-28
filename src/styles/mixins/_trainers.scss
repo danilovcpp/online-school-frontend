@@ -1,0 +1,149 @@
+// Импорт необходимых модулей (должен быть в начале)
+@use './animations' as *;
+@use './effects' as *;
+@use './layouts' as *;
+
+// Миксины для тренажеров
+
+// Миксин для секции настроек
+@mixin trainer-settings($gap: var(--spacing-lg)) {
+  @include grid-auto(200px, $gap);
+  margin-bottom: var(--spacing-2xl);
+}
+
+// Миксин для checkbox wrapper
+@mixin checkbox-wrapper($gap: var(--spacing-md)) {
+  @include flex-center(row, $gap);
+  grid-column: 1 / -1;
+}
+
+// Миксин для checkbox
+@mixin checkbox-style($size: 20px) {
+  width: $size;
+  height: $size;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+// Миксин для checkbox label
+@mixin checkbox-label {
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  user-select: none;
+}
+
+// Миксин для display области
+@mixin trainer-display($min-height: 300px, $gap: var(--spacing-lg)) {
+  min-height: $min-height;
+  background: var(--color-overlay-darker);
+  border-radius: var(--radius-lg);
+  @include flex-center(column, $gap);
+  margin: var(--spacing-2xl) 0;
+  @include overlay-effect(var(--gradient-primary), 0.05, 0);
+}
+
+// Миксин для крупных чисел в display
+@mixin display-number($gradient: var(--gradient-accent)) {
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-bold);
+  @include gradient-text($gradient);
+  transition: all var(--transition-bounce);
+  z-index: 1;
+  @include flash-scale;
+}
+
+// Миксин для progress индикатора
+@mixin progress-indicator {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  z-index: 1;
+}
+
+// Миксин для секции ответа
+@mixin answer-section($padding: var(--spacing-2xl)) {
+  background: var(--color-overlay-heavy);
+  padding: $padding;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin: var(--spacing-lg) 0;
+
+  h3 {
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+  }
+}
+
+// Миксин для input в тренажере
+@mixin trainer-input {
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-xl);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay-heavy);
+  color: var(--color-text-primary);
+  text-align: center;
+  width: 100%;
+  max-width: var(--max-width-input);
+  margin: 0 auto var(--spacing-lg);
+  display: block;
+  transition: all var(--transition-base);
+}
+
+// Миксин для result блока (базовые стили)
+@mixin result-base {
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-lg) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  min-height: 80px;
+  @include flex-center;
+  transition: all var(--transition-base);
+}
+
+// Миксин для успешного результата
+@mixin result-success {
+  @include result-base;
+  @include result-state('success');
+}
+
+// Миксин для ошибочного результата
+@mixin result-error {
+  @include result-base;
+  @include result-state('error');
+}
+
+// Миксин для info блока
+@mixin info-block {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md);
+  background: var(--color-overlay-primary);
+  border-radius: var(--radius-sm);
+
+  p {
+    margin: 0 0 var(--spacing-sm) 0;
+    line-height: var(--line-height-relaxed);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+  }
+}
+
+// Миксин для controls
+@mixin trainer-controls($gap: var(--spacing-lg)) {
+  display: flex;
+  gap: $gap;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: var(--spacing-lg) 0;
+}

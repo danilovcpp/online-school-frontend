@@ -1,47 +1,29 @@
+@use '@/styles/mixins' as *;
+
 .root {
   display: flex;
 }
 
 .card {
-  background: var(--color-overlay-heavy);
-  border: 2px solid var(--color-border-light);
+  @include glass-effect-dark;
   border-radius: var(--radius-lg);
   padding: var(--card-padding);
   text-align: center;
   cursor: pointer;
   transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--gradient-primary);
-    opacity: 0;
-    transition: opacity var(--transition-base);
-    z-index: var(--z-base);
-  }
+  @include hover-overlay(0, 0.1, var(--gradient-primary));
+  @include full-size;
 
   &:hover {
     transform: translateY(-10px) scale(1.02);
     border-color: var(--color-primary);
-    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
-  }
-
-  &:hover::before {
-    opacity: 0.1;
+    box-shadow: var(--shadow-primary-hover);
   }
 
   &.active {
     border-color: var(--color-success);
-    background: rgba(67, 233, 123, 0.1);
-    box-shadow: 0 15px 35px rgba(67, 233, 123, 0.3);
+    background: var(--color-overlay-success-light);
+    box-shadow: var(--shadow-success);
   }
 
   &.active::before {
