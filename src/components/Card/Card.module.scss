@@ -31,15 +31,3 @@
   -webkit-text-fill-color: transparent;
   line-height: var(--line-height-tight);
 }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
