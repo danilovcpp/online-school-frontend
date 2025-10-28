@@ -19,6 +19,8 @@
   --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   --gradient-success: linear-gradient(135deg, var(--color-success) 0%, var(--color-success-dark) 100%);
   --gradient-background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --gradient-rod: linear-gradient(180deg, #4a5568, #2d3748);
+  --gradient-primary-transparent: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
 
   /* Нейтральные цвета */
   --color-dark-bg: #0f0c29;
@@ -40,6 +42,47 @@
   --color-border-light: rgba(255, 255, 255, 0.1);
   --color-border-medium: rgba(255, 255, 255, 0.15);
   --color-border-primary: var(--color-primary);
+
+  /* === РАСШИРЕННАЯ ПАЛИТРА === */
+
+  /* Transparent backgrounds */
+  --color-bg-transparent-10: rgba(0, 0, 0, 0.2);
+  --color-bg-transparent-20: rgba(0, 0, 0, 0.4);
+
+  /* Primary с прозрачностью */
+  --color-primary-opacity-5: rgba(102, 126, 234, 0.05);
+  --color-primary-opacity-10: rgba(102, 126, 234, 0.1);
+  --color-primary-opacity-20: rgba(102, 126, 234, 0.2);
+  --color-primary-opacity-30: rgba(102, 126, 234, 0.3);
+  --color-primary-opacity-40: rgba(102, 126, 234, 0.4);
+
+  /* Success с прозрачностью */
+  --color-success-opacity-20: rgba(67, 233, 123, 0.2);
+  --color-success-opacity-30: rgba(67, 233, 123, 0.3);
+
+  /* Error/Danger цвета */
+  --color-danger: #ef4444;
+  --color-danger-opacity-10: rgba(239, 68, 68, 0.1);
+  --color-danger-opacity-30: rgba(239, 68, 68, 0.3);
+  --color-error-opacity-20: rgba(245, 87, 108, 0.2);
+  --color-error-variant: rgba(240, 101, 149, 0.3);
+
+  /* Info цвета */
+  --color-info: #3b82f6;
+  --color-info-opacity-10: rgba(59, 130, 246, 0.1);
+  --color-info-opacity-30: rgba(59, 130, 246, 0.3);
+
+  /* Warning цвета */
+  --color-warning: #ffc107;
+  --color-warning-opacity-20: rgba(255, 193, 7, 0.2);
+
+  /* Secondary с прозрачностью */
+  --color-secondary-opacity-40: rgba(240, 147, 251, 0.4);
+  --color-secondary-opacity-60: rgba(240, 147, 251, 0.6);
+
+  /* Accent с прозрачностью */
+  --color-accent-opacity-40: rgba(79, 172, 254, 0.4);
+  --color-accent-opacity-60: rgba(79, 172, 254, 0.6);
 
   /* === ТИПОГРАФИКА === */
   --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -85,6 +128,8 @@
   --spacing-4xl: 4rem; /* 64px */
 
   /* Радиусы скругления */
+  --radius-xxs: 0.1875rem; /* 3px */
+  --radius-xs: 0.25rem; /* 4px */
   --radius-sm: 0.5rem; /* 8px */
   --radius-md: 0.625rem; /* 10px */
   --radius-lg: 0.9375rem; /* 15px */
@@ -102,11 +147,23 @@
   --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.4);
   --shadow-primary: 0 10px 30px rgba(102, 126, 234, 0.4);
   --shadow-primary-hover: 0 15px 40px rgba(102, 126, 234, 0.6);
+  --shadow-secondary: 0 10px 30px rgba(240, 147, 251, 0.4);
+  --shadow-secondary-hover: 0 15px 40px rgba(240, 147, 251, 0.6);
+  --shadow-accent: 0 10px 30px rgba(79, 172, 254, 0.4);
+  --shadow-accent-hover: 0 15px 40px rgba(79, 172, 254, 0.6);
   --shadow-success: 0 5px 25px rgba(67, 233, 123, 0.6);
   --shadow-error: 0 5px 25px rgba(245, 87, 108, 0.6);
   --shadow-inset: inset 0 5px 20px rgba(0, 0, 0, 0.5);
   --shadow-glow-primary: 0 0 20px rgba(102, 126, 234, 0.3);
   --shadow-glow-success: 0 0 30px rgba(102, 126, 234, 0.4);
+  --shadow-glow-divider: 0 0 10px rgba(102, 126, 234, 0.5);
+  --shadow-bead: 0 5px 15px rgba(0, 0, 0, 0.3);
+  --shadow-bead-hover: 0 8px 25px rgba(240, 147, 251, 0.6);
+  --shadow-button: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-button-hover: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-button-active: 0 3px 10px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 20px 40px rgba(102, 126, 234, 0.4);
+  --shadow-card-active: 0 15px 35px rgba(67, 233, 123, 0.3);
 
   /* === Z-INDEX === */
   --z-base: 0;
@@ -117,7 +174,10 @@
 
   /* === TRANSITIONS === */
   --transition-fast: 0.15s ease;
+  --transition-fast-smooth: 0.2s ease;
   --transition-base: 0.3s ease;
+  --transition-medium: 0.3s ease;
+  --transition-smooth: 300ms ease-in-out;
   --transition-slow: 0.5s ease;
   --transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
@@ -135,4 +195,100 @@
   --rod-width: 6px;
   --rod-height: 300px;
   --rod-height-mobile: 250px;
+
+  /* === TEXT SHADOWS === */
+  --text-shadow-outline: -1px -1px 2px rgba(0, 0, 0, 0.8), 1px -1px 2px rgba(0, 0, 0, 0.8), -1px 1px 2px rgba(0, 0, 0, 0.8), 1px 1px 2px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
+  --text-shadow-glow: 0 0 20px currentColor;
+}
+
+/* === АНИМАЦИИ === */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes flashScale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

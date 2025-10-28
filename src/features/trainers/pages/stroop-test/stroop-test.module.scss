@@ -1,19 +1,19 @@
 .settings {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 
 .info {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: rgba(102, 126, 234, 0.05);
-  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--color-primary-opacity-5);
+  border-radius: var(--radius-sm);
 
   p {
-    margin: 0 0 0.5rem 0;
-    line-height: 1.6;
+    margin: 0 0 var(--spacing-sm) 0;
+    line-height: var(--line-height-relaxed);
 
     &:last-child {
       margin-bottom: 0;
@@ -21,13 +21,13 @@
   }
 
   strong {
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
     color: var(--color-primary);
   }
 }
 
 .hint {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-primary);
 }
 
@@ -92,17 +92,17 @@
 }
 
 .colorWord {
-  font-size: 4rem;
-  font-weight: 700;
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   user-select: none;
-  text-shadow: 0 0 20px currentColor;
+  text-shadow: var(--text-shadow-glow);
 }
 
 .instruction {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   text-align: center;
 }
@@ -134,20 +134,20 @@
 }
 
 .colorButton {
-  padding: 1rem;
+  padding: var(--spacing-md);
   border: 3px solid;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--transition-fast-smooth);
   min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-button);
 
   &::before {
     content: '';
@@ -156,14 +156,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--color-overlay-medium);
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--transition-fast-smooth);
   }
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-button-hover);
 
     &::before {
       opacity: 1;
@@ -172,19 +172,14 @@
 
   &:active {
     transform: translateY(-1px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-button-active);
   }
 }
 
 .colorName {
   color: var(--color-text-primary);
-  text-shadow:
-    -1px -1px 2px rgba(0, 0, 0, 0.8),
-    1px -1px 2px rgba(0, 0, 0, 0.8),
-    -1px 1px 2px rgba(0, 0, 0, 0.8),
-    1px 1px 2px rgba(0, 0, 0, 0.8),
-    0 0 10px rgba(0, 0, 0, 0.5);
-  font-weight: 700;
+  text-shadow: var(--text-shadow-outline);
+  font-weight: var(--font-weight-bold);
   position: relative;
   z-index: 1;
 }
