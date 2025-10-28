@@ -37,23 +37,30 @@ The codebase follows a feature-based architecture:
 ```
 src/
 ├── app/                    # Next.js App Router pages
-│   ├── (portal)/trainers/  # Trainer pages (abacus, flash-anzan, etc.)
+│   ├── (portal)/           # Authenticated portal routes
+│   │   ├── courses/        # Course catalog and individual courses
+│   │   ├── dashboard/      # User dashboard
+│   │   ├── profile/        # User profile
+│   │   └── trainers/       # Trainer pages (abacus, flash-anzan, etc.)
 │   ├── login/              # Login page
-│   └── register/           # Registration page
-├── components/             # Shared UI components (Button, Input, Card, Select, Header, ThemeToggle)
+│   ├── register/           # Registration page
+│   ├── layout.tsx          # Root layout with AuthProvider
+│   └── page.tsx            # Home page (landing or redirect to dashboard)
+├── components/             # Shared UI components (Button, Input, Card, Select, etc.)
 ├── contexts/               # React Context providers (AuthContext)
 ├── features/               # Feature modules
 │   ├── auth/               # Authentication feature
 │   │   ├── components/     # Auth-specific components
-│   │   ├── context/        # Auth context
-│   │   ├── hooks/          # Auth hooks
 │   │   └── pages/          # Auth page implementations
-│   └── trainers/
+│   ├── courses/            # Course-related features
+│   │   └── data/           # Course content data
+│   ├── landing/            # Landing page feature
+│   │   └── pages/          # Landing page implementation
+│   └── trainers/           # Trainer features
 │       ├── components/     # Trainer-specific components
 │       ├── constants/      # Trainer configurations and lists
 │       ├── hooks/          # Custom React hooks (use-abacus, use-flash-anzan, etc.)
-│       └── pages/          # Feature page implementations
-├── hooks/                  # Shared hooks (currently empty)
+│       └── pages/          # Trainer page implementations
 ├── shared/                 # Shared constants (routes)
 ├── styles/                 # Global SCSS styles and mixins
 │   ├── mixins/             # SCSS mixins (_media.scss, _hover.scss)
@@ -61,7 +68,7 @@ src/
 │   ├── _variables.scss     # SCSS variables
 │   └── _mixins.scss        # SCSS mixin imports
 ├── types/                  # TypeScript type definitions
-└── utils/                  # Utility functions
+└── utils/                  # Utility functions (delay, generateRandomNumber, getSuperscript)
 ```
 
 ### Key Architectural Patterns
@@ -69,7 +76,9 @@ src/
 **Feature-Based Organization**: Each trainer (abacus, flash-anzan, etc.) has its own page implementation in `src/features/trainers/pages/`, with associated components, hooks, and constants.
 
 **Custom Hooks Pattern**: Business logic is encapsulated in custom hooks in `src/features/trainers/hooks/`:
-- `use-abacus.ts` - Manages abacus state with 6 columns, bead positions (top=5, bottom=1), and value calculations
+- `use-abacus.ts` - Manages abacus state with 6 columns, bead positions (top bead=5, bottom beads=1 each), and value calculations
+  - Columns are indexed right-to-left: index 0 = ones, index 1 = tens, etc.
+  - Provides methods: `toggleTopBead()`, `toggleBottomBead()`, `setValue()`, `reset()`, `getColumnValue()`, `getColumnLabel()`
 - `use-flash-anzan.ts` - Handles Flash Anzan game flow, number generation, timing, and statistics tracking
 - `use-guess-result.ts` - Manages guess result trainer state and logic
 - `use-schulte-table.ts` - Handles Schulte table generation and tracking
@@ -82,11 +91,14 @@ src/
 
 **Context Pattern**: React Context is used for cross-cutting concerns:
 - `AuthContext` - Global authentication state management located in [src/contexts/AuthContext.tsx](src/contexts/AuthContext.tsx)
+  - Provides `useAuth()` hook for accessing authentication state
+  - Mock authentication with localStorage persistence
+  - Mock credentials: email `user@example.com`, password `password`
 
 **Authentication**: Auth feature in `src/features/auth/` includes:
-- Auth pages: login and register routes
+- Auth pages: login and register routes in `src/features/auth/pages/`
 - Auth context and hooks for state management
-- Auth-specific components
+- Auth-specific components (LoginForm, RegisterForm)
 
 ### TypeScript Configuration
 
@@ -97,15 +109,24 @@ src/
 
 ### Routing
 
-- App Router with route groups: `app/(portal)/trainers/`
-- Default redirect: `/` → `/trainers/abacus` (configured in [next.config.ts](next.config.ts))
+- App Router with route groups: `app/(portal)/` for authenticated pages (trainers, dashboard, courses, profile)
+- Home page (`/`) shows landing page for unauthenticated users, redirects to `/dashboard` for authenticated users
+- Auth pages: `/login` and `/register` (not in portal route group)
 - All trainer routes follow pattern: `/trainers/{trainer-type}`
+- Routes are centralized in [src/shared/constants/routes.ts](src/shared/constants/routes.ts)
 
 ### Styling
 
 - SCSS modules with global styles in [src/styles/globals.scss](src/styles/globals.scss)
-- Variables in [src/styles/_variables.scss](src/styles/_variables.scss)
-- Mixins available in [src/styles/_mixins.scss](src/styles/_mixins.scss) and [src/styles/mixins/_media.scss](src/styles/mixins/_media.scss)
+- CSS variables defined in [src/styles/_variables.scss](src/styles/_variables.scss) including:
+  - Color palette (primary, secondary, accent, success, error with gradients and opacity variants)
+  - Typography (font sizes, weights, line heights)
+  - Spacing scale and border radii
+  - Shadows and z-index layers
+  - Transitions and animations (fadeInUp, fadeInDown, slideIn, shimmer, shake, pulse, etc.)
+- Mixins available in [src/styles/_mixins.scss](src/styles/_mixins.scss):
+  - Media query mixins: `@mixin max-tablet()` (768px), `@mixin max-mobile()` (480px)
+  - Hover effect mixins in [src/styles/mixins/_hover.scss](src/styles/mixins/_hover.scss)
 
 ## Linting and Code Style
 
@@ -122,6 +143,16 @@ ESLint enforces strict import order via `simple-import-sort`:
 - Max line length: 140 characters
 - Auto-formatting with Prettier
 - Next.js TypeScript config with core web vitals
+- ESLint configuration in [eslint.config.mjs](eslint.config.mjs) using flat config format
+
+## Application Features
+
+The application includes several main sections accessible via the portal route group:
+
+- **Dashboard** (`/dashboard`) - User dashboard with progress tracking and stats
+- **Courses** (`/courses`) - Course catalog and individual course pages (e.g., `/courses/mental-arithmetic-level-1`)
+- **Trainers** (`/trainers`) - Interactive training modules (see Trainer Types below)
+- **Profile** (`/profile`) - User profile page
 
 ## Trainer Types
 
