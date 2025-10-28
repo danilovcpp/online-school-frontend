@@ -42,8 +42,7 @@ export const AbacusDisplay: React.FC<AbacusDisplayProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.abacusFrame}>
-        {Array.from({ length: columns }, (_, i) => columns - 1 - i).map((_, index) => {
-          const columnIndex = columns - 1 - index;
+        {Array.from({ length: columns }, (_, i) => i).reverse().map((columnIndex) => {
           return (
             <AbacusColumn
               key={columnIndex}

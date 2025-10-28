@@ -19,6 +19,8 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
   const bottomCount = value % 5;
   const bottomBeads = [false, false, false, false];
 
+  // Активные бусины располагаются снизу вверх (индекс 3,2,1,0)
+  // bottomCount бусин будут активны начиная с нижней
   for (let i = 3; i >= 4 - bottomCount; i--) {
     bottomBeads[i] = true;
   }
@@ -40,15 +42,21 @@ export const AbacusColumn: React.FC<AbacusColumnProps> = ({ columnIndex, label, 
       {label && <div className={styles.label}>{label}</div>}
       <div className={styles.rod}>
         <div className={styles.topSection}>
+          {!hasTopBead && <div className={styles.spacer} />}
           <AbacusBead active={hasTopBead} onClick={handleTopClick} interactive={!!onToggleTop} />
+          {hasTopBead && <div className={styles.spacer} />}
         </div>
 
         <div className={styles.divider} />
 
         <div className={styles.bottomSection}>
-          {bottomBeads.map((isActive, index) => (
-            <AbacusBead key={index} active={isActive} onClick={() => handleBottomClick(index)} interactive={!!onToggleBottom} />
-          ))}
+          {bottomCount > 0 && <div className={styles.spacer} />}
+          <div className={styles.beadGroup}>
+            {bottomBeads.map((isActive, index) => (
+              <AbacusBead key={index} active={isActive} onClick={() => handleBottomClick(index)} interactive={!!onToggleBottom} />
+            ))}
+          </div>
+          {bottomCount === 0 && <div className={styles.spacer} />}
         </div>
       </div>
     </div>

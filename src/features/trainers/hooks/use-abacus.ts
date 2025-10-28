@@ -15,23 +15,26 @@ export const useAbacus = (columns = 6) => {
   const currentValue = useMemo(() => {
     let total = 0;
     for (let i = 0; i < columns; i++) {
-      const power = columns - 1 - i;
-      total += values[i] * Math.pow(10, power);
+      // Теперь индекс 0 = единицы, индекс 1 = десятки и т.д.
+      total += values[i] * Math.pow(10, i);
     }
     return total;
   }, [values, columns]);
 
   /**
    * Переключить верхнюю бусину (стоимость 5)
+   * При клике бусина перемещается вверх (от разделителя)
    * @param {number} column - индекс колонки
-   * @param {boolean} isActive - текущее состояние бусины
+   * @param {boolean} isActive - текущее состояние бусины (true = внизу у разделителя)
    */
   const toggleTopBead = useCallback((column: number, isActive: boolean) => {
     setValues((prev) => {
       const newValues = [...prev];
       if (isActive) {
+        // Бусина активна (внизу), переместить вверх - отнять 5
         newValues[column] -= 5;
       } else {
+        // Бусина неактивна (вверху), переместить вниз - добавить 5
         newValues[column] += 5;
       }
       return newValues;
@@ -40,9 +43,10 @@ export const useAbacus = (columns = 6) => {
 
   /**
    * Переключить нижнюю бусину (стоимость 1)
+   * При клике бусина перемещается вверх вместе со всеми ниже неё
    * @param {number} column - индекс колонки
-   * @param {number} beadIndex - индекс бусины (0-3)
-   * @param {boolean} isActive - текущее состояние бусины
+   * @param {number} beadIndex - индекс бусины (0 = верхняя, 3 = нижняя)
+   * @param {boolean} isActive - текущее состояние бусины (true = вверху у разделителя)
    * @param {Array} activeBeads - массив активных нижних бусин
    */
   const toggleBottomBead = useCallback((column: number, beadIndex: number, isActive: boolean, activeBeads: boolean[]) => {
@@ -50,14 +54,14 @@ export const useAbacus = (columns = 6) => {
       const newValues = [...prev];
 
       if (isActive) {
-        // Деактивировать эту бусину и все выше неё
+        // Бусина активна (вверху у разделителя), опустить её и все ниже
         let deactivateCount = 0;
-        for (let i = 0; i <= beadIndex; i++) {
+        for (let i = beadIndex; i < 4; i++) {
           if (activeBeads[i]) deactivateCount++;
         }
         newValues[column] -= deactivateCount;
       } else {
-        // Активировать эту бусину и все ниже неё
+        // Бусина неактивна (внизу), поднять её и все ниже неё
         let activateCount = 0;
         for (let i = beadIndex; i < 4; i++) {
           if (!activeBeads[i]) activateCount++;
@@ -79,7 +83,8 @@ export const useAbacus = (columns = 6) => {
       const clampedNumber = Math.max(0, Math.min(maxValue, number));
       const digits = String(clampedNumber).padStart(columns, '0').split('').map(Number);
 
-      setValues(digits);
+      // Переворачиваем массив, чтобы индекс 0 был единицами
+      setValues(digits.reverse());
     },
     [columns],
   );
@@ -108,7 +113,8 @@ export const useAbacus = (columns = 6) => {
    */
   const getColumnPower = useCallback(
     (column: number) => {
-      return columns - 1 - column;
+      // Теперь индекс 0 = 10^0 (единицы), индекс 1 = 10^1 (десятки) и т.д.
+      return column;
     },
     [columns],
   );
