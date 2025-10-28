@@ -13,12 +13,20 @@ This is an interactive online school frontend focused on abacus (soroban) traini
 - `npm run build` - Build for production
 - `npm start` - Start production server
 
+### Docker Support
+- `docker-compose up app` - Build and run production container
+- `docker-compose up dev` - Run development container with hot reload and volume mounting
+- `docker-compose build` - Build containers without starting them
+- `docker-compose down` - Stop and remove containers
+- Dockerfile includes standalone output optimization for production builds
+
 ### Code Quality
 - `npm run lint:js` - Run ESLint on .js, .ts, and .tsx files in src/
 - `npm run lint:fix` - Auto-fix linting issues and format with Prettier
 
 ### Requirements
 - Node.js >= 20.11.1 (specified in package.json engines)
+- Docker (optional, for containerized development/deployment)
 
 ## Architecture
 
@@ -29,16 +37,29 @@ The codebase follows a feature-based architecture:
 ```
 src/
 ├── app/                    # Next.js App Router pages
-│   └── (portal)/trainers/  # Trainer pages (abacus, flash-anzan, etc.)
-├── components/             # Shared UI components (Button, Input, Card, Select)
+│   ├── (portal)/trainers/  # Trainer pages (abacus, flash-anzan, etc.)
+│   ├── login/              # Login page
+│   └── register/           # Registration page
+├── components/             # Shared UI components (Button, Input, Card, Select, Header, ThemeToggle)
+├── contexts/               # React Context providers (AuthContext)
 ├── features/               # Feature modules
+│   ├── auth/               # Authentication feature
+│   │   ├── components/     # Auth-specific components
+│   │   ├── context/        # Auth context
+│   │   ├── hooks/          # Auth hooks
+│   │   └── pages/          # Auth page implementations
 │   └── trainers/
 │       ├── components/     # Trainer-specific components
 │       ├── constants/      # Trainer configurations and lists
-│       ├── hooks/          # Custom React hooks (use-abacus, use-flash-anzan)
+│       ├── hooks/          # Custom React hooks (use-abacus, use-flash-anzan, etc.)
 │       └── pages/          # Feature page implementations
+├── hooks/                  # Shared hooks (currently empty)
 ├── shared/                 # Shared constants (routes)
 ├── styles/                 # Global SCSS styles and mixins
+│   ├── mixins/             # SCSS mixins (_media.scss, _hover.scss)
+│   ├── globals.scss        # Global styles
+│   ├── _variables.scss     # SCSS variables
+│   └── _mixins.scss        # SCSS mixin imports
 ├── types/                  # TypeScript type definitions
 └── utils/                  # Utility functions
 ```
@@ -47,13 +68,25 @@ src/
 
 **Feature-Based Organization**: Each trainer (abacus, flash-anzan, etc.) has its own page implementation in `src/features/trainers/pages/`, with associated components, hooks, and constants.
 
-**Custom Hooks Pattern**: Business logic is encapsulated in custom hooks:
+**Custom Hooks Pattern**: Business logic is encapsulated in custom hooks in `src/features/trainers/hooks/`:
 - `use-abacus.ts` - Manages abacus state with 6 columns, bead positions (top=5, bottom=1), and value calculations
 - `use-flash-anzan.ts` - Handles Flash Anzan game flow, number generation, timing, and statistics tracking
+- `use-guess-result.ts` - Manages guess result trainer state and logic
+- `use-schulte-table.ts` - Handles Schulte table generation and tracking
+- `use-stroop-test.ts` - Manages Stroop test flow and statistics
+- `use-lipman-test.ts` - Handles Lipman test grid generation and marking
 
 **Route Configuration**: All routes are centralized in [src/shared/constants/routes.ts](src/shared/constants/routes.ts), imported throughout the app.
 
 **Trainer Registry**: Trainers are registered in [src/features/trainers/constants/trainer-list.ts](src/features/trainers/constants/trainer-list.ts) with metadata (id, title, description, icon, path).
+
+**Context Pattern**: React Context is used for cross-cutting concerns:
+- `AuthContext` - Global authentication state management located in [src/contexts/AuthContext.tsx](src/contexts/AuthContext.tsx)
+
+**Authentication**: Auth feature in `src/features/auth/` includes:
+- Auth pages: login and register routes
+- Auth context and hooks for state management
+- Auth-specific components
 
 ### TypeScript Configuration
 
@@ -92,20 +125,59 @@ ESLint enforces strict import order via `simple-import-sort`:
 
 ## Trainer Types
 
-The application supports five trainer modes:
+The application currently supports six active trainer modes:
 
-1. **Abacus** - Basic mode for manual number input and abacus practice
-2. **Flash Anzan** - Speed math with numbers flashing briefly on screen
-3. **Guess Result** - Solve problems and input correct answers
-4. **Mental Visualization** - Visualize abacus mentally without physical tool
-5. **Soroban** - Traditional Japanese abacus
+1. **Abacus** (`/trainers/abacus`) - Basic mode for manual number input and abacus practice
+2. **Flash Anzan** (`/trainers/flash-anzan`) - Speed math with numbers flashing briefly on screen
+3. **Guess Result** (`/trainers/guess-result`) - Solve problems and input correct answers
+4. **Schulte Table** (`/trainers/schulte-table`) - Concentration and peripheral vision training
+5. **Stroop Test** (`/trainers/stroop-test`) - Cognitive control and selective attention training
+6. **Lipman Test** (`/trainers/lipman-test`) - Attention concentration and selective perception training
 
-Each trainer has its own route, page component, and configuration.
+Each trainer has its own route, page component in `src/features/trainers/pages/`, custom hook in `src/features/trainers/hooks/`, and is registered in the trainer list.
+
+## Adding New Trainers
+
+To add a new trainer, follow this pattern:
+
+1. **Add Type**: Add the trainer ID to `TrainerType` union in [src/types/trainers.ts](src/types/trainers.ts)
+2. **Add Route**: Add the route to `routes.trainers` object in [src/shared/constants/routes.ts](src/shared/constants/routes.ts)
+3. **Create Types**: Define settings and stats interfaces in [src/types/trainers.ts](src/types/trainers.ts)
+4. **Create Hook**: Implement business logic in `src/features/trainers/hooks/use-{trainer-name}.ts`
+5. **Create Page**: Implement page component in `src/features/trainers/pages/{trainer-name}/`
+6. **Add Route File**: Create `src/app/(portal)/trainers/{trainer-name}/page.tsx` that imports the page component
+7. **Register Trainer**: Add trainer metadata to `trainerList` in [src/features/trainers/constants/trainer-list.ts](src/features/trainers/constants/trainer-list.ts)
 
 ## Key Type Definitions
 
 See [src/types/trainers.ts](src/types/trainers.ts) for:
-- `TrainerType` - Union of all trainer IDs
-- `Trainer` - Trainer metadata interface
-- `BeadPosition`, `ColumnValue` - Abacus state types
-- `FlashAnzanSettings`, `FlashAnzanStats` - Flash Anzan configuration and tracking
+
+**Trainer Types:**
+- `TrainerType` - Union of all trainer IDs ('abacus', 'flash-anzan', 'guess-result', etc.)
+- `Trainer` - Trainer metadata interface (id, title, description, icon, path)
+
+**Abacus Types:**
+- `BeadPosition` - Bead position data (column, type, index, active)
+- `ColumnValue` - Column value data (column, value)
+
+**Flash Anzan Types:**
+- `FlashAnzanSettings` - Configuration (count, speed, digits, allowNegative)
+- `FlashAnzanStats` - Statistics tracking (correct, wrong, accuracy)
+
+**Guess Result Types:**
+- `GuessResultSettings` - Configuration (count, speed, digits, allowNegative)
+- `GuessResultStats` - Statistics tracking (correct, wrong, accuracy, averageTime, totalRounds)
+
+**Schulte Table Types:**
+- `SchulteTableSettings` - Configuration (gridSize, shuffle)
+- `SchulteTableStats` - Statistics tracking (completedGames, bestTime, averageTime, lastTime)
+
+**Stroop Test Types:**
+- `SroopColor` - Color definition (name in Russian, hex)
+- `StroopTestSettings` - Configuration (rounds, mode: congruent/incongruent/mixed)
+- `StroopTestStats` - Statistics tracking (completedTests, bestTime, averageTime, accuracy, totalCorrect, totalWrong)
+
+**Lipman Test Types:**
+- `LipmanTestSettings` - Configuration (rows, cols, targetLetters)
+- `LipmanTestStats` - Statistics tracking (completedTests, bestTime, averageTime, accuracy, totalCorrect, totalWrong)
+- `LipmanCell` - Cell data (letter, isTarget, isMarked, isCorrect)
