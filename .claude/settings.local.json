@@ -6,7 +6,8 @@
       "Bash(npm run lint:js:*)",
       "Bash(npm run lint:fix:*)",
       "Bash(timeout /t 15 /nobreak)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []
