@@ -75,6 +75,13 @@
   animation: pulse 2s infinite;
 }
 
+.challengeControls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
 .result {
   padding: 20px;
   border-radius: 10px;

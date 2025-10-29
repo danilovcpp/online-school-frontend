@@ -1,19 +1,24 @@
-import React from 'react';
+import { ComponentPropsWithRef, type FC, type ReactNode } from 'react';
 import clsx from 'clsx';
 
-import styles from './Card.module.scss';
+import { type Classes } from '@/types';
 
-interface CardProps {
-  children: React.ReactNode;
+import styles from './card.module.scss';
+
+interface CardProps extends ComponentPropsWithRef<'div'> {
+  children: ReactNode;
   className?: string;
   title?: string;
+  classes?: Classes<'title'>
 }
 
-export const Card: React.FC<CardProps> = ({ children, className, title }) => {
+const Card: FC<CardProps> = ({ children, className, title, classes, ...rest }) => {
   return (
-    <div className={clsx(styles.card, className)}>
-      <h2 className={styles.title}>{title}</h2>
+    <div className={clsx(styles.root, className)} {...rest}>
+      <h2 className={clsx(styles.title, classes?.title)}>{title}</h2>
       {children}
     </div>
   );
 };
+
+export { Card };

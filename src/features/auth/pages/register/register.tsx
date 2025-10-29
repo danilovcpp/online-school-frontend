@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Card } from '@/components/Card/Card';
+import { Card } from '@/components/card/card';
 import { routes } from '@/shared/constants/routes';
 
 import { RegisterForm } from './components/register-form/register-form';

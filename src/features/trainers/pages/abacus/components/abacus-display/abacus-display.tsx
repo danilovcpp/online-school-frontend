@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 
-import { Card } from '@/components/Card/Card';
+import { Card } from '@/components/card/card';
 
 import { useAbacus } from '../../../../hooks/use-abacus';
 import { AbacusColumn } from '../abacus-column/abacus-column';

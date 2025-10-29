@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 
-import { Card } from '@/components/Card/Card';
+import { Card } from '@/components/card/card';
 
 import { trainerList } from '../../constants/trainer-list';
 import { TrainerCard } from '../trainer-card/trainer-card';

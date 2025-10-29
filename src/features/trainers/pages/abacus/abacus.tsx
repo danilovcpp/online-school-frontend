@@ -3,7 +3,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 import { Button } from '@/components/button/button';
-import { Card } from '@/components/Card/Card';
+import { Card } from '@/components/card/card';
 import { Input } from '@/components/Input/Input';
 import { generateRandomNumber } from '@/utils';
 
@@ -106,7 +106,7 @@ const AbacusPage: React.FC = () => {
             <div className={styles.challenge}>
               <h3>Текущее задание:</h3>
               <div className={styles.challengeNumber}>{challenge.toLocaleString()}</div>
-              <div className="flex gap-3 justify-center mt-5 flex-wrap">
+              <div className={styles.challengeControls}>
                 <Button onClick={handleCheckAnswer} variant="primary">
                   Проверить ответ
                 </Button>

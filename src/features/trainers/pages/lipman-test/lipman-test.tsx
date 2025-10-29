@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 import { Button } from '@/components/button/button';
-import { Card } from '@/components/Card/Card';
+import { Card } from '@/components/card/card';
 import { Input } from '@/components/Input/Input';
 import { Select } from '@/components/Select/Select';
 
