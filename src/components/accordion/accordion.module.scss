@@ -1,0 +1,106 @@
+.root {
+  --accordion-radius: var(--radius-lg);
+  --accordion-chevron-size: 1rem;
+  --accordion-animation-time: 0.25s;
+  --accordion-bg-color: var(--color-overlay-light);
+  --accordion-affix-margin: var(--spacing-xs);
+  --accordion-padding-inline: 1rem;
+  --accordion-padding-content-block: 1rem;
+  --accordion-border-color: var(--color-border-light);
+
+  width: 100%;
+  background: var(--accordion-bg-color);
+  border: 1px solid var(--accordion-border-color);
+  border-radius: var(--accordion-radius);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+
+  @media (hover: hover) {
+    &:hover {
+      --accordion-border-color: var(--color-border-medium);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+}
+
+.accordion {
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-inline: var(--accordion-padding-inline);
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: var(--accordion-affix-margin);
+}
+
+.label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-block: var(--spacing-sm);
+}
+
+.chevron {
+  width: var(--accordion-chevron-size);
+  height: var(--accordion-chevron-size);
+  transition: transform 200ms ease;
+
+  &[data-rotate] {
+    transform: rotate(180deg);
+  }
+}
+
+.content {
+  transition-duration: var(--accordion-animation-time);
+  transition-timing-function: ease-in-out;
+  position: relative;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition-delay: 1ms;
+  visibility: hidden;
+  min-block-size: 1px;
+  transition-property: grid-template-rows, padding, visibility;
+
+  &[data-expanded] {
+    transition-property: grid-template-rows, padding, visibility;
+    grid-template-rows: 1fr;
+    visibility: visible;
+
+    .contentWrapper {
+      opacity: 1;
+      visibility: visible;
+      padding-block: var(--accordion-padding-content-block);
+    }
+  }
+}
+
+.contentWrapper {
+  transition-property: all;
+  transition-duration: var(--accordion-animation-time);
+  transition-timing-function: ease-in-out;
+  grid-row: 1 / span 2;
+  grid-row-start: 1;
+  grid-row-end: span 2;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  padding-inline: var(--accordion-padding-inline);
+}

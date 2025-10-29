@@ -52,7 +52,7 @@ Flash Anzan - это упражнение, где числа мелькают н
       description: 'Попрактикуйтесь в быстром сложении чисел с помощью Flash Anzan.',
       requirements: 'Выполните 5 раундов с точностью не менее 70%.',
     },
-    isCompleted: false,
+    isCompleted: true,
     isLocked: false,
   },
   {
