@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/button/button';
 import { Card } from '@/components/Card/Card';
 import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';

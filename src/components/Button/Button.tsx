@@ -1,17 +1,29 @@
-import React from 'react';
+import { type ElementType, type ReactNode } from 'react';
 import clsx from 'clsx';
 
-import styles from './Button.module.scss';
+import { PolymorphicComponent } from '@/types';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'accent';
-  children: React.ReactNode;
+import { UnstyledButton } from '../unstyled-button';
+
+import styles from './button.module.scss';
+
+export type ButtonVariant = 'primary' | 'secondary' | 'accent';
+
+export interface ButtonBaseProps {
+  className?: string;
+  variant?: ButtonVariant;
+  fullWidth?: boolean;
+  children: ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, className, ...props }) => {
+export type ButtonProps<C extends ElementType = 'button'> = PolymorphicComponent<C, ButtonBaseProps>;
+
+const Button = <C extends ElementType = 'button'>({ variant = 'primary', children, className, fullWidth, ...props }: ButtonProps<C>) => {
   return (
-    <button className={clsx(styles.button, styles[variant], className)} {...props}>
+    <UnstyledButton className={clsx(styles.button, styles[variant], className, { [styles.fullWidth]: fullWidth })} {...props}>
       {children}
-    </button>
+    </UnstyledButton>
   );
 };
+
+export { Button };

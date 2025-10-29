@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/button/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
 
@@ -13,14 +13,6 @@ import styles from './Header.module.scss';
 export const Header: React.FC = () => {
   const router = useRouter();
   const { user, isAuthenticated, logout } = useAuth();
-
-  const handleLogin = () => {
-    router.push(routes.auth.login);
-  };
-
-  const handleRegister = () => {
-    router.push(routes.auth.register);
-  };
 
   const handleLogout = () => {
     logout();
@@ -48,10 +40,10 @@ export const Header: React.FC = () => {
             </>
           ) : (
             <>
-              <Button variant="secondary" onClick={handleLogin} className={styles.authButton}>
+              <Button as={Link} href={routes.auth.login} variant="secondary" className={styles.authButton}>
                 Вход
               </Button>
-              <Button variant="primary" onClick={handleRegister} className={styles.authButton}>
+              <Button as={Link} href={routes.auth.register} variant="primary" className={styles.authButton}>
                 Регистрация
               </Button>
             </>

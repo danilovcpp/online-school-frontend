@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { AbacusDisplay } from '@/components/AbacusDisplay';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/button/button';
 import { Card } from '@/components/Card/Card';
 import { Header } from '@/components/Header/Header';
 import { trainerList } from '@/features/trainers/constants/trainer-list';

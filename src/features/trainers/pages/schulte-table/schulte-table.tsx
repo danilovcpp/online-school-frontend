@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/button/button';
 import { Card } from '@/components/Card/Card';
 import { Input } from '@/components/Input/Input';
 import { Select } from '@/components/Select/Select';

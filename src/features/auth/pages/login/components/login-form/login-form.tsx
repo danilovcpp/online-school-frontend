@@ -3,7 +3,7 @@ import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/components/button/button';
 import { Input } from '@/components/Input/Input';
 import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
