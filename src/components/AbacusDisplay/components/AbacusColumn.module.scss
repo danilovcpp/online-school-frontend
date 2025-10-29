@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@use '@/styles/mixins';
 
 .column {
   display: flex;
@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     font-size: 0.625rem;
   }
 }
@@ -32,16 +32,15 @@
   box-shadow:
     inset 0 2px 4px var(--color-overlay-darker),
     0 2px 4px var(--color-bg-transparent-10);
-  width: clamp(1.5rem, 3vw, 2rem);
+  width: 2rem;
 
-  @include media-tablet {
-    width: clamp(1.25rem, 2.5vw, 1.75rem);
-    min-height: clamp(14rem, 28vh, 18rem);
+  @include mixins.max-tablet {
+    width: 1.5rem;
+    padding: var(--spacing-xs) var(--spacing-xs);
   }
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     width: 1.25rem;
-    min-height: 12rem;
     padding: var(--spacing-xs) 2px;
   }
 }
@@ -53,6 +52,15 @@
   padding: var(--spacing-xs) 0;
   align-items: center;
   min-height: 65px;
+
+  @include mixins.max-tablet {
+    min-height: 55px;
+  }
+
+  @include mixins.max-mobile {
+    min-height: 40px;
+    padding: var(--spacing-xs) 2px;
+  }
 }
 
 .divider {
@@ -71,6 +79,15 @@
   justify-content: flex-end;
   align-items: center;
   min-height: 200px;
+
+  @include mixins.max-tablet {
+    min-height: 165px;
+  }
+
+  @include mixins.max-mobile {
+    min-height: 125px;
+    padding: var(--spacing-xs) 2px;
+  }
 }
 
 .spacer {

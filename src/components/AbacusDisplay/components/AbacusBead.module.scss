@@ -1,8 +1,8 @@
-@import '@/styles/mixins';
+@use '@/styles/mixins';
 
 .bead {
-  width: clamp(1.75rem, 3.5vw, 2.5rem);
-  height: clamp(1.75rem, 3.5vw, 2.5rem);
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
   transition: all var(--transition-base);
   box-shadow:
@@ -22,12 +22,12 @@
     pointer-events: none;
   }
 
-  @include media-tablet {
-    width: clamp(1.5rem, 3vw, 2rem);
-    height: clamp(1.5rem, 3vw, 2rem);
+  @include mixins.max-tablet {
+    width: 2rem;
+    height: 2rem;
   }
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     width: 1.5rem;
     height: 1.5rem;
   }
@@ -36,7 +36,7 @@
 .interactive {
   cursor: pointer;
 
-  @include hover {
+  @include mixins.hover {
     transform: scale(1.08);
     box-shadow:
       var(--shadow-bead-hover),

@@ -1,4 +1,4 @@
-@import '@/styles/mixins';
+@use '@/styles/mixins';
 
 .container {
   display: flex;
@@ -7,9 +7,12 @@
   gap: var(--spacing-xl);
   padding: var(--spacing-2xl) var(--spacing-lg);
   width: 100%;
-  overflow-x: auto;
 
-  @include media-mobile {
+  @include mixins.max-tablet {
+    overflow-x: auto;
+  }
+
+  @include mixins.max-mobile {
     padding: var(--spacing-xl) var(--spacing-md);
     gap: var(--spacing-lg);
   }
@@ -27,12 +30,12 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   min-width: 480px;
-  
+
   :global {
     animation: fadeInDown 0.5s ease-out;
   }
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     min-width: 240px;
     padding: var(--spacing-md) var(--spacing-xl);
   }
@@ -57,7 +60,7 @@
   transition: all var(--transition-smooth);
   animation: pulse 2s ease-in-out infinite;
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     font-size: var(--font-size-2xl);
   }
 }
@@ -65,7 +68,7 @@
 .abacusFrame {
   display: flex;
   flex-direction: row-reverse;
-  gap: clamp(0.5rem, 1.5vw, 1rem);
+  gap: 1rem;
   background: linear-gradient(145deg, var(--color-dark-surface), var(--color-dark-elevated));
   padding: var(--spacing-2xl);
   border-radius: var(--radius-lg);
@@ -84,22 +87,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      180deg,
-      var(--color-overlay-light) 0%,
-      transparent 50%,
-      var(--color-overlay-medium) 100%
-    );
+    background: linear-gradient(180deg,
+        var(--color-overlay-light) 0%,
+        transparent 50%,
+        var(--color-overlay-medium) 100%);
     pointer-events: none;
     border-radius: var(--radius-lg);
   }
 
-  @include media-tablet {
+  @include mixins.max-tablet {
     padding: var(--spacing-xl);
-    gap: clamp(0.4rem, 1vw, 0.8rem);
+    gap: 0.8rem;
   }
 
-  @include media-mobile {
+  @include mixins.max-mobile {
     padding: var(--spacing-lg);
     gap: 0.4rem;
   }

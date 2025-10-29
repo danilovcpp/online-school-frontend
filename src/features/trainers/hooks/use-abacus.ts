@@ -8,7 +8,7 @@ import { getSuperscript } from '@/utils';
  * @param {number} columns - количество колонок (по умолчанию 6)
  * @returns {object} методы и состояние абакуса
  */
-export const useAbacus = (columns = 6) => {
+export const useAbacus = (columns: number = 6) => {
   // Состояние значений каждой колонки (0-9)
   const [values, setValues] = useState(new Array(columns).fill(0));
 
