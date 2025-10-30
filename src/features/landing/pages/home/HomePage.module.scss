@@ -184,8 +184,11 @@
 
 // Trainers Section
 .trainers {
-  padding: 5rem 2rem;
   background: var(--color-primary-opacity-5);
+}
+
+.trainersContent {
+  padding: 5rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -371,4 +374,105 @@
   .trainerCard {
     padding: 2rem 1.5rem;
   }
+
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footerTitle {
+    margin-top: 1.5rem;
+  }
+}
+
+// Footer Section
+.footer {
+  background: linear-gradient(135deg, var(--color-background-secondary), var(--color-primary-opacity-10));
+  border-top: 1px solid var(--color-border);
+  padding: 4rem 2rem 2rem;
+  margin-top: auto;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 1.25rem;
+  color: var(--color-text-primary);
+}
+
+.footerDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s ease;
+
+    @include mixins.hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  a {
+    font-size: 1.75rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    opacity: 0.8;
+
+    @include mixins.hover {
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+  }
+}
+
+.footerBottom {
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border-light);
+  text-align: center;
+}
+
+.copyright {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin: 0;
 }

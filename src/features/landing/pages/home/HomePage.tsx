@@ -82,20 +82,22 @@ export const HomePage: React.FC = () => {
 
         {/* Trainers Section */}
         <section className={styles.trainers}>
-          <h2 className={styles.sectionTitle}>Доступные тренажеры</h2>
-          <div className={styles.trainersGrid}>
-            {trainerList.map((trainer) => (
-              <Card key={trainer.id} className={styles.trainerCard}>
-                <div className={styles.trainerIcon}>{trainer.icon}</div>
-                <h3 className={styles.trainerTitle}>{trainer.title}</h3>
-                <p className={styles.trainerDescription}>{trainer.description}</p>
-              </Card>
-            ))}
-          </div>
-          <div className={styles.trainersAction}>
-            <Link href={routes.auth.register}>
-              <Button variant="accent">Зарегистрироваться и попробовать</Button>
-            </Link>
+          <div className={styles.trainersContent}>
+            <h2 className={styles.sectionTitle}>Доступные тренажеры</h2>
+            <div className={styles.trainersGrid}>
+              {trainerList.map((trainer) => (
+                <Card key={trainer.id} className={styles.trainerCard}>
+                  <div className={styles.trainerIcon}>{trainer.icon}</div>
+                  <h3 className={styles.trainerTitle}>{trainer.title}</h3>
+                  <p className={styles.trainerDescription}>{trainer.description}</p>
+                </Card>
+              ))}
+            </div>
+            <div className={styles.trainersAction}>
+              <Link href={routes.auth.register}>
+                <Button variant="accent">Зарегистрироваться и попробовать</Button>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -111,6 +113,80 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* Footer Section */}
+        <footer className={styles.footer}>
+          <div className={styles.footerContent}>
+            <div className={styles.footerGrid}>
+              {/* About Column */}
+              <div className={styles.footerColumn}>
+                <h3 className={styles.footerTitle}>О платформе</h3>
+                <p className={styles.footerDescription}>
+                  Онлайн школа ментальной арифметики — современная платформа для развития когнитивных способностей через соробан и интерактивные
+                  тренажеры.
+                </p>
+              </div>
+
+              {/* Navigation Column */}
+              <div className={styles.footerColumn}>
+                <h3 className={styles.footerTitle}>Навигация</h3>
+                <ul className={styles.footerLinks}>
+                  <li>
+                    <Link href={routes.dashboard}>Личный кабинет</Link>
+                  </li>
+                  <li>
+                    <Link href={routes.courses}>Курсы</Link>
+                  </li>
+                  <li>
+                    <Link href={routes.auth.login}>Войти</Link>
+                  </li>
+                  <li>
+                    <Link href={routes.auth.register}>Регистрация</Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Support Column */}
+              <div className={styles.footerColumn}>
+                <h3 className={styles.footerTitle}>Поддержка</h3>
+                <ul className={styles.footerLinks}>
+                  <li>
+                    <a href="mailto:support@mentalmath">support@mentalmath</a>
+                  </li>
+                  <li>
+                    <a href="tel:+70000000000">+7 (000) 000-00-00</a>
+                  </li>
+                  <li>
+                    <a href="#faq">FAQ</a>
+                  </li>
+                  <li>
+                    <a href="#privacy">Политика конфиденциальности</a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Social Column */}
+              <div className={styles.footerColumn}>
+                <h3 className={styles.footerTitle}>Мы в соцсетях</h3>
+                <div className={styles.socialLinks}>
+                  <a href="https://t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    📱
+                  </a>
+                  <a href="https://vk.com" target="_blank" rel="noopener noreferrer" aria-label="VK">
+                    🔵
+                  </a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    📺
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.footerBottom}>
+              <p className={styles.copyright}>© {new Date().getFullYear()} Онлайн Школа Ментальной Арифметики. Все права защищены.</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
