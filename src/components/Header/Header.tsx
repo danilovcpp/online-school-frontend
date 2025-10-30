@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -31,8 +32,18 @@ export const Header: React.FC = () => {
           {isAuthenticated && user ? (
             <>
               <Link href={routes.profile} className={styles.userInfo}>
-                <span className={styles.avatar}>{user.avatar || '👤'}</span>
-                <span className={styles.userName}>{user.name}</span>
+                {user.avatarUrl ? (
+                  <Image
+                    src={user.avatarUrl}
+                    alt={user.userName}
+                    width={32}
+                    height={32}
+                    className={styles.avatarImage}
+                  />
+                ) : (
+                  <span className={styles.avatar}>{user.avatar || '👤'}</span>
+                )}
+                <span className={styles.userName}>{user.userName || user.name}</span>
               </Link>
               <Button variant="secondary" onClick={handleLogout} className={styles.authButton}>
                 Выход

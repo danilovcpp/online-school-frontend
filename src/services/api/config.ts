@@ -3,6 +3,7 @@ export const API_CONFIG = {
   ENDPOINTS: {
     LOGIN: '/api/login',
     REGISTER: '/api/register',
+    PROFILE_ME: '/api/profile/me',
   },
   TIMEOUT: 10000,
 } as const;

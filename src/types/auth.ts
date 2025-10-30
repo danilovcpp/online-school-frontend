@@ -1,12 +1,26 @@
 export interface User {
   id: string;
   email: string;
-  name: string;
+  userName: string;
+  avatarUrl?: string;
+  emailConfirmed?: boolean;
+  createdAt?: string;
+  // Legacy fields for backward compatibility
+  name?: string;
   avatar?: string;
   bio?: string;
   registeredAt?: string;
   level?: number;
   experiencePoints?: number;
+}
+
+export interface ProfileResponse {
+  id: string;
+  email: string;
+  userName: string;
+  avatarUrl: string;
+  emailConfirmed: boolean;
+  createdAt: string;
 }
 
 export interface AuthContextType {

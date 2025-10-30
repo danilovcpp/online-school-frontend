@@ -3,16 +3,33 @@
 import React, { createContext, PropsWithChildren, useCallback, useContext, useState } from 'react';
 
 import { authApi } from '@/services/api/auth-api';
+import { profileApi } from '@/services/api/profile-api';
 import { decodeJWT } from '@/utils/jwt-decode';
 import { tokenStorage } from '@/utils/token-storage';
 
-import type { AuthContextType, User } from '@/types/auth';
+import type { AuthContextType, ProfileResponse, User } from '@/types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const USER_STORAGE_KEY = 'user';
 
-// Helper function to create user from JWT token
+// Helper function to create user from profile response
+const createUserFromProfile = (profile: ProfileResponse): User => {
+  return {
+    id: profile.id,
+    email: profile.email,
+    userName: profile.userName,
+    avatarUrl: profile.avatarUrl,
+    emailConfirmed: profile.emailConfirmed,
+    createdAt: profile.createdAt,
+    // Legacy fields for backward compatibility
+    name: profile.userName,
+    avatar: profile.avatarUrl,
+    registeredAt: profile.createdAt,
+  };
+};
+
+// Helper function to create user from JWT token (fallback)
 const createUserFromToken = (accessToken: string): User | null => {
   const payload = decodeJWT(accessToken);
   if (!payload) return null;
@@ -20,10 +37,12 @@ const createUserFromToken = (accessToken: string): User | null => {
   return {
     id: payload.sub || '',
     email: payload.email || '',
+    userName: payload.name || payload.email || 'Пользователь',
     name: payload.name || payload.email || 'Пользователь',
     avatar: payload.name ? payload.name.charAt(0).toUpperCase() : '👤',
     bio: '',
     registeredAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
     level: 1,
     experiencePoints: 0,
   };
@@ -42,11 +61,20 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
       // Save tokens
       tokenStorage.saveTokens(tokens);
 
-      // Create user from JWT
-      const newUser = createUserFromToken(tokens.accessToken);
-      if (newUser) {
+      // Fetch user profile
+      try {
+        const profile = await profileApi.getMyProfile(tokens.accessToken);
+        const newUser = createUserFromProfile(profile);
         setUser(newUser);
         localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+      } catch (profileError) {
+        // Fallback to JWT-based user creation if profile fetch fails
+        console.warn('Failed to fetch profile, using JWT fallback:', profileError);
+        const newUser = createUserFromToken(tokens.accessToken);
+        if (newUser) {
+          setUser(newUser);
+          localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+        }
       }
     } catch (error) {
       throw error;
