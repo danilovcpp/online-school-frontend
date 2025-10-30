@@ -55,29 +55,17 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
   }, []);
 
-  const register = useCallback(async (name: string, email: string, password: string) => {
+  const register = useCallback(async (email: string, password: string): Promise<string> => {
     setIsLoading(true);
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // In a real app, validate with backend
-    // For now, create a mock user with provided data
-    const newUser: User = {
-      id: Date.now().toString(),
-      email,
-      name,
-      avatar: name.charAt(0).toUpperCase(),
-      bio: '',
-      registeredAt: new Date().toISOString(),
-      level: 1,
-      experiencePoints: 0,
-    };
-
-    setUser(newUser);
-    localStorage.setItem('user', JSON.stringify(newUser));
-
-    setIsLoading(false);
+    try {
+      const response = await authApi.register({ email, password });
+      return response.message;
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const logout = useCallback(() => {

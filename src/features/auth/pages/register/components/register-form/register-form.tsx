@@ -1,37 +1,37 @@
 'use client';
 import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 import { useAuth } from '@/contexts/AuthContext';
-import { routes } from '@/shared/constants/routes';
 
 import styles from './register-form.module.scss';
 
 const RegisterForm: FC = () => {
-  const router = useRouter();
   const { register, isLoading } = useAuth();
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+    setError('');
+    setSuccessMessage('');
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
 
-    const { name, email, password, confirmPassword } = formData;
+    const { email, password, confirmPassword } = formData;
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       setError('Заполните все поля');
       return;
     }
@@ -52,8 +52,9 @@ const RegisterForm: FC = () => {
     }
 
     try {
-      await register(name, email, password);
-      router.push(routes.home);
+      const message = await register(email, password);
+      setSuccessMessage(message);
+      setFormData({ email: '', password: '', confirmPassword: '' });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Ошибка регистрации');
     }
@@ -61,16 +62,6 @@ const RegisterForm: FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <Input
-        type="text"
-        label="Имя"
-        value={formData.name}
-        onChange={handleChange('name')}
-        placeholder="Иван Иванов"
-        disabled={isLoading}
-        autoComplete="name"
-      />
-
       <Input
         type="email"
         label="Email"
@@ -102,6 +93,7 @@ const RegisterForm: FC = () => {
       />
 
       {error && <div className={styles.error}>{error}</div>}
+      {successMessage && <div className={styles.success}>{successMessage}</div>}
 
       <Button type="submit" disabled={isLoading} className={styles.submitButton}>
         {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
