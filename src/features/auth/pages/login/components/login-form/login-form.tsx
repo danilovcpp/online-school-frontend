@@ -63,14 +63,6 @@ const LoginForm: FC = () => {
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <div className={styles.hint}>
-        <strong>Тестовые данные:</strong>
-        <br />
-        Email: user@example.com
-        <br />
-        Пароль: password
-      </div>
-
       <Button type="submit" disabled={isLoading} className={styles.submitButton}>
         {isLoading ? 'Вход...' : 'Войти'}
       </Button>

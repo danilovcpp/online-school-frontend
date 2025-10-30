@@ -9,7 +9,7 @@ interface CardProps extends ComponentPropsWithRef<'div'> {
   children: ReactNode;
   className?: string;
   title?: string;
-  classes?: Classes<'title'>
+  classes?: Classes<'title'>;
 }
 
 const Card: FC<CardProps> = ({ children, className, title, classes, ...rest }) => {

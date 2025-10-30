@@ -33,7 +33,9 @@ const AccordionControl: FC<AccordionControlProps> = ({ className, children, onCl
       disabled={disabled}
     >
       <span className={styles.label}>{children}</span>
-      <span className={styles.chevron} data-rotate={expanded || undefined}>{icon || '▼'}</span>
+      <span className={styles.chevron} data-rotate={expanded || undefined}>
+        {icon || '▼'}
+      </span>
     </UnstyledButton>
   );
 };

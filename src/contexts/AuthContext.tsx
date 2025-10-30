@@ -2,26 +2,31 @@
 
 import React, { createContext, PropsWithChildren, useCallback, useContext, useState } from 'react';
 
+import { authApi } from '@/services/api/auth-api';
+import { decodeJWT } from '@/utils/jwt-decode';
+import { tokenStorage } from '@/utils/token-storage';
+
 import type { AuthContextType, User } from '@/types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock user data
-const MOCK_USER: User = {
-  id: '1',
-  email: 'user@example.com',
-  name: 'Иван Иванов',
-  avatar: '👤',
-  bio: 'Увлекаюсь ментальной арифметикой и развитием когнитивных способностей. Постоянно совершенствую свои навыки счета на абакусе.',
-  registeredAt: new Date('2024-01-15').toISOString(),
-  level: 5,
-  experiencePoints: 3750,
-};
+const USER_STORAGE_KEY = 'user';
 
-// Mock credentials
-const MOCK_CREDENTIALS = {
-  email: 'user@example.com',
-  password: 'password',
+// Helper function to create user from JWT token
+const createUserFromToken = (accessToken: string): User | null => {
+  const payload = decodeJWT(accessToken);
+  if (!payload) return null;
+
+  return {
+    id: payload.sub || '',
+    email: payload.email || '',
+    name: payload.name || payload.email || 'Пользователь',
+    avatar: payload.name ? payload.name.charAt(0).toUpperCase() : '👤',
+    bio: '',
+    registeredAt: new Date().toISOString(),
+    level: 1,
+    experiencePoints: 0,
+  };
 };
 
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -31,17 +36,23 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const login = useCallback(async (email: string, password: string) => {
     setIsLoading(true);
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
+    try {
+      const tokens = await authApi.login({ email, password });
 
-    if (email === MOCK_CREDENTIALS.email && password === MOCK_CREDENTIALS.password) {
-      setUser(MOCK_USER);
-      localStorage.setItem('user', JSON.stringify(MOCK_USER));
-    } else {
-      throw new Error('Неверный email или пароль');
+      // Save tokens
+      tokenStorage.saveTokens(tokens);
+
+      // Create user from JWT
+      const newUser = createUserFromToken(tokens.accessToken);
+      if (newUser) {
+        setUser(newUser);
+        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(newUser));
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }, []);
 
   const register = useCallback(async (name: string, email: string, password: string) => {
@@ -71,19 +82,27 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const logout = useCallback(() => {
     setUser(null);
-    localStorage.removeItem('user');
+    tokenStorage.clearTokens();
+    localStorage.removeItem(USER_STORAGE_KEY);
   }, []);
 
   // Restore user from localStorage on mount
   React.useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    const storedUser = localStorage.getItem(USER_STORAGE_KEY);
+    const tokens = tokenStorage.getTokens();
+
+    if (storedUser && tokens && !tokenStorage.isTokenExpired()) {
       try {
         setUser(JSON.parse(storedUser));
       } catch (error) {
         console.error('Failed to parse stored user:', error);
-        localStorage.removeItem('user');
+        localStorage.removeItem(USER_STORAGE_KEY);
+        tokenStorage.clearTokens();
       }
+    } else if (tokenStorage.isTokenExpired()) {
+      // Clear expired tokens
+      tokenStorage.clearTokens();
+      localStorage.removeItem(USER_STORAGE_KEY);
     }
   }, []);
 
