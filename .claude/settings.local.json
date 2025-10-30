@@ -8,7 +8,8 @@
       "Bash(timeout /t 15 /nobreak)",
       "Bash(npm run build:*)",
       "Bash(test:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "ask": []

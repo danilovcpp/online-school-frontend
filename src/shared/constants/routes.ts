@@ -3,6 +3,7 @@ export const routes = {
   dashboard: '/dashboard',
   courses: '/courses',
   profile: '/profile',
+  settings: '/settings',
   course: {
     mentalArithmeticLevel1: '/courses/mental-arithmetic-level-1',
   },

@@ -1,0 +1,57 @@
+.avatarUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.avatarPreview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--gradient-secondary);
+  box-shadow: var(--shadow-medium);
+  transition: all var(--transition-medium);
+
+  &:hover {
+    box-shadow: var(--shadow-large);
+
+    .avatarOverlay {
+      opacity: 1;
+    }
+  }
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+}
+
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity var(--transition-medium);
+  color: white;
+}
+
+.fileInput {
+  display: none;
+}

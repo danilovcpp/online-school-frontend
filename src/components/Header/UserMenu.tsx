@@ -48,7 +48,9 @@ export const UserMenu: React.FC = () => {
         Тренажеры
       </DropdownItem>
       <DropdownDivider />
-      <DropdownItem icon="⚙️">Настройки</DropdownItem>
+      <DropdownItem icon="⚙️" onClick={() => router.push(routes.settings)}>
+        Настройки
+      </DropdownItem>
       <DropdownItem icon="❓">Помощь</DropdownItem>
       <DropdownDivider />
       <DropdownItem icon="🚪" onClick={handleLogout} variant="danger">
