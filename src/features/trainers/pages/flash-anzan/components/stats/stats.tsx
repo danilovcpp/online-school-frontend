@@ -7,25 +7,23 @@ interface StatsProps {
 }
 
 const Stats: React.FC<StatsProps> = ({ stats }) => {
-  if (stats.correct <= 0 || stats.wrong <= 0) {
-    return null;
-  }
+  const totalRounds = stats.correct + stats.wrong;
 
   return (
-    <div className={styles.root}>
-      <h3 className={styles.title}>Статистика:</h3>
+    <div className={styles.stats}>
+      <h3 className={styles.title}>Статистика</h3>
       <div className={styles.grid}>
-        <div className={styles.item}>
-          <span className={styles.label}>Правильные ответы:</span>
-          <span className={styles.value}>{stats.correct}</span>
+        <div className={styles.stat}>
+          <div className={styles.label}>Правильные ответы</div>
+          <div className={styles.value}>{stats.correct}</div>
         </div>
-        <div className={styles.item}>
-          <span className={styles.label}>Неправильные:</span>
-          <span className={styles.value}>{stats.wrong}</span>
+        <div className={styles.stat}>
+          <div className={styles.label}>Неправильные</div>
+          <div className={styles.value}>{stats.wrong}</div>
         </div>
-        <div className={styles.item}>
-          <span className={styles.label}>Точность:</span>
-          <span className={styles.value}>{stats.accuracy}%</span>
+        <div className={styles.stat}>
+          <div className={styles.label}>Точность</div>
+          <div className={styles.value}>{totalRounds > 0 ? `${stats.accuracy}%` : '-'}</div>
         </div>
       </div>
     </div>
