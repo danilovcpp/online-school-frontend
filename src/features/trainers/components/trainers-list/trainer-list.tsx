@@ -8,6 +8,7 @@ import { TrainerCard } from '../trainer-card/trainer-card';
 
 import styles from './trainer-list.module.scss';
 
+// deprecated, not used
 const TrainerList = () => {
   const pathname = usePathname();
 

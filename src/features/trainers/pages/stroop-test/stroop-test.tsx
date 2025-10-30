@@ -52,6 +52,19 @@ const StroopTestPage = () => {
 
   return (
     <Card title="Тест Струпа - Тренировка концентрации внимания">
+
+      <div className={styles.info}>
+        <p>
+          <strong>Тест Струпа</strong> — классическое психологическое упражнение для тренировки когнитивного контроля и избирательного
+          внимания.
+        </p>
+        <p>
+          <strong>Задача:</strong> Вам будет показано слово-название цвета, написанное определённым цветом. Вы должны выбрать{' '}
+          <strong>цвет текста</strong>, а не прочитать слово.
+        </p>
+        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot;, чтобы начать упражнение</p>
+      </div>
+
       <div className={styles.settings}>
         <Select label="Количество раундов:" value={settings.rounds} name="rounds" onChange={handleChangeRounds}>
           {roundsOptions.map((option) => (
@@ -68,18 +81,6 @@ const StroopTestPage = () => {
             </option>
           ))}
         </Select>
-      </div>
-
-      <div className={styles.info}>
-        <p>
-          <strong>Тест Струпа</strong> — классическое психологическое упражнение для тренировки когнитивного контроля и избирательного
-          внимания.
-        </p>
-        <p>
-          <strong>Задача:</strong> Вам будет показано слово-название цвета, написанное определённым цветом. Вы должны выбрать{' '}
-          <strong>цвет текста</strong>, а не прочитать слово.
-        </p>
-        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot;, чтобы начать упражнение</p>
       </div>
 
       <div className={styles.controls}>

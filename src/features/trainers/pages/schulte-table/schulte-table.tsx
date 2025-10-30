@@ -51,6 +51,15 @@ const SchulteTablePage = () => {
 
   return (
     <Card title="Таблица Шульте - Тренажер концентрации и периферического зрения">
+
+      <div className={styles.info}>
+        <p>
+          Таблица Шульте — это таблица со случайно расположенными числами. Задача — как можно быстрее найти все числа по порядку от 1 до{' '}
+          {totalNumbers}.
+        </p>
+        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать упражнение</p>
+      </div>
+
       <div className={styles.settings}>
         <Select label="Размер таблицы:" value={settings.gridSize} name="gridSize" onChange={handleChangeGridSize}>
           {gridSizeOptions.map((option) => (
@@ -66,14 +75,6 @@ const SchulteTablePage = () => {
             Перемешивать числа
           </label>
         </div>
-      </div>
-
-      <div className={styles.info}>
-        <p>
-          Таблица Шульте — это таблица со случайно расположенными числами. Задача — как можно быстрее найти все числа по порядку от 1 до{' '}
-          {totalNumbers}.
-        </p>
-        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать упражнение</p>
       </div>
 
       <div className={styles.controls}>

@@ -1,13 +1,11 @@
-'use client';
-
 import React, { PropsWithChildren } from 'react';
 
 import { Header } from '@/components/Header/Header';
 import { Sidebar } from '@/components/Sidebar/Sidebar';
 
-import styles from './DashboardLayout.module.scss';
+import styles from './layout.module.scss';
 
-export const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.layout}>
       <Header />
