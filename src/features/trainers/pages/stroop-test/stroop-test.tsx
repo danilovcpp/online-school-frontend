@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
-import { Select } from '@/components/Select/Select';
+import { Select } from '@/components/select/select';
 
 import { StroopTestSettings } from '@/types';
 

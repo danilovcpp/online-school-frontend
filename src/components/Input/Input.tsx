@@ -1,17 +1,19 @@
-import React from 'react';
+import { type FC, type InputHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-import styles from './Input.module.scss';
+import styles from './input.module.scss';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export const Input: React.FC<InputProps> = ({ label, className, ...props }) => {
+const Input: FC<InputProps> = ({ label, className, ...props }) => {
   return (
-    <div className={styles.inputContainer}>
+    <div className={styles.container}>
       {label && <label className={styles.label}>{label}</label>}
       <input className={clsx(styles.input, className)} {...props} />
     </div>
   );
 };
+
+export { Input }

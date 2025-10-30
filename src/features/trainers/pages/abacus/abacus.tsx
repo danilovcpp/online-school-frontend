@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
-import { Input } from '@/components/Input/Input';
+import { Input } from '@/components/input/input';
 import { generateRandomNumber } from '@/utils';
 
 import { tutorials } from '../../constants/abacus';

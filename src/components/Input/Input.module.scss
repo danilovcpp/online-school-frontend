@@ -1,4 +1,4 @@
-.inputContainer {
+.container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -11,7 +11,8 @@
 }
 
 .input {
-  padding: var(--spacing-md);
+  padding-inline: var(--spacing-md);
+  height: 48px;
   font-size: var(--font-size-md);
   border: 2px solid var(--color-border-light);
   border-radius: var(--radius-md);

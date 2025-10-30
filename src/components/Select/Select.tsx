@@ -1,15 +1,15 @@
-import React from 'react';
+import { type FC, type SelectHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
-import styles from './Select.module.scss';
+import styles from './select.module.scss';
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
 }
 
-export const Select: React.FC<SelectProps> = ({ label, className, children, ...props }) => {
+const Select: FC<SelectProps> = ({ label, className, children, ...props }) => {
   return (
-    <div className={styles.selectContainer}>
+    <div className={styles.container}>
       {label && <label className={styles.label}>{label}</label>}
       <select className={clsx(styles.select, className)} {...props}>
         {children}
@@ -17,3 +17,5 @@ export const Select: React.FC<SelectProps> = ({ label, className, children, ...p
     </div>
   );
 };
+
+export { Select };

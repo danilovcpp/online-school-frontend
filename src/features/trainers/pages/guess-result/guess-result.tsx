@@ -4,8 +4,8 @@ import clsx from 'clsx';
 
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
-import { Input } from '@/components/Input/Input';
-import { Select } from '@/components/Select/Select';
+import { Input } from '@/components/input/input';
+import { Select } from '@/components/select/select';
 
 import { GuessResultSettings } from '@/types';
 
