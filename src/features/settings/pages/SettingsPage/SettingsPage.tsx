@@ -38,10 +38,18 @@ export const SettingsPage: React.FC = () => {
   };
 
   const handleSettingChange = <K extends keyof UserSettings>(key: K, value: UserSettings[K] | Partial<UserSettings[K]>) => {
-    setSettings((prev) => ({
-      ...prev,
-      [key]: typeof value === 'object' && !Array.isArray(value) ? { ...prev[key], ...value } : value,
-    }));
+    setSettings((prev) => {
+      const prevValue = prev[key];
+      const newValue =
+        typeof value === 'object' && !Array.isArray(value) && typeof prevValue === 'object' && prevValue !== null
+          ? { ...prevValue, ...value }
+          : value;
+
+      return {
+        ...prev,
+        [key]: newValue as UserSettings[K],
+      };
+    });
     setSaved(false);
   };
 
@@ -58,7 +66,7 @@ export const SettingsPage: React.FC = () => {
       <div className={styles.sections}>
         <SettingsSection title="Профиль" description="Управление данными профиля">
           <div className={styles.profileSection}>
-            <AvatarUpload currentAvatar={user?.avatar} onAvatarChange={handleAvatarChange} />
+            <AvatarUpload currentAvatar={user?.avatarUrl} onAvatarChange={handleAvatarChange} />
             <Input label="Email" type="email" value={settings.email} disabled />
           </div>
         </SettingsSection>

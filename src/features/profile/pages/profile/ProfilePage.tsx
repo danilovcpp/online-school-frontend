@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/button/button';
@@ -24,8 +25,8 @@ export const ProfilePage: React.FC = () => {
     return null;
   }
 
-  const registeredDate = user.registeredAt
-    ? new Date(user.registeredAt).toLocaleDateString('ru-RU', {
+  const registeredDate = user.registeredAt || user.createdAt
+    ? new Date(user.registeredAt || user.createdAt || '').toLocaleDateString('ru-RU', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -37,14 +38,23 @@ export const ProfilePage: React.FC = () => {
   const experienceToNextLevel = level * 1000;
   const progressPercentage = Math.min((experiencePoints / experienceToNextLevel) * 100, 100);
 
+  const displayName = user.userName || user.name || 'Пользователь';
+  const avatarInitial = displayName.charAt(0).toUpperCase();
+
   return (
     <div className={styles.container}>
       <Card className={styles.profileCard}>
         <div className={styles.header}>
           <div className={styles.avatarSection}>
-            <div className={styles.avatar}>{user.avatar || '👤'}</div>
+            <div className={styles.avatar}>
+              {user.avatarUrl ? (
+                <Image src={user.avatarUrl} alt={displayName} width={120} height={120} className={styles.avatarImage} />
+              ) : (
+                avatarInitial
+              )}
+            </div>
             <div className={styles.info}>
-              <h1 className={styles.name}>{user.name}</h1>
+              <h1 className={styles.name}>{displayName}</h1>
               <p className={styles.email}>{user.email}</p>
             </div>
           </div>

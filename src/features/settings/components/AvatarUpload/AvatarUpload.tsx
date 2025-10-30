@@ -33,6 +33,7 @@ export const AvatarUpload: React.FC<AvatarUploadProps> = ({ currentAvatar, onAva
     <div className={styles.avatarUpload}>
       <div className={styles.avatarPreview} onClick={handleClick}>
         {preview ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img src={preview} alt="Avatar" className={styles.avatarImage} />
         ) : (
           <div className={styles.avatarPlaceholder}>

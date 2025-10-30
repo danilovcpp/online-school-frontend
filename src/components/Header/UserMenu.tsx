@@ -21,14 +21,17 @@ export const UserMenu: React.FC = () => {
     router.push('/');
   };
 
+  const displayName = user.userName || user.name || 'Пользователь';
+  const avatarInitial = displayName.charAt(0).toUpperCase();
+
   const trigger = (
     <div className={styles.trigger}>
       {user.avatarUrl ? (
-        <Image src={user.avatarUrl} alt={user.userName} width={32} height={32} className={styles.avatarImage} />
+        <Image src={user.avatarUrl} alt={displayName} width={32} height={32} className={styles.avatarImage} />
       ) : (
-        <span className={styles.avatar}>{user.avatar || '👤'}</span>
+        <span className={styles.avatar}>{avatarInitial}</span>
       )}
-      <span className={styles.userName}>{user.userName || user.name}</span>
+      <span className={styles.userName}>{displayName}</span>
       <span className={styles.chevron}>▼</span>
     </div>
   );
