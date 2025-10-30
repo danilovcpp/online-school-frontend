@@ -9,12 +9,6 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <DashboardLayout>
       <div className={styles.container}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>
-            <span className={styles.gradientText}>Абакус</span>
-            <span className={styles.subtitle}>Древнее искусство быстрого счета</span>
-          </h1>
-        </header>
 
         <main>
           <TrainerList />

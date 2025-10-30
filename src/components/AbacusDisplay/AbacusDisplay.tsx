@@ -42,19 +42,21 @@ export const AbacusDisplay: React.FC<AbacusDisplayProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.abacusFrame}>
-        {Array.from({ length: columns }, (_, i) => i).reverse().map((columnIndex) => {
-          const columnValue = getColumnValue(columnIndex);
-          return (
-            <AbacusColumn
-              key={columnIndex}
-              columnIndex={columnIndex}
-              value={columnValue}
-              label={showLabels ? columnValue.toString() : undefined}
-              onToggleTop={interactive ? toggleTopBead : undefined}
-              onToggleBottom={interactive ? toggleBottomBead : undefined}
-            />
-          );
-        })}
+        {Array.from({ length: columns }, (_, i) => i)
+          .reverse()
+          .map((columnIndex) => {
+            const columnValue = getColumnValue(columnIndex);
+            return (
+              <AbacusColumn
+                key={columnIndex}
+                columnIndex={columnIndex}
+                value={columnValue}
+                label={showLabels ? columnValue.toString() : undefined}
+                onToggleTop={interactive ? toggleTopBead : undefined}
+                onToggleBottom={interactive ? toggleBottomBead : undefined}
+              />
+            );
+          })}
       </div>
       {showValue && (
         <div className={styles.valueDisplay}>

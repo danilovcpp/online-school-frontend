@@ -69,7 +69,7 @@ const menuItems: MenuItem[] = [
     title: 'Тест Липмана',
     icon: '🔤',
     path: routes.trainers.lipmanTest,
-  },
+  }
 ];
 
 export const Sidebar: React.FC = () => {

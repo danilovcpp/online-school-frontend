@@ -47,7 +47,7 @@ export const useAbacus = (columns: number = 6) => {
    */
   const toggleBottomBead = useCallback((column: number, beadIndex: number, isActive: boolean, activeBeads: boolean[]) => {
     setValues((prev) => {
-      const newValues = [...prev];      
+      const newValues = [...prev];
 
       if (isActive) {
         // Деактивировать эту бусину и все выше неё

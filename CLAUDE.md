@@ -18,7 +18,7 @@ This is an interactive online school frontend focused on abacus (soroban) traini
 - `docker-compose up dev` - Run development container with hot reload and volume mounting
 - `docker-compose build` - Build containers without starting them
 - `docker-compose down` - Stop and remove containers
-- Dockerfile includes standalone output optimization for production builds
+- Dockerfile uses multi-stage build with standalone output optimization for production builds
 
 ### Code Quality
 - `npm run lint:js` - Run ESLint on .js, .ts, and .tsx files in src/
@@ -41,6 +41,7 @@ src/
 │   │   ├── courses/        # Course catalog and individual courses
 │   │   ├── dashboard/      # User dashboard
 │   │   ├── profile/        # User profile
+│   │   ├── settings/       # User settings
 │   │   └── trainers/       # Trainer pages (abacus, flash-anzan, etc.)
 │   ├── login/              # Login page
 │   ├── register/           # Registration page
@@ -61,6 +62,9 @@ src/
 │       ├── constants/      # Trainer configurations and lists
 │       ├── hooks/          # Custom React hooks (use-abacus, use-flash-anzan, etc.)
 │       └── pages/          # Trainer page implementations
+├── hooks/                  # Shared React hooks (use-uncontrolled)
+├── services/               # API services layer
+│   └── api/                # API client implementations (auth-api, profile-api, config)
 ├── shared/                 # Shared constants (routes)
 ├── styles/                 # Global SCSS styles and mixins
 │   ├── mixins/             # SCSS mixins (_media.scss, _hover.scss)
@@ -68,7 +72,7 @@ src/
 │   ├── _variables.scss     # SCSS variables
 │   └── _mixins.scss        # SCSS mixin imports
 ├── types/                  # TypeScript type definitions
-└── utils/                  # Utility functions (delay, generateRandomNumber, getSuperscript)
+└── utils/                  # Utility functions (delay, generateRandomNumber, getSuperscript, jwt-decode, token-storage)
 ```
 
 ### Key Architectural Patterns
@@ -85,20 +89,23 @@ src/
 - `use-stroop-test.ts` - Manages Stroop test flow and statistics
 - `use-lipman-test.ts` - Handles Lipman test grid generation and marking
 
+**Shared Hooks**: Common hooks in `src/hooks/`:
+- `use-uncontrolled.ts` - Manages controlled/uncontrolled component state pattern for form inputs, enabling components to work in both controlled and uncontrolled modes
+
 **Route Configuration**: All routes are centralized in [src/shared/constants/routes.ts](src/shared/constants/routes.ts), imported throughout the app.
 
 **Trainer Registry**: Trainers are registered in [src/features/trainers/constants/trainer-list.ts](src/features/trainers/constants/trainer-list.ts) with metadata (id, title, description, icon, path).
 
+**API Services Layer**: API clients in `src/services/api/`:
+- `auth-api.ts` - Authentication endpoints (login, register, refresh)
+- `profile-api.ts` - User profile endpoints (get profile, update profile)
+- `config.ts` - API configuration and base URL setup
+
 **Context Pattern**: React Context is used for cross-cutting concerns:
 - `AuthContext` - Global authentication state management located in [src/contexts/AuthContext.tsx](src/contexts/AuthContext.tsx)
   - Provides `useAuth()` hook for accessing authentication state
-  - Mock authentication with localStorage persistence
-  - Mock credentials: email `user@example.com`, password `password`
-
-**Authentication**: Auth feature in `src/features/auth/` includes:
-- Auth pages: login and register routes in `src/features/auth/pages/`
-- Auth context and hooks for state management
-- Auth-specific components (LoginForm, RegisterForm)
+  - Handles JWT token management with automatic refresh
+  - Token storage utilities in [src/utils/token-storage.ts](src/utils/token-storage.ts)
 
 ### TypeScript Configuration
 
@@ -106,10 +113,19 @@ src/
 - Target: ES2017
 - JSX: react-jsx (React 19)
 - Strict mode enabled
+- Custom type roots: `./@types` for extended type definitions
+
+### Next.js Configuration
+
+**Image Optimization**: Configured remote patterns in [next.config.ts](next.config.ts):
+- Local development: `http://localhost:9000/avatars/**`
+- Production: `http://s3api.runex.space/school-avatars/avatars/**`
+
+**Output Mode**: Uses `standalone` output for optimized Docker builds
 
 ### Routing
 
-- App Router with route groups: `app/(portal)/` for authenticated pages (trainers, dashboard, courses, profile)
+- App Router with route groups: `app/(portal)/` for authenticated pages (trainers, dashboard, courses, profile, settings)
 - Home page (`/`) shows landing page for unauthenticated users, redirects to `/dashboard` for authenticated users
 - Auth pages: `/login` and `/register` (not in portal route group)
 - All trainer routes follow pattern: `/trainers/{trainer-type}`
@@ -152,7 +168,8 @@ The application includes several main sections accessible via the portal route g
 - **Dashboard** (`/dashboard`) - User dashboard with progress tracking and stats
 - **Courses** (`/courses`) - Course catalog and individual course pages (e.g., `/courses/mental-arithmetic-level-1`)
 - **Trainers** (`/trainers`) - Interactive training modules (see Trainer Types below)
-- **Profile** (`/profile`) - User profile page
+- **Profile** (`/profile`) - User profile page with avatar management
+- **Settings** (`/settings`) - User settings and preferences
 
 ## Trainer Types
 
@@ -204,7 +221,7 @@ See [src/types/trainers.ts](src/types/trainers.ts) for:
 - `SchulteTableStats` - Statistics tracking (completedGames, bestTime, averageTime, lastTime)
 
 **Stroop Test Types:**
-- `SroopColor` - Color definition (name in Russian, hex)
+- `StroopColor` - Color definition (name in Russian, hex)
 - `StroopTestSettings` - Configuration (rounds, mode: congruent/incongruent/mixed)
 - `StroopTestStats` - Statistics tracking (completedTests, bestTime, averageTime, accuracy, totalCorrect, totalWrong)
 
