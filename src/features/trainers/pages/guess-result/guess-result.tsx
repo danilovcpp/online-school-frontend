@@ -101,6 +101,14 @@ const GuessResultPage = () => {
 
   return (
     <Card title="Угадай результат - Тренировка памяти и ментального счета">
+      <div className={styles.info}>
+        <p>
+          Тренажер для развития оперативной памяти и навыков ментального счета. На экране поочередно появляются числа, которые нужно
+          запомнить и сложить. После показа всех чисел необходимо выбрать правильную сумму из предложенных вариантов.
+        </p>
+        <p className={styles.hint}>Настройте параметры и нажмите кнопку &quot;Начать&quot; для старта тренировки</p>
+      </div>
+
       <div className={styles.settings}>
         <Select label="Количество чисел:" value={settings.count} name="count" onChange={handleChangeSettings}>
           {countSetting.map((option) => (

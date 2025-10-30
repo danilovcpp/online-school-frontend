@@ -95,11 +95,15 @@
   }
 }
 
+.trainerGrid {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 .grid {
   display: grid;
   gap: 4px;
   margin-bottom: 2rem;
-  max-width: 100%;
 }
 
 .cell {

@@ -66,6 +66,20 @@ const LipmanTestPage = () => {
 
   return (
     <Card title="Тест Лимпана - Тренировка концентрации и избирательного внимания">
+
+      <div className={styles.info}>
+        <p>
+          Тест Лимпана — это психологический тест для оценки концентрации внимания. В таблице случайных букв нужно найти и отметить все
+          вхождения указанных букв.
+        </p>
+        {settings.targetLetters.length > 0 && (
+          <p className={styles.targetInfo}>
+            Целевые буквы: <span className={styles.targetLetters}>{settings.targetLetters.join(', ')}</span>
+          </p>
+        )}
+        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать тест</p>
+      </div>
+
       <div className={styles.settings}>
         <Select label="Количество строк:" value={settings.rows} name="rows" onChange={handleChangeRows}>
           {rowsOptions.map((option) => (
@@ -90,19 +104,6 @@ const LipmanTestPage = () => {
           placeholder="КА"
           maxLength={10}
         />
-      </div>
-
-      <div className={styles.info}>
-        <p>
-          Тест Лимпана — это психологический тест для оценки концентрации внимания. В таблице случайных букв нужно найти и отметить все
-          вхождения указанных букв.
-        </p>
-        {settings.targetLetters.length > 0 && (
-          <p className={styles.targetInfo}>
-            Целевые буквы: <span className={styles.targetLetters}>{settings.targetLetters.join(', ')}</span>
-          </p>
-        )}
-        <p className={styles.hint}>Нажмите кнопку &quot;Старт&quot; чтобы начать тест</p>
       </div>
 
       <div className={styles.controls}>
@@ -147,29 +148,31 @@ const LipmanTestPage = () => {
         )}
       </div>
 
-      {cells.length > 0 && (
-        <div
-          className={styles.grid}
-          style={{
-            gridTemplateColumns: `repeat(${settings.cols}, 1fr)`,
-          }}
-        >
-          {cells.map((cell, index) => (
-            <button
-              key={index}
-              className={`${styles.cell} ${cell.isMarked ? styles.marked : ''} ${
-                isCompleted && cell.isCorrect === true ? styles.correctMark : ''
-              } ${isCompleted && cell.isCorrect === false ? styles.wrongMark : ''} ${
-                isCompleted && cell.isTarget && !cell.isMarked ? styles.missed : ''
-              } ${!isActive || isCompleted ? styles.disabled : ''}`}
-              onClick={() => toggleCell(index)}
-              disabled={!isActive || isCompleted}
-            >
-              {cell.letter}
-            </button>
-          ))}
-        </div>
-      )}
+      <div className={styles.trainerGrid}>
+        {cells.length > 0 && (
+          <div
+            className={styles.grid}
+            style={{
+              gridTemplateColumns: `repeat(${settings.cols}, 1fr)`,
+            }}
+          >
+            {cells.map((cell, index) => (
+              <button
+                key={index}
+                className={`${styles.cell} ${cell.isMarked ? styles.marked : ''} ${
+                  isCompleted && cell.isCorrect === true ? styles.correctMark : ''
+                } ${isCompleted && cell.isCorrect === false ? styles.wrongMark : ''} ${
+                  isCompleted && cell.isTarget && !cell.isMarked ? styles.missed : ''
+                } ${!isActive || isCompleted ? styles.disabled : ''}`}
+                onClick={() => toggleCell(index)}
+                disabled={!isActive || isCompleted}
+              >
+                {cell.letter}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       <Stats stats={stats} />
     </Card>
