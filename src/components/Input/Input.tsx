@@ -1,19 +1,29 @@
-import { type FC, type InputHTMLAttributes } from 'react';
+import { type FC, type InputHTMLAttributes, useId } from 'react';
 import clsx from 'clsx';
+
+import { Classes } from '@/types';
 
 import styles from './input.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  classes?: Classes<'container' | 'label'>;
 }
 
-const Input: FC<InputProps> = ({ label, className, ...props }) => {
+const Input: FC<InputProps> = ({ label, className, id, classes, ...props }) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
+
   return (
-    <div className={styles.container}>
-      {label && <label className={styles.label}>{label}</label>}
-      <input className={clsx(styles.input, className)} {...props} />
+    <div className={clsx(styles.container, classes?.container)}>
+      {label && (
+        <label className={clsx(styles.label, classes?.label)} htmlFor={inputId}>
+          {label}
+        </label>
+      )}
+      <input className={clsx(styles.input, className)} id={inputId} {...props} />
     </div>
   );
 };
 
-export { Input }
+export { Input };
