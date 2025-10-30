@@ -17,7 +17,7 @@
 }
 
 .heroContent {
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 .title {
@@ -264,6 +264,11 @@
   opacity: 0.95;
   margin-bottom: 2.5rem;
   line-height: 1.6;
+}
+
+.ctaAction {
+  display: flex;
+  justify-content: center;
 }
 
 .cta a {

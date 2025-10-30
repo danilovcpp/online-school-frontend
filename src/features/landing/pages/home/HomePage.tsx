@@ -104,9 +104,11 @@ export const HomePage: React.FC = () => {
           <div className={styles.ctaContent}>
             <h2 className={styles.ctaTitle}>Готовы начать?</h2>
             <p className={styles.ctaDescription}>Присоединяйтесь к тысячам учеников, которые уже развивают свои когнитивные способности</p>
-            <Link href={routes.auth.register}>
-              <Button variant="primary">Создать аккаунт бесплатно</Button>
-            </Link>
+            <div className={styles.ctaAction}>
+              <Link href={routes.auth.register}>
+                <Button variant="primary">Создать аккаунт бесплатно</Button>
+              </Link>
+            </div>
           </div>
         </section>
       </div>
