@@ -1,24 +1,18 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/button/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
 
+import { UserMenu } from './UserMenu';
+
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
-  const router = useRouter();
-  const { user, isAuthenticated, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    router.push('/');
-  };
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -29,26 +23,8 @@ export const Header: React.FC = () => {
         </Link>
 
         <nav className={styles.nav}>
-          {isAuthenticated && user ? (
-            <>
-              <Link href={routes.profile} className={styles.userInfo}>
-                {user.avatarUrl ? (
-                  <Image
-                    src={user.avatarUrl}
-                    alt={user.userName}
-                    width={32}
-                    height={32}
-                    className={styles.avatarImage}
-                  />
-                ) : (
-                  <span className={styles.avatar}>{user.avatar || '👤'}</span>
-                )}
-                <span className={styles.userName}>{user.userName || user.name}</span>
-              </Link>
-              <Button variant="secondary" onClick={handleLogout} className={styles.authButton}>
-                Выход
-              </Button>
-            </>
+          {isAuthenticated ? (
+            <UserMenu />
           ) : (
             <>
               <Button as={Link} href={routes.auth.login} variant="secondary" className={styles.authButton}>
