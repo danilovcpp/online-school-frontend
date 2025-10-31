@@ -1,0 +1,214 @@
+@use '@/styles/mixins' as *;
+
+.card {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-lg);
+  background: var(--color-overlay-light);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+
+  @include hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+.locked {
+  opacity: 0.6;
+  filter: grayscale(0.5);
+
+  @include hover {
+    opacity: 0.75;
+  }
+}
+
+// Tier colors
+.bronze {
+  border-color: rgba(205, 127, 50, 0.4);
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, var(--color-overlay-light) 100%);
+  }
+}
+
+.silver {
+  border-color: rgba(192, 192, 192, 0.4);
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, var(--color-overlay-light) 100%);
+  }
+}
+
+.gold {
+  border-color: rgba(255, 215, 0, 0.4);
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, var(--color-overlay-light) 100%);
+  }
+}
+
+.platinum {
+  border-color: rgba(229, 228, 226, 0.5);
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, rgba(229, 228, 226, 0.15) 0%, var(--color-overlay-light) 100%);
+  }
+}
+
+.diamond {
+  border-color: rgba(185, 242, 255, 0.6);
+
+  &:not(.locked) {
+    background: linear-gradient(135deg, rgba(185, 242, 255, 0.15) 0%, var(--color-overlay-light) 100%);
+  }
+}
+
+.iconWrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background-dark);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border-light);
+}
+
+.icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+  border-radius: var(--radius-lg);
+  font-size: 2rem;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: var(--color-background-dark);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+}
+
+.progressText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.unlockedDate {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-xs);
+}
+
+.tierBadge {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-background-dark);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.5px;
+}
+
+@include max-tablet {
+  .card {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .lockOverlay {
+    font-size: 1.5rem;
+  }
+}
+
+@include max-mobile {
+  .card {
+    padding: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: var(--font-size-base);
+  }
+
+  .description {
+    font-size: var(--font-size-sm);
+  }
+
+  .tierBadge {
+    font-size: 0.65rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
