@@ -29,6 +29,12 @@ const menuItems: MenuItem[] = [
     path: routes.courses,
   },
   {
+    id: 'leaderboard',
+    title: 'Рейтинг',
+    icon: '🏆',
+    path: routes.leaderboard,
+  },
+  {
     id: 'mental-arithmetic-level-1',
     title: 'Курс: Уровень 1',
     icon: '🎓',

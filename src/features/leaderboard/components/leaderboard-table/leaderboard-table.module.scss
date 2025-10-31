@@ -1,0 +1,288 @@
+@use '@/styles/mixins' as *;
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--color-overlay-light);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  thead {
+    background: var(--color-background-dark);
+    border-bottom: 2px solid var(--color-border-light);
+
+    th {
+      padding: var(--spacing-lg) var(--spacing-md);
+      text-align: left;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+
+      &:first-child {
+        border-top-left-radius: var(--radius-lg);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--radius-lg);
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      transition:
+        background var(--transition-base),
+        transform var(--transition-base);
+
+      @include hover {
+        background: var(--color-overlay-light);
+        transform: translateX(4px);
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--color-border-light);
+      }
+    }
+  }
+}
+
+.row {
+  td {
+    padding: var(--spacing-lg) var(--spacing-md);
+    font-size: var(--font-size-base);
+  }
+}
+
+.topThreeRow {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.05) 0%, transparent 100%);
+  border-left: 3px solid var(--color-accent);
+
+  td {
+    padding: var(--spacing-lg) var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+  }
+
+  @include hover {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, var(--color-overlay-light) 100%) !important;
+  }
+}
+
+.rankColumn {
+  width: 80px;
+}
+
+.userColumn {
+  min-width: 200px;
+}
+
+.scoreColumn,
+.levelColumn,
+.achievementsColumn,
+.exercisesColumn {
+  width: 120px;
+  text-align: center;
+}
+
+.rankCell {
+  text-align: center;
+}
+
+.rankContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.medal {
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+}
+
+.rankNumber {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.userCell {
+  .userInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-inverse);
+    flex-shrink: 0;
+  }
+
+  .username {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+  }
+}
+
+.scoreCell {
+  text-align: center;
+
+  .score {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.levelCell {
+  text-align: center;
+
+  .level {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-md);
+    color: var(--color-text-inverse);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+  }
+}
+
+.achievementsCell,
+.exercisesCell {
+  text-align: center;
+
+  span {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+@include max-tablet {
+  .table {
+    thead th {
+      padding: var(--spacing-md) var(--spacing-sm);
+      font-size: var(--font-size-xs);
+    }
+
+    tbody td {
+      padding: var(--spacing-md) var(--spacing-sm);
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  .rankColumn {
+    width: 60px;
+  }
+
+  .userColumn {
+    min-width: 150px;
+  }
+
+  .scoreColumn,
+  .levelColumn,
+  .achievementsColumn,
+  .exercisesColumn {
+    width: 90px;
+  }
+
+  .userCell {
+    .avatar {
+      width: 32px;
+      height: 32px;
+      font-size: var(--font-size-base);
+    }
+  }
+
+  .medal {
+    font-size: var(--font-size-xl);
+  }
+
+  .scoreCell .score {
+    font-size: var(--font-size-base);
+  }
+}
+
+@include max-mobile {
+  .tableWrapper {
+    border-radius: var(--radius-md);
+  }
+
+  .table {
+    thead th {
+      padding: var(--spacing-sm) var(--spacing-xs);
+      font-size: 10px;
+    }
+
+    tbody td {
+      padding: var(--spacing-sm) var(--spacing-xs);
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  .rankColumn {
+    width: 50px;
+  }
+
+  .userColumn {
+    min-width: 120px;
+  }
+
+  .scoreColumn,
+  .levelColumn {
+    width: 70px;
+  }
+
+  .achievementsColumn,
+  .exercisesColumn {
+    display: none;
+  }
+
+  .userCell {
+    .avatar {
+      width: 28px;
+      height: 28px;
+      font-size: var(--font-size-sm);
+    }
+
+    .username {
+      font-size: var(--font-size-xs);
+    }
+  }
+
+  .medal {
+    font-size: var(--font-size-lg);
+  }
+
+  .scoreCell .score {
+    font-size: var(--font-size-sm);
+  }
+
+  .levelCell .level {
+    padding: 2px var(--spacing-xs);
+    font-size: 10px;
+  }
+}

@@ -5,6 +5,7 @@ export const routes = {
   profile: '/profile',
   settings: '/settings',
   achievements: '/achievements',
+  leaderboard: '/leaderboard',
   course: {
     mentalArithmeticLevel1: '/courses/mental-arithmetic-level-1',
   },
