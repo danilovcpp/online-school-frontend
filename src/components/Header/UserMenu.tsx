@@ -47,6 +47,9 @@ export const UserMenu: React.FC = () => {
       <DropdownItem icon="📚" onClick={() => router.push(routes.courses)}>
         Курсы
       </DropdownItem>
+      <DropdownItem icon="🏆" onClick={() => router.push(routes.achievements)}>
+        Достижения
+      </DropdownItem>
       <DropdownItem icon="🎯" onClick={() => router.push('/trainers')}>
         Тренажеры
       </DropdownItem>
