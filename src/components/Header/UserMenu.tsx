@@ -5,19 +5,23 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Dropdown, DropdownDivider, DropdownItem } from '@/components/Dropdown';
-import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
+import { logoutRequest } from '@/store/features/auth/auth-slice';
+import { selectUserProfile } from '@/store/features/user/user-slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 import styles from './UserMenu.module.scss';
 
 export const UserMenu: React.FC = () => {
   const router = useRouter();
-  const { user, logout } = useAuth();
+
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUserProfile);
 
   if (!user) return null;
 
   const handleLogout = () => {
-    logout();
+    dispatch(logoutRequest());
     router.push('/');
   };
 

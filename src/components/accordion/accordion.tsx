@@ -3,7 +3,7 @@
 import { type FC, type ReactNode, useCallback, useId, useMemo } from 'react';
 import clsx from 'clsx';
 
-import { useUncontrolled } from '@/hooks/use-uncontrolled';
+import { useUncontrolled } from '@/shared/hooks/use-uncontrolled';
 
 import { AccordionContext, AccordionContextValue } from './accordion.context';
 

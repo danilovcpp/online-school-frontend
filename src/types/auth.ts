@@ -14,13 +14,14 @@ export interface User {
   experiencePoints?: number;
 }
 
-export interface ProfileResponse {
+export interface Profile {
   id: string;
   email: string;
   userName: string;
   avatarUrl: string;
   emailConfirmed: boolean;
   createdAt: string;
+  name: string;
 }
 
 export interface AuthContextType {

@@ -6,17 +6,21 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
-import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
+import { logoutRequest } from '@/store/features/auth/auth-slice';
+import { selectUserProfile } from '@/store/features/user/user-slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 import styles from './profile.module.scss';
 
 export const ProfilePage: React.FC = () => {
   const router = useRouter();
-  const { user, logout } = useAuth();
+
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUserProfile);
 
   const handleLogout = () => {
-    logout();
+    dispatch(logoutRequest());
     router.push(routes.home);
   };
 
@@ -25,16 +29,10 @@ export const ProfilePage: React.FC = () => {
     return null;
   }
 
-  const registeredDate = user.registeredAt || user.createdAt
-    ? new Date(user.registeredAt || user.createdAt || '').toLocaleDateString('ru-RU', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })
-    : 'Недавно';
+  const registeredDate = 'Недавно'; // user.registeredAt;
 
-  const level = user.level ?? 1;
-  const experiencePoints = user.experiencePoints ?? 0;
+  const level = 1; // user.level
+  const experiencePoints = 0; // user.experiencePoints
   const experienceToNextLevel = level * 1000;
   const progressPercentage = Math.min((experiencePoints / experienceToNextLevel) * 100, 100);
 
@@ -62,7 +60,7 @@ export const ProfilePage: React.FC = () => {
 
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>О себе</h2>
-          <p className={styles.bio}>{user.bio || 'Расскажите о себе...'}</p>
+          <p className={styles.bio}>{'Расскажите о себе...'}</p>
         </div>
 
         <div className={styles.section}>

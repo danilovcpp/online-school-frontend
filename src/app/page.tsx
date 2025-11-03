@@ -3,13 +3,13 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { useAuth } from '@/contexts/AuthContext';
 import { HomePage } from '@/features/landing/pages/home';
 import { routes } from '@/shared/constants/routes';
+import { useIsAuthorized } from '@/shared/hooks/auth/use-is-authorized';
 
 export default function Home() {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useIsAuthorized();
 
   useEffect(() => {
     if (isAuthenticated) {

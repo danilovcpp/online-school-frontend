@@ -4,18 +4,18 @@ import { useState } from 'react';
 
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
-import { useAuth } from '@/contexts/AuthContext';
+import { AuthApi } from '@/services/api/auth-api';
 
 import styles from './register-form.module.scss';
 
 const RegisterForm: FC = () => {
-  const { register, isLoading } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     confirmPassword: '',
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +51,17 @@ const RegisterForm: FC = () => {
       return;
     }
 
-    try {
-      const message = await register(email, password);
-      setSuccessMessage(message);
+    setIsLoading(true);
+    const { status, data, error } = await AuthApi.register({ email, password });
+
+    if (status === 200 && data) {
+      setSuccessMessage(data.message);
       setFormData({ email: '', password: '', confirmPassword: '' });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка регистрации');
+    } else {
+      setError(error || 'Ошибка регистрации');
     }
+
+    setIsLoading(false);
   };
 
   return (

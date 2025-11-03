@@ -4,15 +4,15 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Button } from '@/components/button/button';
-import { useAuth } from '@/contexts/AuthContext';
 import { routes } from '@/shared/constants/routes';
+import { useIsAuthorized } from '@/shared/hooks/auth/use-is-authorized';
 
 import { UserMenu } from './UserMenu';
 
 import styles from './Header.module.scss';
 
 export const Header: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const isAuthenticated = useIsAuthorized();
 
   return (
     <header className={styles.header}>
