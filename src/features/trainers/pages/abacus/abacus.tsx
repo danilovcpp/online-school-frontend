@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 import clsx from 'clsx';
 
 import { Button } from '@/components/button/button';
@@ -14,6 +14,8 @@ import { TutorialCard } from './components/tutorial-card/tutorial-card';
 
 import styles from './abacus.module.scss';
 
+const maxValue = 999999;
+
 const AbacusPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(0);
   const [abacusValue, setAbacusValue] = useState<number>(0);
@@ -22,10 +24,10 @@ const AbacusPage: React.FC = () => {
   const [resultType, setResultType] = useState<'success' | 'error' | ''>('');
 
   const handleSetNumber = () => {
-    if (inputValue >= 0 && inputValue <= 999999) {
+    if (inputValue >= 0 && inputValue <= maxValue) {
       setAbacusValue(inputValue);
     } else {
-      alert('Пожалуйста, введите число от 0 до 999999');
+      alert(`Пожалуйста, введите число от 0 до ${maxValue}`);
     }
   };
 
@@ -35,13 +37,13 @@ const AbacusPage: React.FC = () => {
   };
 
   const handleRandom = () => {
-    const randomNum = generateRandomNumber(0, 999999);
+    const randomNum = generateRandomNumber(0, maxValue);
     setInputValue(randomNum);
     setAbacusValue(randomNum);
   };
 
   const handleNewChallenge = () => {
-    const newChallenge = generateRandomNumber(1, 999999);
+    const newChallenge = generateRandomNumber(1, maxValue);
     setChallenge(newChallenge);
     setResultMessage('');
     setResultType('');
@@ -61,29 +63,29 @@ const AbacusPage: React.FC = () => {
     }
   };
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    handleSetNumber();
+  };
+
   return (
     <main>
       <section>
         <Card title="Панель управления">
           <div className={styles.controls}>
-            <div className={styles.inputGroup}>
+            <form className={styles.inputGroup} onSubmit={handleSubmit}>
               <Input
                 type="number"
-                label="Введите число (0-999999):"
+                label={`Введите число (0-${maxValue}):`}
                 min={0}
-                max={999999}
+                max={maxValue}
                 value={inputValue}
                 onChange={(e) => setInputValue(Number(e.target.value))}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleSetNumber();
-                  }
-                }}
               />
-              <Button onClick={handleSetNumber} variant="primary">
+              <Button variant="primary" type="submit">
                 Показать на абакусе
               </Button>
-            </div>
+            </form>
             <div className={styles.buttonGroup}>
               <Button onClick={handleReset} variant="secondary" className="flex-1 min-w-[150px]">
                 Сбросить
