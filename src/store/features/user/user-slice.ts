@@ -62,9 +62,10 @@ export const userSlice = createAppSlice({
     selectIsUserLoading: (state) => state.status === 'loading',
     selectIsUserLoaded: (state) => state.status === 'success',
     selectUserProfile: (state) => state.profile,
+    selectUserStatus: (state) => state.status,
   },
 });
 
 export const { userRequest, resetUser } = userSlice.actions;
 
-export const { selectIsUserLoading, selectUserProfile, selectIsUserLoaded } = userSlice.selectors;
+export const { selectIsUserLoading, selectUserProfile, selectIsUserLoaded, selectUserStatus } = userSlice.selectors;

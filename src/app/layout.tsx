@@ -5,8 +5,6 @@ import { StoreProvider } from '@/store/provider/provider';
 
 import '@/styles/globals.scss';
 
-import '@/utils/axios';
-
 export const metadata: Metadata = {
   title: 'Абакус - Интерактивное обучение счету',
   description: 'Древнее искусство быстрого счета с помощью абакуса (соробана)',

@@ -52,7 +52,7 @@ export interface LoginResponse {
 export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
-  expiresAt: number;
+  expiresIn: number;
 }
 
 export interface RegisterRequest {
@@ -62,4 +62,8 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   message: string;
+}
+
+export interface RefreshRequest {
+  refreshToken: string;
 }

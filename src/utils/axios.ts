@@ -1,18 +1,11 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { AuthApi } from '@/services/api/auth-api';
+import { getOrCreateStore } from '@/store';
+import { loginToken, logoutRequest } from '@/store/features/auth/auth-slice';
 
 import { IS_SSR } from './isSsr';
-import {
-  deleteTokens,
-  getAuthHeader,
-  getClientAccess,
-  getClientRefresh,
-  getServerAccess,
-  getServerRefresh,
-  setClientAccess,
-  setClientRefresh,
-} from './jwt';
+import { deleteTokens, getAuthHeader, getClientAccess, getClientRefresh, getServerAccess, getServerRefresh, setTokens } from './jwt';
 
 function createAxiosInstance(): AxiosInstance {
   const instance = axios.create({
@@ -47,18 +40,34 @@ function createAxiosInstance(): AxiosInstance {
         originalRequest._isRetry = true;
 
         const refreshToken = await (IS_SSR ? getServerRefresh() : getClientRefresh());
+
         if (refreshToken) {
           try {
-            const { data } = await AuthApi.refresh();
+            const { data } = await AuthApi.refresh({ refreshToken });
+
             if (data) {
-              await setClientAccess(data.accessToken);
-              await setClientRefresh(data.refreshToken);
+              await setTokens(data);
+
+              if (!IS_SSR) {
+                const store = getOrCreateStore();
+                store.dispatch(loginToken(data.accessToken));
+              }
 
               originalRequest.headers['Authorization'] = getAuthHeader(data.accessToken);
               return instance.request(originalRequest);
             }
           } catch {
             await deleteTokens();
+
+            if (!IS_SSR) {
+              const store = getOrCreateStore();
+              store.dispatch(logoutRequest());
+            }
+          }
+        } else {
+          if (!IS_SSR) {
+            const store = getOrCreateStore();
+            store.dispatch(logoutRequest());
           }
         }
       }

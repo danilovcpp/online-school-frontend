@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
 import { routes } from '@/shared/constants/routes';
+import { useIsAuthorized } from '@/shared/hooks/auth/use-is-authorized';
 import { logoutRequest } from '@/store/features/auth/auth-slice';
 import { selectUserProfile } from '@/store/features/user/user-slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
@@ -17,6 +18,7 @@ export const ProfilePage: React.FC = () => {
   const router = useRouter();
 
   const dispatch = useAppDispatch();
+  const isAuth = useIsAuthorized()
   const user = useAppSelector(selectUserProfile);
 
   const handleLogout = () => {
@@ -24,7 +26,7 @@ export const ProfilePage: React.FC = () => {
     router.push(routes.home);
   };
 
-  if (!user) {
+  if (!isAuth) {
     router.push(routes.auth.login);
     return null;
   }

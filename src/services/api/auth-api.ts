@@ -1,6 +1,6 @@
 import { request } from '@/utils/request';
 
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth';
+import type { AuthTokens, LoginRequest, LoginResponse, RefreshRequest, RegisterRequest, RegisterResponse } from '@/types/auth';
 
 import { API_CONFIG } from './config';
 
@@ -20,7 +20,11 @@ export const AuthApi = {
       data: credentials,
     });
   },
-  async refresh() {
-    return { data: { accessToken: '123', refreshToken: '456' } };
+  async refresh(data: RefreshRequest) {
+    return request<AuthTokens>({
+      method: 'POST',
+      url: API_CONFIG.ENDPOINTS.REFRESH,
+      data,
+    });
   },
 };
