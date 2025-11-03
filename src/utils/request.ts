@@ -6,6 +6,8 @@ import axios, {
   type RawAxiosResponseHeaders,
 } from 'axios';
 
+import { axiosInstance } from './axios';
+
 /**
  * Расширяем стандартный конфиг axios возможностью указать сообщение об ошибке по умолчанию
  */
@@ -52,8 +54,7 @@ const axiosErrorHandler = <T>(error: APIError<T>, defaultError?: string): Respon
  */
 export const request = async <T = unknown>(config: RequestConfig): Promise<Response<T>> => {
   try {
-    const response: AxiosResponse<T> = await axios.request<T>(config);
-    const { data, status, headers } = response;
+    const { data, status, headers }: AxiosResponse<T> = await axiosInstance.request<T>(config);
 
     return { data, status, headers };
   } catch (error) {
