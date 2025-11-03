@@ -4,9 +4,9 @@ import React, { useEffect } from 'react';
 
 import { useAbacus } from '@/features/trainers/hooks/use-abacus';
 
-import { AbacusColumn } from './components/AbacusColumn';
+import { AbacusColumn } from './components/abacus-column';
 
-import styles from './AbacusDisplay.module.scss';
+import styles from './abacus-display.module.scss';
 
 interface AbacusDisplayProps {
   columns?: number;

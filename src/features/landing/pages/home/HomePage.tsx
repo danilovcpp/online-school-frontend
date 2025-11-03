@@ -3,12 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { AbacusDisplay } from '@/components/AbacusDisplay';
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
 import { Header } from '@/components/Header/Header';
 import { trainerList } from '@/features/trainers/constants/trainer-list';
 import { routes } from '@/shared/constants/routes';
+import { AbacusDisplay } from '@/shared/trainers/components/abacus-display';
 
 import styles from './HomePage.module.scss';
 
@@ -122,8 +122,8 @@ export const HomePage: React.FC = () => {
               <div className={styles.footerColumn}>
                 <h3 className={styles.footerTitle}>О платформе</h3>
                 <p className={styles.footerDescription}>
-                  Онлайн школа ментальной арифметики — современная платформа для развития когнитивных способностей через соробан и интерактивные
-                  тренажеры.
+                  Онлайн школа ментальной арифметики — современная платформа для развития когнитивных способностей через соробан и
+                  интерактивные тренажеры.
                 </p>
               </div>
 

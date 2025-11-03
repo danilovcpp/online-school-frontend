@@ -5,11 +5,11 @@ import clsx from 'clsx';
 import { Button } from '@/components/button/button';
 import { Card } from '@/components/card/card';
 import { Input } from '@/components/input/input';
+import { AbacusDisplay } from '@/shared/trainers/components/abacus-display';
 import { generateRandomNumber } from '@/utils';
 
 import { tutorials } from '../../constants/abacus';
 
-import { AbacusDisplay } from './components/abacus-display/abacus-display';
 import { TutorialCard } from './components/tutorial-card/tutorial-card';
 
 import styles from './abacus.module.scss';
@@ -93,11 +93,15 @@ const AbacusPage: React.FC = () => {
               </Button>
             </div>
           </div>
-          <div className={styles.currentValue}>
+          {/* <div className={styles.currentValue}>
             <span>Текущее значение:</span>
             <span className={styles.valueDisplay}>{abacusValue.toLocaleString()}</span>
-          </div>
+          </div> */}
         </Card>
+      </section>
+
+      <section>
+        <AbacusDisplay value={abacusValue} onChange={setAbacusValue} showValue={false} />
       </section>
 
       <section>
@@ -118,10 +122,6 @@ const AbacusPage: React.FC = () => {
             {resultMessage && <div className={clsx(styles.result, styles[resultType])}>{resultMessage}</div>}
           </div>
         </Card>
-      </section>
-
-      <section>
-        <AbacusDisplay columns={6} value={abacusValue} onChange={setAbacusValue} />
       </section>
 
       <Card title="Как использовать абакус">

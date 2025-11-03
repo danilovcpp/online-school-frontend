@@ -2,9 +2,9 @@
 
 import React from 'react';
 
-import { AbacusBead } from './AbacusBead';
+import { AbacusBead } from './abacus-bead';
 
-import styles from './AbacusColumn.module.scss';
+import styles from './abacus-column.module.scss';
 
 interface AbacusColumnProps {
   columnIndex: number;

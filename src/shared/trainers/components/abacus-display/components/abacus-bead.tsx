@@ -3,7 +3,7 @@
 import React, { ComponentPropsWithoutRef } from 'react';
 import clsx from 'clsx';
 
-import styles from './AbacusBead.module.scss';
+import styles from './abacus-bead.module.scss';
 
 interface AbacusBeadProps extends ComponentPropsWithoutRef<'div'> {
   active: boolean;
