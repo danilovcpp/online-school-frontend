@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 
-import { AuthProvider } from '@/contexts/AuthContext';
+import { StoreProvider } from '@/store/provider/provider';
 
 import '@/styles/globals.scss';
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>{children}</AuthProvider>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   );

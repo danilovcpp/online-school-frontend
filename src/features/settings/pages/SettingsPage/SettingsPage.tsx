@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 import { Select } from '@/components/select/select';
-import { useAuth } from '@/contexts/AuthContext';
+import { selectUserProfile } from '@/store/features/user/user-slice';
+import { useAppSelector } from '@/store/hooks';
 
 import { UserSettings } from '@/types/settings';
 
@@ -16,7 +17,8 @@ import { SettingsSection } from '../../components/SettingsSection';
 import styles from './SettingsPage.module.scss';
 
 export const SettingsPage: React.FC = () => {
-  const { user } = useAuth();
+  const user = useAppSelector(selectUserProfile);
+
   const [settings, setSettings] = useState<UserSettings>({
     email: user?.email || 'user@example.com',
     notifications: {

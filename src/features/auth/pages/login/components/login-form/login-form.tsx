@@ -5,17 +5,23 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
-import { useAuth } from '@/contexts/AuthContext';
+import { AuthApi } from '@/services/api/auth-api';
 import { routes } from '@/shared/constants/routes';
+import { loginToken } from '@/store/features/auth/auth-slice';
+import { useAppDispatch } from '@/store/hooks';
+import { setTokens } from '@/utils/jwt';
 
 import styles from './login-form.module.scss';
 
 const LoginForm: FC = () => {
   const router = useRouter();
-  const { login, isLoading } = useAuth();
+
+  const dispatch = useAppDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,12 +37,19 @@ const LoginForm: FC = () => {
       return;
     }
 
-    try {
-      await login(email, password);
+    setIsLoading(true);
+
+    const { status, data, error } = await AuthApi.login({ email, password });
+
+    if (data && status === 200) {
+      await setTokens(data);
+      dispatch(loginToken(data.accessToken));
       router.push(routes.home);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Ошибка входа');
+    } else {
+      setError(error || 'Ошибка входа');
     }
+
+    setIsLoading(false);
   };
 
   return (

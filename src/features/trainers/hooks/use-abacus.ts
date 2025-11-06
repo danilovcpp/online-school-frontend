@@ -65,8 +65,6 @@ export const useAbacus = (columns: number = 6) => {
         newValues[column] += activateCount;
       }
 
-      console.log('newValues', newValues);
-
       return newValues;
     });
   }, []);
