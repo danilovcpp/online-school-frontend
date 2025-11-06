@@ -26,7 +26,7 @@ export const authSlice = createAppSlice({
         const result = await logoutAction();
 
         if (result) {
-          thunkApi.dispatch(resetUser());
+          thunkApi.dispatch(resetUser('logout'));
           return thunkApi.fulfillWithValue({ token: '' });
         }
 

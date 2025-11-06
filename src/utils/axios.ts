@@ -1,8 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
 import { AuthApi } from '@/services/api/auth-api';
-import { getOrCreateStore } from '@/store';
-import { loginToken, logoutRequest } from '@/store/features/auth/auth-slice';
 
 import { IS_SSR } from './isSsr';
 import { deleteTokens, getAuthHeader, getClientAccess, getClientRefresh, getServerAccess, getServerRefresh, setTokens } from './jwt';
@@ -49,6 +47,8 @@ function createAxiosInstance(): AxiosInstance {
               await setTokens(data);
 
               if (!IS_SSR) {
+                const { getOrCreateStore } = await import('@/store');
+                const { loginToken } = await import('@/store/features/auth/auth-slice');
                 const store = getOrCreateStore();
                 store.dispatch(loginToken(data.accessToken));
               }
@@ -60,12 +60,16 @@ function createAxiosInstance(): AxiosInstance {
             await deleteTokens();
 
             if (!IS_SSR) {
+              const { getOrCreateStore } = await import('@/store');
+              const { logoutRequest } = await import('@/store/features/auth/auth-slice');
               const store = getOrCreateStore();
               store.dispatch(logoutRequest());
             }
           }
         } else {
           if (!IS_SSR) {
+            const { getOrCreateStore } = await import('@/store');
+            const { logoutRequest } = await import('@/store/features/auth/auth-slice');
             const store = getOrCreateStore();
             store.dispatch(logoutRequest());
           }

@@ -5,7 +5,7 @@ import type { Profile } from '@/types/auth';
 import { createAppSlice } from '../../utils/create-app-slice';
 import type { CustomError } from '../types';
 
-import type { UserState } from './user-slice.types';
+import type { UserState, UserStatus } from './user-slice.types';
 
 const nameOfSlice = 'user';
 
@@ -54,8 +54,8 @@ export const userSlice = createAppSlice({
         },
       },
     ),
-    resetUser: create.reducer(() => {
-      return initialState;
+    resetUser: create.reducer<UserStatus>((_, action) => {
+      return { ...initialState, status: action.payload };
     }),
   }),
   selectors: {

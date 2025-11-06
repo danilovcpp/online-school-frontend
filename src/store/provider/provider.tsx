@@ -1,23 +1,21 @@
 'use server';
 
 import { PropsWithChildren } from 'react';
-import { cookies } from 'next/headers';
 
 import { ProfileApi } from '@/services/api/profile-api';
-import { ACCESS_TOKEN_COOKIE_NAME } from '@/shared/constants/cookies';
+import { checkServerIsAuth } from '@/utils/checkServerIsAuth';
 
 import { StoreProviderClient } from './provider-client';
 
 export const StoreProvider = async ({ children }: PropsWithChildren) => {
-  // FIXME Refactor
-  const authToken = (await cookies()).get(ACCESS_TOKEN_COOKIE_NAME)?.value ?? '';
+  const { token } = await checkServerIsAuth();
 
   const { data: profile } = await ProfileApi.getMyProfile();
 
   return (
     <StoreProviderClient
       preloadedState={{
-        auth: { token: authToken },
+        auth: { token },
         ...(profile && { user: { status: 'success', profile } })
       }}
     >
