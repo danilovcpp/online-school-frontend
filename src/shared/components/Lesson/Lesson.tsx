@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import { Accordion, AccordionContent, AccordionControl } from '@/components/accordion';
+import { Accordion, AccordionContent, AccordionControl } from '@/ui-kit/accordion';
 
 import type { Lesson as LessonType } from '@/types/courses';
 

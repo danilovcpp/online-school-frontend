@@ -3,11 +3,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from '@/components/button/button';
 import { routes } from '@/shared/constants/routes';
 import { useIsAuthorized } from '@/shared/hooks/auth/use-is-authorized';
+import { Button } from '@/ui-kit/button/button';
 
-import { UserMenu } from './UserMenu';
+import { UserMenu } from './components/user-menu/user-menu';
 
 import styles from './Header.module.scss';
 

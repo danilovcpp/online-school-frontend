@@ -1,18 +1,18 @@
 'use client';
 
-import React from 'react';
+import { type FC } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { Dropdown, DropdownDivider, DropdownItem } from '@/components/Dropdown';
 import { routes } from '@/shared/constants/routes';
 import { logoutRequest } from '@/store/features/auth/auth-slice';
 import { selectUserProfile } from '@/store/features/user/user-slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { Dropdown, DropdownDivider, DropdownItem } from '@/ui-kit/Dropdown';
 
-import styles from './UserMenu.module.scss';
+import styles from './user-menu.module.scss';
 
-export const UserMenu: React.FC = () => {
+export const UserMenu: FC = () => {
   const router = useRouter();
 
   const dispatch = useAppDispatch();

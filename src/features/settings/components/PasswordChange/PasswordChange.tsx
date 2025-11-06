@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
+import { Button } from '@/ui-kit/button/button';
+import { Input } from '@/ui-kit/input/input';
 
 import { PasswordChangeData } from '@/types/settings';
 

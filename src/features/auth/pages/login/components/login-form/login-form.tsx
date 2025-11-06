@@ -3,12 +3,12 @@ import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
 import { AuthApi } from '@/services/api/auth-api';
 import { routes } from '@/shared/constants/routes';
 import { loginToken } from '@/store/features/auth/auth-slice';
 import { useAppDispatch } from '@/store/hooks';
+import { Button } from '@/ui-kit/button/button';
+import { Input } from '@/ui-kit/input/input';
 import { setTokens } from '@/utils/jwt';
 
 import styles from './login-form.module.scss';

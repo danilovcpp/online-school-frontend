@@ -7,7 +7,8 @@
     "build": "next build --webpack",
     "start": "next start",
     "lint:js": "eslint --ext .js --ext .ts --ext .tsx ./src",
-    "lint:fix": "npm run lint:js -- --fix && prettier --write 'src/**/*.{js,ts,tsx}'"
+    "lint:fix": "npm run lint:js -- --fix && prettier --write 'src/**/*.{js,ts,tsx}'",
+    "type-check": "tsc -p tsconfig.json --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@reduxjs/toolkit": "2.9.2",

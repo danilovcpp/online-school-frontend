@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from '@/components/button/button';
+import { Button } from '@/ui-kit/button/button';
 
 import { RecommendedTrainer } from '@/types/dashboard';
 

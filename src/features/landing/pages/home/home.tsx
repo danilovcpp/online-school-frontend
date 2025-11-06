@@ -3,19 +3,18 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { Button } from '@/components/button/button';
-import { Card } from '@/components/card/card';
-import { Header } from '@/components/Header/Header';
 import { trainerList } from '@/features/trainers/constants/trainer-list';
+import { PortalLayout } from '@/layouts/portal-layout/portal-layout';
 import { routes } from '@/shared/constants/routes';
 import { AbacusDisplay } from '@/shared/trainers/components/abacus-display';
+import { Button } from '@/ui-kit/button/button';
+import { Card } from '@/ui-kit/card/card';
 
-import styles from './HomePage.module.scss';
+import styles from './home.module.scss';
 
 export const HomePage: React.FC = () => {
   return (
-    <>
-      <Header />
+    <PortalLayout className={styles.root} showSidebar={false} classes={{ main: styles.main }}>
       <div className={styles.container}>
         {/* Hero Section */}
         <section className={styles.hero}>
@@ -188,6 +187,6 @@ export const HomePage: React.FC = () => {
           </div>
         </footer>
       </div>
-    </>
+    </PortalLayout>
   );
 };

@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-import { Lesson } from '@/components/Lesson/Lesson';
 import { mentalArithmeticLevel1Lessons } from '@/features/courses/data/mental-arithmetic-level-1';
+import { Lesson } from '@/shared/components/Lesson/Lesson';
 import { routes } from '@/shared/constants/routes';
 
 import styles from './page.module.scss';

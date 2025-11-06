@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
 import { useRouter } from 'next/navigation';
 
-import { CourseCard } from '@/components/CourseCard';
 import { coursesList } from '@/features/courses/constants/courses-list';
+import { CourseCard } from '@/shared/components/CourseCard';
 import { routes } from '@/shared/constants/routes';
 
 import styles from './page.module.scss';

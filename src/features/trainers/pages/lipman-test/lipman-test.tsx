@@ -1,10 +1,10 @@
 'use client';
 import { useState } from 'react';
 
-import { Button } from '@/components/button/button';
-import { Card } from '@/components/card/card';
-import { Input } from '@/components/input/input';
-import { Select } from '@/components/select/select';
+import { Button } from '@/ui-kit/button/button';
+import { Card } from '@/ui-kit/card/card';
+import { Input } from '@/ui-kit/input/input';
+import { Select } from '@/ui-kit/select/select';
 
 import { LipmanTestSettings } from '@/types';
 

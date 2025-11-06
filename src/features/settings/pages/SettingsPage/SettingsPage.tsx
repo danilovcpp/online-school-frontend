@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
-import { Select } from '@/components/select/select';
 import { selectUserProfile } from '@/store/features/user/user-slice';
 import { useAppSelector } from '@/store/hooks';
+import { Button } from '@/ui-kit/button/button';
+import { Input } from '@/ui-kit/input/input';
+import { Select } from '@/ui-kit/select/select';
 
 import { UserSettings } from '@/types/settings';
 

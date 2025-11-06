@@ -4,12 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/button/button';
-import { Card } from '@/components/card/card';
 import { routes } from '@/shared/constants/routes';
 import { logoutRequest } from '@/store/features/auth/auth-slice';
 import { selectUserProfile } from '@/store/features/user/user-slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { Button } from '@/ui-kit/button/button';
+import { Card } from '@/ui-kit/card/card';
 
 import styles from './profile-card.module.scss';
 

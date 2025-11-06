@@ -2,9 +2,9 @@
 import type { FC, FormEvent } from 'react';
 import { useState } from 'react';
 
-import { Button } from '@/components/button/button';
-import { Input } from '@/components/input/input';
 import { AuthApi } from '@/services/api/auth-api';
+import { Button } from '@/ui-kit/button/button';
+import { Input } from '@/ui-kit/input/input';
 
 import styles from './register-form.module.scss';
 

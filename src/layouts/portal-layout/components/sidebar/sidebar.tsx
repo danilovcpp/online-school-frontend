@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 import { routes } from '@/shared/constants/routes';
 
-import styles from './Sidebar.module.scss';
+import styles from './sidebar.module.scss';
 
 interface MenuItem {
   id: string;
@@ -75,7 +75,7 @@ const menuItems: MenuItem[] = [
     title: 'Тест Липмана',
     icon: '🔤',
     path: routes.trainers.lipmanTest,
-  }
+  },
 ];
 
 export const Sidebar: React.FC = () => {

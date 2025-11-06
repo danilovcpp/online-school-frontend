@@ -2,10 +2,10 @@
 import { FormEventHandler, useState } from 'react';
 import clsx from 'clsx';
 
-import { Button } from '@/components/button/button';
-import { Card } from '@/components/card/card';
-import { Input } from '@/components/input/input';
 import { AbacusDisplay } from '@/shared/trainers/components/abacus-display';
+import { Button } from '@/ui-kit/button/button';
+import { Card } from '@/ui-kit/card/card';
+import { Input } from '@/ui-kit/input/input';
 import { generateRandomNumber } from '@/utils';
 
 import { tutorials } from '../../constants/abacus';

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { Card } from '@/components/card/card';
 import { routes } from '@/shared/constants/routes';
+import { Card } from '@/ui-kit/card/card';
 
 import { RegisterForm } from './components/register-form/register-form';
 

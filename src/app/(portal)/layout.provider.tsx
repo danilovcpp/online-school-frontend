@@ -1,5 +1,5 @@
 'use client';
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
 import { useStartup } from '@/shared/hooks/use-startup';
 
