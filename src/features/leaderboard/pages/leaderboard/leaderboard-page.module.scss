@@ -8,7 +8,7 @@
 .header {
   margin-bottom: var(--spacing-2xl);
   text-align: center;
-  animation: fadeInUp 0.6s ease-out;
+  animation: var(--anim-fade-in-up) 0.6s ease-out;
 }
 
 .title {
@@ -32,7 +32,7 @@
   justify-content: center;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-2xl);
-  animation: fadeInUp 0.7s ease-out;
+  animation: var(--anim-fade-in-up) 0.7s ease-out;
 }
 
 .tab {
@@ -87,7 +87,7 @@
   align-items: flex-end;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-2xl);
-  animation: fadeInUp 0.8s ease-out;
+  animation: var(--anim-fade-in-up) 0.8s ease-out;
 }
 
 .podiumPlace {
@@ -191,7 +191,7 @@
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  animation: fadeInUp 0.9s ease-out;
+  animation: var(--anim-fade-in-up) 0.9s ease-out;
 }
 
 .statCard {

@@ -61,7 +61,7 @@
   -webkit-text-fill-color: transparent;
   transition: all var(--transition-bounce);
   z-index: 1;
-  animation: flashScale 0.2s ease;
+  animation: var(--anim-flash-scale) 0.2s ease;
 }
 
 .progress {
@@ -125,13 +125,13 @@
     background: var(--color-success-opacity-20);
     border: 2px solid var(--color-success);
     color: var(--color-success);
-    animation: successPulse 0.5s ease;
+    animation: var(--anim-success-pulse) 0.5s ease;
   }
 
   &.error {
     background: var(--color-error-opacity-20);
     border: 2px solid var(--color-error);
     color: var(--color-error);
-    animation: shake 0.5s ease;
+    animation: var(--anim-shake) 0.5s ease;
   }
 }

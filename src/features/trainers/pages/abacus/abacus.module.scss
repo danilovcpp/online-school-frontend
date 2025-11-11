@@ -72,7 +72,7 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 20px 0;
-  animation: pulse 2s infinite;
+  animation: var(--anim-pulse) 2s infinite;
 }
 
 .challengeControls {
@@ -97,57 +97,13 @@
     background: rgba(67, 233, 123, 0.2);
     border: 2px solid #43e97b;
     color: #43e97b;
-    animation: successPulse 0.5s ease;
+    animation: var(--anim-success-pulse) 0.5s ease;
   }
 
   &.error {
     background: rgba(245, 87, 108, 0.2);
     border: 2px solid #f5576c;
     color: #f5576c;
-    animation: shake 0.5s ease;
-  }
-}
-
-@keyframes successPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes snake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-10px);
-  }
-
-  75% {
-    transform: translateX(10px);
-  }
-}
-
-@keyframes pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.05);
+    animation: var(--anim-shake) 0.5s ease;
   }
 }

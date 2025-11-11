@@ -20,7 +20,7 @@
   box-shadow: var(--shadow-lg);
   padding: var(--spacing-xs);
   z-index: var(--z-modal);
-  animation: fadeInDown 0.2s ease-out;
+  animation: var(--anim-fade-in-down) 0.2s ease-out;
 
   &--left {
     left: 0;
@@ -83,15 +83,4 @@
   height: 1px;
   background: var(--color-border-light);
   margin: var(--spacing-xs) 0;
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

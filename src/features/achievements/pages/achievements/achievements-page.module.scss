@@ -7,7 +7,7 @@
 
 .header {
   margin-bottom: var(--spacing-xl);
-  animation: fadeInUp 0.6s ease-out;
+  animation: var(--anim-fade-in-up) 0.6s ease-out;
 }
 
 .title {
@@ -61,7 +61,7 @@
 
 .progressBarWrapper {
   margin-bottom: var(--spacing-2xl);
-  animation: fadeInUp 0.7s ease-out;
+  animation: var(--anim-fade-in-up) 0.7s ease-out;
 }
 
 .progressBar {
@@ -91,7 +91,7 @@
   backdrop-filter: blur(10px);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
-  animation: fadeInUp 0.8s ease-out;
+  animation: var(--anim-fade-in-up) 0.8s ease-out;
 }
 
 .categoryFilters {
@@ -168,7 +168,7 @@
 .achievements {
   display: grid;
   gap: var(--spacing-lg);
-  animation: fadeInUp 0.9s ease-out;
+  animation: var(--anim-fade-in-up) 0.9s ease-out;
 }
 
 .empty {

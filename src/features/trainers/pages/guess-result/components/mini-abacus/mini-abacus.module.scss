@@ -1,16 +1,5 @@
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 .container {
-  animation: slideIn 0.3s ease-out;
+  animation: var(--anim-slide-in) 0.3s ease-out;
   margin: 20px 0;
   text-align: center;
 }
